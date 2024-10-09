@@ -12,9 +12,11 @@ public class ItemFileReader {
         List<Item>currentStock = retrieveAllItems();
 
         for (Item existingItem : currentStock){
-            if (existingItem.getId() == item.getId()){
-                System.out.println("Item " + item.getName() + " with ID " + item.getId() + " already exists. Not saving.");
-                return;
+            if (existingItem != null) {
+                if (existingItem.getId() == item.getId()) {
+                    System.out.println("Item " + item.getName() + " with ID " + item.getId() + " already exists. Not saving.");
+                    return;
+                }
             }
         }
         try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_ITEM_INFO, true))) {  // Append mode
@@ -48,6 +50,8 @@ public class ItemFileReader {
 
     private Item csvToItem(String line){
         String[] data = line.split(",");
+        if(data[0].equalsIgnoreCase("id")) return null;
+
         int id = Integer.parseInt(data[0]);
         String name = data[1];
         double price = Double.parseDouble(data[2]);

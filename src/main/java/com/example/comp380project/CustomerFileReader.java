@@ -12,9 +12,11 @@ public class CustomerFileReader {
         List<Customer> existingCustomers = retrieveAllCustomers();
 
         for (Customer existingCustomer : existingCustomers){
-            if (existingCustomer.getId() == customer.getId()){
-                System.out.println("Customer " + customer.getFirstName() + " already exists. Not saving.");
-                return;
+            if (existingCustomer != null) {
+                if (existingCustomer.getId() == customer.getId()) {
+                    System.out.println("Customer " + customer.getFirstName() + " already exists. Not saving.");
+                    return;
+                }
             }
         }
         try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_CUSTOMERS_INFO, true))) {  // Append mode
@@ -63,6 +65,8 @@ public class CustomerFileReader {
     // Convert an entry in Customers.csv to a Customer object
     private Customer csvToCustomer(String line){
     String[] data = line.split(",");
+    if(data[0].equalsIgnoreCase("id")) return null;
+
     int id = Integer.parseInt(data[0]);
     String firstName = data[1];
     String lastName = data[2];
