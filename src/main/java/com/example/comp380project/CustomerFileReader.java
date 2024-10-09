@@ -5,10 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerFileReader {
-    private static final String CSV_CUSTOMERS_INFO = "Customers.csv";
+    private static final String CSV_CUSTOMERS_INFO = "data/Customers.csv";
 
     // Save customer info
-    public void saveCustomer(Customer customer) throws IOException {
+    public void saveCustomer(Customer customer) throws IOException, ClassNotFoundException {
+        List<Customer> existingCustomers = retrieveAllCustomers();
+
+        for (Customer existingCustomer : existingCustomers){
+            if (existingCustomer.getId() == customer.getId()){
+                System.out.println("Customer " + customer.getFirstName() + " already exists. Not saving.");
+                return;
+            }
+        }
         try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_CUSTOMERS_INFO, true))) {  // Append mode
             writer.println(customerToCSV(customer));
         }
