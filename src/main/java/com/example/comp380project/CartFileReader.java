@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 public class CartFileReader {
     private static final String CSV_CART_INFO = "data/ItemsInCart.csv";
@@ -46,7 +47,7 @@ public class CartFileReader {
 
         int id = Integer.parseInt(data[0]);
         Customer customer = new CustomerFileReader().csvToCustomer(data[1]);
-        Map<Item,Integer> items = data[2];
+        Map<Item,Integer> items = parseItems(data[2]);
 
         return new Cart(id, customer, items);
     }
@@ -60,7 +61,7 @@ public class CartFileReader {
     private Map<Item, Integer> parseItems (String line){
 		Map<Item,Integer> items = new HashMap<>();
 		
-		String[] data = line.split(",");
+		String[] data = line.split(";");
 		if (data[0].equalsIgnoreCase("id")) return null;
 		
 		for (String pair : data){
@@ -74,7 +75,7 @@ public class CartFileReader {
 			String itemName = quantity[0];
 			int item_quantity = Integer.parseInt(quantity[1]);
 			
-			Item item = new Item(itemName);
+			Item item = new ItemFileReader().csvToItem(itemName);
 			
 			items.put(item, item_quantity);
 		}

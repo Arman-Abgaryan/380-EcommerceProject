@@ -11,6 +11,9 @@ public class Test {
         Item sweater = new Item(1,"Sweater", 49.99, 10);
         Item shirt = new Item(2,"Shirt", 39.99, 10);
 
+        shop.addItem(sweater, 2);
+        shop.addItem(shirt, 4);
+
         Customer person1 = new Customer(2,"John", "Doe", "johndoe@gmail.com", "123 Elm St");
 
         // Testing saving customer info functionality
@@ -20,6 +23,11 @@ public class Test {
             // Save customer to file
             f1.saveCustomer(Alfredo);
             f1.saveCustomer(person1);
+
+            CartFileReader f4 = new CartFileReader();
+
+            f4.saveCart(shop);
+
 
             // Retrieve customer from file
             List<Customer> customers = f1.retrieveAllCustomers();
@@ -42,6 +50,7 @@ public class Test {
         System.out.println(shop.getItems());
         System.out.println("$" + shop.getTotalAmount());
         System.out.println(shop.getCustomer().getFirstName());
+
 
     }
 }

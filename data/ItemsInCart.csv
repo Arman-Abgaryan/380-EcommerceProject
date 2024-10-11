@@ -1,0 +1,1 @@
+0,Customer{id=1firstName='Alfredo', lastName='Ulloa', email='alfredoulloa@ymail.com', address='Not Found'},{Item{id=1, name='Sweater', price=49.99, stock=10}=2, Item{id=2, name='Shirt', price=39.99, stock=10}=4}

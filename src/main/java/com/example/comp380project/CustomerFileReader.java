@@ -27,10 +27,10 @@ public class CustomerFileReader {
     // Converts Customer object to an entry in Customers.csv
     private String customerToCSV(Customer customer){
         return customer.getId() +
-                "," + customer.getFirstName() +
-                "," + customer.getLastName() +
-                "," + customer.getEmail() +
-                "," + customer.getAddress();
+                ";" + customer.getFirstName() +
+                ";" + customer.getLastName() +
+                ";" + customer.getEmail() +
+                ";" + customer.getAddress();
     }
 
     // Retrieve a specific customer by ID
@@ -63,8 +63,8 @@ public class CustomerFileReader {
     }
 
     // Convert an entry in Customers.csv to a Customer object
-    private Customer csvToCustomer(String line){
-    String[] data = line.split(",");
+    public Customer csvToCustomer(String line){
+    String[] data = line.split(";");
     if(data[0].equalsIgnoreCase("id")) return null;
 
     int id = Integer.parseInt(data[0]);

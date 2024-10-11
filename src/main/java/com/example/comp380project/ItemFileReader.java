@@ -41,15 +41,15 @@ public class ItemFileReader {
         return items;
     }
 
-    private String itemToCSV(Item item){
+    public String itemToCSV(Item item){
         return item.getId() +
-                "," + item.getName() +
-                "," + item.getPrice() +
-                "," + item.getStock();
+                ";" + item.getName() +
+                ";" + item.getPrice() +
+                ";" + item.getStock();
     }
 
-    private Item csvToItem(String line){
-        String[] data = line.split(",");
+    public Item csvToItem(String line){
+        String[] data = line.split(";");
         if(data[0].equalsIgnoreCase("id")) return null;
 
         int id = Integer.parseInt(data[0]);

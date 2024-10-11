@@ -13,7 +13,7 @@ public class Cart {
         items = new HashMap<>();
     }
 
-    public Cart(int idCart, Customer customer) {
+    public Cart(int idCart, Customer customer, Map<Item, Integer> items) {
         this.idCart = idCart;
         this.customer = customer;
         this.items = new HashMap<>();
