@@ -58,6 +58,27 @@ public class CartFileReader {
     }
 
     private Map<Item, Integer> parseItems (String line){
+		Map<Item,Integer> items = new HashMap<>();
+		
+		String[] data = line.split(",");
+		if (data[0].equalsIgnoreCase("id")) return null;
+		
+		for (String pair : data){
+			String[] quantity = pair.split(":");
+			
+			if (quantity.length != 2){
+				System.out.println("Invalid item entry " + pair);
+				continue;
+			}
+			
+			String itemName = quantity[0];
+			int item_quantity = Integer.parseInt(quantity[1]);
+			
+			Item item = new Item(itemName);
+			
+			items.put(item, item_quantity);
+		}
+		return items;
 
     }
 
