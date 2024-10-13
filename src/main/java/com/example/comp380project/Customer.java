@@ -3,7 +3,8 @@ package com.example.comp380project;
 import java.io.Serializable;
 
 public class Customer implements Serializable {
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 2L;
+    private static int nextID = 1;
 
     private int id;
     private String firstName;
@@ -11,12 +12,21 @@ public class Customer implements Serializable {
     private String email;
     private String address;
 
-    public Customer(int id, String firstName, String lastName, String email, String address) {
+    public Customer(int id,String firstName, String lastName, String email, String address) {
         this.id = id;
         this.firstName =firstName;
         this.lastName =lastName;
         this.email =email;
         this.address =address;
+    }
+
+    public Customer(String firstName, String lastName, String email, String address){
+        this.id = nextID++;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+
     }
 
     int getId(){

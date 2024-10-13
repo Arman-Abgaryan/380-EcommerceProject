@@ -75,14 +75,14 @@ public class Cart implements Serializable {
         StringBuilder itemsCSV = new StringBuilder();
         for (Map.Entry<Item, Integer> entry : this.getItems().entrySet()) {
             if (itemsCSV.length() > 0) {
-                itemsCSV.append(";");  // Separate items with semicolons
+                itemsCSV.append(";");
             }
-            itemsCSV.append(entry.getKey().getName()) // Assuming Item has a getName method
+            itemsCSV.append(entry.getKey().getName())
                     .append(":")
                     .append(entry.getValue());
         }
 
-        // Combine cart id, customer info, and items into a single CSV string
+        // Combine cart id, customer id,  and items into a single CSV string
         return this.getIdCart() + "," + customerID + "," + itemsCSV.toString();
     }
 
