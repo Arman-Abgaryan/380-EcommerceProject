@@ -1,37 +1,63 @@
 package com.example.comp380project;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
+
+        CustomerFileReader f1 = new CustomerFileReader();
+        CartFileReader f2 = new CartFileReader();
+        ItemFileReader f3 = new ItemFileReader();
+
+        //Creating objects for testing purposes
         Customer Alfredo = new Customer(1,"Alfredo", "Ulloa", "alfredoulloa@ymail.com", "Not Found");
+        Customer person1 = new Customer(2,"John", "Doe", "johndoe@gmail.com", "123 Elm St");
+        Customer p3 = new Customer(3, "Poopy", "Butthole", "poopybutthole@poop.com", "69420 Poop Ln");
+
         Cart shop = new Cart();
         shop.setCustomer(Alfredo);
-        Item sweater = new Item(1,"Sweater", 49.99, 10);
-        Item shirt = new Item(2,"Shirt", 39.99, 10);
+        Cart coolItems = new Cart();
+        coolItems.setCustomer(p3);
 
-        shop.addItem(sweater, 2);
-        shop.addItem(shirt, 4);
+        // Adding items to the cart
 
-        Customer person1 = new Customer(2,"John", "Doe", "johndoe@gmail.com", "123 Elm St");
 
         // Testing saving customer info functionality
         try {
-            CustomerFileReader f1 = new CustomerFileReader();
+            Item shirt = f3.retrieveItem(4);
 
             // Save customer to file
             f1.saveCustomer(Alfredo);
             f1.saveCustomer(person1);
 
-            CartFileReader f4 = new CartFileReader();
+            // Saving cart to file
+            f2.saveCart(shop);
+            f2.saveCart(coolItems);
 
-            f4.saveCart(shop);
-
+            // Retrieve cart info from file
+//            List<Cart> carts = f2.retrieveAllCarts();
+//            for (Cart cart : carts){
+//                if (cart != null){
+//                    System.out.println(cart);
+//                }
+//            }
 
             // Retrieve customer from file
             List<Customer> customers = f1.retrieveAllCustomers();
             System.out.println("Retrieved Customers: " + customers);
+
+            // Retrieving Customer from file
+            Customer p4 = f1.retrieveCustomer(2);
+            System.out.println("Mr Poopy Butthole's info is the following: " + p4);
+
+            shop.addItem(shirt, 4);
+
+
+            System.out.println(shop.getItems());
+            System.out.println("$" + shop.getTotalAmount());
+            System.out.println("This cart belongs to " + shop.getCustomer().getFirstName() + " " + shop.getCustomer().getLastName());
+            System.out.println(shop.toString());
+            System.out.println("Item info of blue is " + shirt);
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found. Please make sure the file exists.");
@@ -42,14 +68,7 @@ public class Test {
             System.out.println("Class not found. Make sure you're retrieving the correct object.");
         }
 
-        shop.addItem(sweater, 2);
-        System.out.println("$" + shop.getTotalAmount());
 
-        System.out.println(shop.getItems());
-        shop.addItem(shirt, 4);
-        System.out.println(shop.getItems());
-        System.out.println("$" + shop.getTotalAmount());
-        System.out.println(shop.getCustomer().getFirstName());
 
 
     }

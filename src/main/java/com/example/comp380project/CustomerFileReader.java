@@ -37,6 +37,7 @@ public class CustomerFileReader {
     public Customer retrieveCustomer(int id) throws IOException, ClassNotFoundException {
         List<Customer> customers = retrieveAllCustomers();
         for (Customer customer : customers) {
+            if(customer == null) continue;
             if (customer.getId() == id) {
                 return customer;
             }

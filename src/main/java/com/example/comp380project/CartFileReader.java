@@ -9,9 +9,12 @@ import java.util.HashMap;
 public class CartFileReader {
     private static final String CSV_CART_INFO = "data/ItemsInCart.csv";
 
+    // Write Cart object to file
     public void saveCart(Cart cart) throws IOException, ClassNotFoundException {
+        // Retrieve list of carts already saved in file
         List<Cart> existingCarts = retrieveAllCarts();
 
+        // Check if cart being saved already exists
         for (Cart existingCart : existingCarts) {
             if (existingCart != null) {
                 if (existingCart.getIdCart() == cart.getIdCart()) {
@@ -20,11 +23,23 @@ public class CartFileReader {
                 }
             }
         }
-        try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_CART_INFO, true))) {  // Append mode
+        try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_CART_INFO, true))) {
             writer.println(cartToCSV(cart));
         }
     }
 
+    // Retrieve Cart by ID
+    public Cart retrieveCart (int id) throws IOException, ClassNotFoundException{
+        List<Cart> existingCarts = retrieveAllCarts();
+        for (Cart cart : existingCarts){
+            if (cart.getIdCart() == id){
+                return cart;
+            }
+        }
+        return null;
+    }
+
+    // Helper method for saveCart
     public List<Cart> retrieveAllCarts() throws FileNotFoundException, IOException, ClassNotFoundException {
         List<Cart> carts = new ArrayList<>();
         File file = new File(CSV_CART_INFO);
@@ -41,21 +56,45 @@ public class CartFileReader {
         return carts;
     }
 
-    private Cart csvToCart(String line){
+    public Cart csvToCart(String line) {
         String[] data = line.split(",");
-        if(data[0].equalsIgnoreCase("id")) return null;
+        if (data.length < 3 || data[0].equalsIgnoreCase("idCart")) return null;
 
         int id = Integer.parseInt(data[0]);
-        Customer customer = new CustomerFileReader().csvToCustomer(data[1]);
-        Map<Item,Integer> items = parseItems(data[2]);
+
+        // Parse customer data (assuming the order: id, firstName, lastName, email, phoneNumber)
+        Customer customer = null;
+        try{
+            int customerId = Integer.parseInt(data[1]);
+            customer = new CustomerFileReader().retrieveCustomer(customerId);
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error retrieving customer" + e.getMessage());
+            return null;
+        }
+
+        // Parse items from the CSV string (starting from index 6)
+        Map<Item, Integer> items = parseItems(data[2]);
 
         return new Cart(id, customer, items);
     }
 
+    private String itemsToCSV(Map<Item, Integer> items) {
+        StringBuilder itemsCSV = new StringBuilder();
+        for (Map.Entry<Item, Integer> entry : items.entrySet()) {
+            if (itemsCSV.length() > 0) {
+                itemsCSV.append(";"); // Separate items with semicolons
+            }
+            itemsCSV.append(entry.getKey().getId()) // Assuming Item has getId() or similar
+                    .append(":")
+                    .append(entry.getValue());
+        }
+        return itemsCSV.toString();
+    }
+
     private String cartToCSV(Cart cart){
         return cart.getIdCart() +
-                "," + cart.getCustomer() +
-                "," + cart.getItems();
+                "," + cart.getCustomer().getId() +
+                "," + itemsToCSV(cart.getItems());
     }
 
     private Map<Item, Integer> parseItems (String line){
@@ -65,7 +104,7 @@ public class CartFileReader {
 		if (data[0].equalsIgnoreCase("id")) return null;
 		
 		for (String pair : data){
-			String[] quantity = pair.split(":");
+			String[] quantity = pair.split("=");
 			
 			if (quantity.length != 2){
 				System.out.println("Invalid item entry " + pair);

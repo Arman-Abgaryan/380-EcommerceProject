@@ -38,11 +38,11 @@ public class Item implements Serializable {
     // To make it more human-readable
     @Override
     public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                '}';
+        return
+                + id + ";"
+                + name + ";"
+                + price + ";"
+                + stock
+                ;
         }
 }

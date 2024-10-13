@@ -24,6 +24,17 @@ public class ItemFileReader {
         }
     }
 
+    public Item retrieveItem (int id) throws IOException, ClassNotFoundException{
+        List<Item> existingItems = retrieveAllItems();
+        for (Item item : existingItems){
+            if (item == null) continue;
+            if (item.getId() == id){
+                return item;
+            }
+        }
+        return null;
+    }
+
     // Return list of customers
     public List<Item> retrieveAllItems() throws FileNotFoundException, IOException, ClassNotFoundException {
         List<Item> items = new ArrayList<>();

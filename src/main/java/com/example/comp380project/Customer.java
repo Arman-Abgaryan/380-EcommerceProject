@@ -42,13 +42,13 @@ public class Customer implements Serializable {
     // To make it more human-readable
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        return
+                + id + ";"
+                + firstName + ";"
+                + lastName + ";"
+                + email + ";"
+                + address
+                ;
     }
 }
 
