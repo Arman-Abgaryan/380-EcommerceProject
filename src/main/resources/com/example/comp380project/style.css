@@ -1,0 +1,35 @@
+.search-box{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.transparent{
+    -fx-background-color:rgba(0,0,0,0);
+}
+
+.topPane{
+    -fx-background-color: #D3D3D3;
+}
+
+.fruitBackground{
+    -fx-background-color:#FFFFFF;
+        -fx-background-radius:30;
+}
+
+.cartBackground {
+    -fx-background-color:#D3D3D3;
+}
+
+.Background {
+    -fx-background-color:#FFFFFF;
+}
+
+.frontPageItem{
+      -fx-background-radius:30;
+}
+
+.addtoCart{
+    -fx-background-color:#D3D3D3;
+        -fx-background-radius:30;
+
+}
