@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CartController {
+public class CartPageController {
     private Stage stage;
     private Scene scene;
     private Parent root;
