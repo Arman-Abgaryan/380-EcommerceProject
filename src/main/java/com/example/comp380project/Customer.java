@@ -2,8 +2,7 @@ package com.example.comp380project;
 
 import java.io.Serializable;
 
-public class Customer implements Serializable {
-    //private static final long serialVersionUID = 2L;
+public class Customer implements Serializable{
     private static int nextID = 1;
 
     private int id;
@@ -31,6 +30,10 @@ public class Customer implements Serializable {
 
     int getId(){
         return id;
+    }
+
+    public static void setNextID(int nextID) {
+        Customer.nextID = nextID;
     }
 
     String getFirstName() {

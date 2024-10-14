@@ -13,17 +13,22 @@ public class Cart implements Serializable {
 
     public Cart() {
         this.idCart = nextID++;
+        this.customer  = getCustomer();
         items = new HashMap<>();
     }
 
     public Cart(int idCart, Customer customer, Map<Item, Integer> items) {
         this.idCart = idCart;
         this.customer = customer;
-        this.items = new HashMap<>();
+        this.items = items;
     }
 
     public int getIdCart() {
         return idCart;
+    }
+
+    public static void setNextID(int nextID){
+        Cart.nextID = nextID;
     }
 
     public void setIdCart(int idCart) {
@@ -83,8 +88,6 @@ public class Cart implements Serializable {
         }
 
         // Combine cart id, customer id,  and items into a single CSV string
-        return this.getIdCart() + "," + customerID + "," + itemsCSV.toString();
+        return this.getIdCart() + "," + customerID + "," + itemsCSV;
     }
-
-
 }

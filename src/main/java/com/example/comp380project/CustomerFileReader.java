@@ -50,6 +50,7 @@ public class CustomerFileReader {
     public List<Customer> retrieveAllCustomers() throws FileNotFoundException, IOException, ClassNotFoundException {
         List<Customer> customers = new ArrayList<>();
         File file = new File(CSV_CUSTOMERS_INFO);
+        int maxID = 0;
 
         if (!file.exists()) {
             return customers;
@@ -60,6 +61,15 @@ public class CustomerFileReader {
                 customers.add(csvToCustomer(line));
             }
         }
+        // Removing null value
+        customers.remove(0);
+
+        /*---------------------------*/
+        // Setting next available ID
+        // Need to create a separate method in the future to initialize the next available ID on startup
+        maxID = customers.getLast().getId();
+        Customer.setNextID(maxID);
+        /*---------------------------*/
         return customers;
     }
 
