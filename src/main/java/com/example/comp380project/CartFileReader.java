@@ -10,7 +10,7 @@ public class CartFileReader {
     private static final String CSV_CART_INFO = "data/Cart.csv";
 
     // Write Cart object to file
-    public void saveCart(Cart cart) throws IOException, ClassNotFoundException {
+    public static void saveCart(Cart cart) throws IOException, ClassNotFoundException {
         // Retrieve list of carts already saved in file
         List<Cart> existingCarts = retrieveAllCarts();
 
@@ -27,7 +27,7 @@ public class CartFileReader {
     }
 
     // Retrieve Cart by ID
-    public Cart retrieveCart(int id) throws IOException, ClassNotFoundException{
+    public static Cart retrieveCart(int id) throws IOException, ClassNotFoundException{
         List<Cart> existingCarts = retrieveAllCarts();
 
         for (Cart cart : existingCarts){
@@ -40,7 +40,7 @@ public class CartFileReader {
     }
 
     // Helper method for saveCart
-    public List<Cart> retrieveAllCarts() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static List<Cart> retrieveAllCarts() throws FileNotFoundException, IOException, ClassNotFoundException {
         List<Cart> carts = new ArrayList<>();
         File file = new File(CSV_CART_INFO);
         int maxID = 0;
@@ -67,7 +67,7 @@ public class CartFileReader {
     }
 
     // Create Cart object from data in Cart.csv
-    public Cart csvToCart(String line) throws IOException, ClassNotFoundException{
+    public static Cart csvToCart(String line) throws IOException, ClassNotFoundException{
         String[] data = line.split(",");
 
         if (data.length < 3 || data[0].equalsIgnoreCase("idCart")) return null;
@@ -88,7 +88,7 @@ public class CartFileReader {
         return new Cart(id, customer, items);
     }
 
-    private String itemsToCSV(Map<Item, Integer> items) {
+    private static String itemsToCSV(Map<Item, Integer> items) {
         StringBuilder itemsCSV = new StringBuilder();
         for (Map.Entry<Item, Integer> entry : items.entrySet()) {
             if (itemsCSV.length() > 0) {
@@ -101,13 +101,13 @@ public class CartFileReader {
         return itemsCSV.toString();
     }
 
-    private String cartToCSV(Cart cart){
+    private static String cartToCSV(Cart cart){
         return cart.getIdCart() +
                 "," + cart.getCustomer().getId() +
                 "," + itemsToCSV(cart.getItems());
     }
 
-    private Map<Item, Integer> parseItems (String line) throws IOException, ClassNotFoundException{
+    private static Map<Item, Integer> parseItems (String line) throws IOException, ClassNotFoundException{
 		Map<Item,Integer> items = new HashMap<>();
 
         String[] data = line.split(";");

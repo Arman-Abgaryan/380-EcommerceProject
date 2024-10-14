@@ -4,11 +4,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// Make methods static to not have to crate the object
 public class CustomerFileReader {
     private static final String CSV_CUSTOMERS_INFO = "data/Customers.csv";
 
     // Save customer info
-    public void saveCustomer(Customer customer) throws IOException, ClassNotFoundException {
+    public static void saveCustomer(Customer customer) throws IOException, ClassNotFoundException {
         List<Customer> existingCustomers = retrieveAllCustomers();
 
         for (Customer existingCustomer : existingCustomers){
@@ -25,7 +27,7 @@ public class CustomerFileReader {
     }
 
     // Converts Customer object to an entry in Customers.csv
-    private String customerToCSV(Customer customer){
+    private static String customerToCSV(Customer customer){
         return customer.getId() +
                 ";" + customer.getFirstName() +
                 ";" + customer.getLastName() +
@@ -34,7 +36,7 @@ public class CustomerFileReader {
     }
 
     // Retrieve a specific customer by ID
-    public Customer retrieveCustomer(int id) throws IOException, ClassNotFoundException {
+    public static Customer retrieveCustomer(int id) throws IOException, ClassNotFoundException {
         List<Customer> customers = retrieveAllCustomers();
         for (Customer customer : customers) {
             if(customer == null) continue;
@@ -47,7 +49,7 @@ public class CustomerFileReader {
 
 
     // Return list of customers
-    public List<Customer> retrieveAllCustomers() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static List<Customer> retrieveAllCustomers() throws FileNotFoundException, IOException, ClassNotFoundException {
         List<Customer> customers = new ArrayList<>();
         File file = new File(CSV_CUSTOMERS_INFO);
         int maxID = 0;
@@ -74,7 +76,7 @@ public class CustomerFileReader {
     }
 
     // Convert an entry in Customers.csv to a Customer object
-    public Customer csvToCustomer(String line){
+    public static Customer csvToCustomer(String line){
     String[] data = line.split(";");
     if(data[0].equalsIgnoreCase("id")) return null;
 

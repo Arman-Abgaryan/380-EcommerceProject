@@ -8,7 +8,7 @@ public class ItemFileReader {
     private static final String CSV_ITEM_INFO = "data/Items.csv";
 
     // Add new item to stock
-    public void saveItem(Item item) throws IOException, ClassNotFoundException {
+    public static void saveItem(Item item) throws IOException, ClassNotFoundException {
         List<Item>currentStock = retrieveAllItems();
 
         for (Item existingItem : currentStock){
@@ -24,7 +24,7 @@ public class ItemFileReader {
         }
     }
 
-    public Item retrieveItem (int id) throws IOException, ClassNotFoundException{
+    public static Item retrieveItem (int id) throws IOException, ClassNotFoundException{
         List<Item> existingItems = retrieveAllItems();
         for (Item item : existingItems){
             if (item == null) continue;
@@ -36,7 +36,7 @@ public class ItemFileReader {
     }
 
     // Return list of customers
-    public List<Item> retrieveAllItems() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static List<Item> retrieveAllItems() throws FileNotFoundException, IOException, ClassNotFoundException {
         List<Item> items = new ArrayList<>();
         File file = new File(CSV_ITEM_INFO);
 
@@ -52,14 +52,14 @@ public class ItemFileReader {
         return items;
     }
 
-    public String itemToCSV(Item item){
+    public static String itemToCSV(Item item){
         return item.getId() +
                 ";" + item.getName() +
                 ";" + item.getPrice() +
                 ";" + item.getStock();
     }
 
-    public Item csvToItem(String line){
+    public static Item csvToItem(String line){
         String[] data = line.split(";");
         if(data[0].equalsIgnoreCase("id")) return null;
 
