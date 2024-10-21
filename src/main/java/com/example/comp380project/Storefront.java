@@ -21,7 +21,7 @@ public class Storefront extends Application {
     Button button;
 
     @Override
-    public void start(Stage StorefrontStage) throws Exception {
+    public void start(Stage StorefrontStage) {
         window = StorefrontStage;
         window.setTitle("AJAD Ecommerce");
         StorefrontStage.setWidth(1200);
