@@ -13,6 +13,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.awt.event.ItemEvent;
+import java.io.IOException;
+
 public class TShirtPage {
 
     public Scene getTShirtPage(Stage stage) {
@@ -33,7 +36,7 @@ public class TShirtPage {
             AJADlogo.setFitHeight(100);
             AJADlogo.setFitWidth(100);
             logoHolder.getChildren().addAll(AJADlogo);
-            
+
 
         HBox viewCart = new HBox();
             viewCart.setAlignment(Pos.TOP_RIGHT);
@@ -48,7 +51,17 @@ public class TShirtPage {
 
         HBox TShirtHolder = new HBox(200); //Horizontal Box that holds all T-Shirts
 
-            VBox BlackTShirtBox = new VBox();
+            // Testing VBoxFactory class
+            Item blk_shirt = ItemFileReader.retrieveItem(1);
+            VBox BlackTShirtBox = VBoxFactory.createItemBox("/Black Tshirt.jpg", blk_shirt);
+
+            Item wt_shirt = ItemFileReader.retrieveItem(2);
+            VBox WhiteTShirtBox = VBoxFactory.createItemBox("/White T.jpg", wt_shirt);
+
+            Item gray_shirt = ItemFileReader.retrieveItem(3);
+            VBox GreyTShirtBox = VBoxFactory.createItemBox("/Grey TShirt.jpg", gray_shirt);
+
+            /*VBox BlackTShirtBox = new VBox();
                 // Image for the Black T-Shirt
                 Image BlackTShirtImage = new Image (getClass().getResourceAsStream("/Black TShirt.jpg"));
                 ImageView blackTShirt = new ImageView(BlackTShirtImage);
@@ -57,8 +70,9 @@ public class TShirtPage {
 
                 BlackTShirtBox.setAlignment(Pos.CENTER);
                 BlackTShirtBox.setSpacing(10);
-                Label BTshirt = new Label("Black T-Shirt");
-                Label BShirtPrice = new Label("$19.99"); // Placeholder until pulled from database
+                Item blk_shirt = ItemFileReader.retrieveItem(1);
+                Label BTshirt = new Label(blk_shirt.getName());
+                Label BShirtPrice = new Label("$" + String.valueOf(blk_shirt.getPrice())); // Placeholder until pulled from database
                 Button AddtoCart = new Button("Add to Cart");
                 BlackTShirtBox.getChildren().addAll(blackTShirt, BTshirt, BShirtPrice, AddtoCart);
 
@@ -71,8 +85,9 @@ public class TShirtPage {
 
                 WhiteTShirtBox.setAlignment(Pos.CENTER);
                 WhiteTShirtBox.setSpacing(10);
-                Label WTshirt = new Label("White T-Shirt");
-                Label WShirtPrice = new Label("$19.99"); // // Placeholder until pulled from database
+                Item wt_shirt = ItemFileReader.retrieveItem(2);
+                Label WTshirt = new Label(wt_shirt.getName());
+                Label WShirtPrice = new Label("$" + String.valueOf(wt_shirt.getPrice())); // // Placeholder until pulled from database
                 Button AddtoCart3 = new Button("Add to Cart");
                 WhiteTShirtBox.getChildren().addAll(whiteTShirt, WTshirt, WShirtPrice, AddtoCart3);
 
@@ -85,15 +100,16 @@ public class TShirtPage {
 
                 GreyTShirtBox.setAlignment(Pos.CENTER);
                 GreyTShirtBox.setSpacing(10);
-                Label GTShirt = new Label("Grey T-Shirt");
-                Label GShirtPrice = new Label("$19.99"); // // Placeholder until pulled from database
+                Item gr_shirt = ItemFileReader.retrieveItem(3);
+                Label GTShirt = new Label(gr_shirt.getName());
+                Label GShirtPrice = new Label("$" + String.valueOf(gr_shirt.getPrice())); // // Placeholder until pulled from database
                 Button AddtoCart2 = new Button("Add to Cart");
-                GreyTShirtBox.getChildren().addAll(greyTShirt, GTShirt, GShirtPrice, AddtoCart2);
+
+                GreyTShirtBox.getChildren().addAll(greyTShirt, GTShirt, GShirtPrice, AddtoCart2);*/
 
 
-            TShirtHolder.setAlignment(Pos.CENTER);
-            TShirtHolder.getChildren().addAll(BlackTShirtBox, WhiteTShirtBox, GreyTShirtBox);
-
+                TShirtHolder.setAlignment(Pos.CENTER);
+                TShirtHolder.getChildren().addAll(BlackTShirtBox, WhiteTShirtBox, GreyTShirtBox);
 
         BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
             boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white

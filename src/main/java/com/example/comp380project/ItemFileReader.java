@@ -8,10 +8,10 @@ public class ItemFileReader {
     private static final String CSV_ITEM_INFO = "data/Items.csv";
 
     // Add new item to stock
-    public static void saveItem(Item item) throws IOException, ClassNotFoundException {
-        List<Item>currentStock = retrieveAllItems();
+    public static void saveItem(Item item) {
+        List<Item> currentStock = retrieveAllItems();
 
-        for (Item existingItem : currentStock){
+        for (Item existingItem : currentStock) {
             if (existingItem != null) {
                 if (existingItem.getId() == item.getId()) {
                     System.out.println("Item " + item.getName() + " with ID " + item.getId() + " already exists. Not saving.");
@@ -19,12 +19,15 @@ public class ItemFileReader {
                 }
             }
         }
-        try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_ITEM_INFO, true))) {  // Append mode
+        try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_ITEM_INFO, true))) {   // Append mode
             writer.println(itemToCSV(item));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public static Item retrieveItem (int id) throws IOException, ClassNotFoundException{
+
+    public static Item retrieveItem (int id){
         List<Item> existingItems = retrieveAllItems();
         for (Item item : existingItems){
             if (item == null) continue;
@@ -36,18 +39,20 @@ public class ItemFileReader {
     }
 
     // Return list of customers
-    public static List<Item> retrieveAllItems() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static List<Item> retrieveAllItems() {
         List<Item> items = new ArrayList<>();
         File file = new File(CSV_ITEM_INFO);
 
         if (!file.exists()) {
             return items;
         }
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 items.add(csvToItem(line));
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return items;
     }
@@ -70,4 +75,4 @@ public class ItemFileReader {
 
         return new Item(id, name, price, stock);
     }
-}
+    }

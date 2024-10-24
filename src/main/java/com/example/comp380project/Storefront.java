@@ -19,6 +19,7 @@ public class Storefront extends Application {
     Stage window;
     Scene scene;
     Button button;
+    Cart cart = new Cart();
 
     @Override
     public void start(Stage StorefrontStage) {
