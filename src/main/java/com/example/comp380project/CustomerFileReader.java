@@ -10,7 +10,7 @@ public class CustomerFileReader {
     private static final String CSV_CUSTOMERS_INFO = "data/Customers.csv";
 
     // Save customer info
-    public static void saveCustomer(Customer customer) throws IOException, ClassNotFoundException {
+    public static void saveCustomer(Customer customer)  {
         List<Customer> existingCustomers = retrieveAllCustomers();
 
         for (Customer existingCustomer : existingCustomers){
@@ -21,9 +21,10 @@ public class CustomerFileReader {
                 }
             }
         }
-        try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_CUSTOMERS_INFO, true))) {  // Append mode
+        try(PrintWriter writer = new PrintWriter(new FileWriter(CSV_CUSTOMERS_INFO, true))) {  // Append mode
             writer.println(customerToCSV(customer));
-        }
+        }catch (IOException e){}
+
     }
 
     // Converts Customer object to an entry in Customers.csv
@@ -36,7 +37,7 @@ public class CustomerFileReader {
     }
 
     // Retrieve a specific customer by ID
-    public static Customer retrieveCustomer(int id) throws IOException, ClassNotFoundException {
+    public static Customer retrieveCustomer(int id)  {
         List<Customer> customers = retrieveAllCustomers();
         for (Customer customer : customers) {
             if(customer == null) continue;
@@ -49,7 +50,7 @@ public class CustomerFileReader {
 
 
     // Return list of customers
-    public static List<Customer> retrieveAllCustomers() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static List<Customer> retrieveAllCustomers() {
         List<Customer> customers = new ArrayList<>();
         File file = new File(CSV_CUSTOMERS_INFO);
         int maxID = 0;
@@ -57,12 +58,15 @@ public class CustomerFileReader {
         if (!file.exists()) {
             return customers;
         }
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 customers.add(csvToCustomer(line));
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
         // Removing null value
         customers.remove(0);
 

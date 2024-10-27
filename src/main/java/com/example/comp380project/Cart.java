@@ -48,17 +48,22 @@ public class Cart implements Serializable {
     }
 
     // Add an item to cart
-    public void addItem(Item item, int quantity) {
-        if (items.containsKey(item)) {
-            items.put(item, items.get(item) + quantity);
-        } else {
-            items.put(item, quantity);
-        }
+    public void addItem(Item item) {
+        items.put(item,items.getOrDefault(item,0)+1);
+
     }
 
     // Remove an item from cart
     public void removeItem(Item item) {
-        items.remove(item);
+        Integer currentQuantity = items.get(item);
+
+        if (currentQuantity != null){
+            if(currentQuantity > 1){
+                items.put(item,currentQuantity - 1);
+            } else {
+                items.remove(item);
+            }
+        }
     }
 
     // Calculate total amount

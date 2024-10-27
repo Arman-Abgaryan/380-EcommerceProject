@@ -1,5 +1,5 @@
-id;Name;Price;Stock
-1;Sweater;49.99;10
-2;Shirt;39.99;10
-3;Long-Sleeve-Shirt;27.99;10
+id;Name;Price;Stock; imagePath
+1;Sweater;49.99;10;/Black TShirt.jpg
+2;Shirt;39.99;10;/Grey TShirt.jpg
+3;Long-Sleeve-Shirt;27.99;10;/White T.jpg
 4;Blue Shirt;30.50;10
