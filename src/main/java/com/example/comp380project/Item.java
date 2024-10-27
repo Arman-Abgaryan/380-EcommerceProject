@@ -7,12 +7,16 @@ public class Item implements Serializable {
     private String name;
     private double price;
     private int stock;
+    private String imagePath;
 
-    public Item(int id, String name, double price, int stock){
+
+    public Item(int id, String name, double price, int stock, String imagePath){
         this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
+        this.imagePath = imagePath;
+
     }
 
     public int getId() {
@@ -34,6 +38,12 @@ public class Item implements Serializable {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    public String getImagePath(){
+        return imagePath;
+    }
+    
+
 
     // To make it more human-readable
     @Override
