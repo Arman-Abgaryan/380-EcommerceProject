@@ -31,7 +31,7 @@ public class SearchPage {
     public Scene getSearchPage() {
             HBox pageLabel = new HBox(); // HBox for Label
             pageLabel.setPadding(new Insets(0, 0, 0, 0));
-            Label label = new Label("Search results for " + );
+            Label label = new Label("Search Results");
             label.setFont(Font.font("verdana", FontWeight.BOLD, 20));
             pageLabel.setAlignment(Pos.TOP_LEFT);
             pageLabel.getChildren().addAll(label);
