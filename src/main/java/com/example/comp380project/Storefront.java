@@ -3,6 +3,7 @@ package com.example.comp380project;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -34,8 +35,10 @@ public class Storefront extends Application {
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
         choiceBox.getItems().addAll("T-Shirts", "Pants", "Shoes","Cart");
         choiceBox.setValue("- Select -");
+        choiceBox.setCursor(Cursor.HAND);
 
         button = new Button("Go");
+        button.setCursor(Cursor.HAND);
         button.setOnAction(e -> getChoice(choiceBox));
 
         VBox selection = new VBox();

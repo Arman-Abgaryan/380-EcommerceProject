@@ -3,6 +3,7 @@ package com.example.comp380project;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,6 +30,7 @@ public class VBoxFactory {
         Label itemPrice = new Label("$" + String.valueOf(item.getPrice()));
         Label countLabel = new Label("Added 0");
         Button addToCartButton = new Button("Add to Cart");
+        addToCartButton.setCursor(Cursor.HAND);
         int [] addCount = {0};
 
         addToCartButton.setOnAction(new EventHandler<ActionEvent>() {
