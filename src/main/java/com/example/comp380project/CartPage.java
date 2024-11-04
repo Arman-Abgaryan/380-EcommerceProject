@@ -44,6 +44,7 @@ public class CartPage{
 
     public Scene getCartScene(Stage primaryStage){
         BorderPane layout = new BorderPane();
+        layout.setStyle("-fx-background-color: white"); //Sets the background of the page to white
         layout.setPadding(new Insets(20));
 
         VBox itemList = new VBox();
