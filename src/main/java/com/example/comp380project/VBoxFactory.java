@@ -15,13 +15,13 @@ import javafx.util.Duration;
 public class VBoxFactory {
 
     // Method to create a VBox for an item
-    public static VBox createItemBox(String imagePath, Item item, Cart cart) {
+    public static VBox createItemBox(Item item, Cart cart) {
 
         VBox itemBox = new VBox();
         itemBox.setAlignment(Pos.CENTER);
         itemBox.setSpacing(10);
 
-        Image itemImage = new Image(VBoxFactory.class.getResourceAsStream(imagePath));
+        Image itemImage = new Image(VBoxFactory.class.getResourceAsStream(item.getImagePath()));
         ImageView imageView = new ImageView(itemImage);
         imageView.setFitHeight(250);
         imageView.setFitWidth(250);
