@@ -79,15 +79,15 @@ public class TShirtPage {
 
         // Testing VBoxFactory class
         Item blk_shirt = ItemFileReader.retrieveItem(1);
-        VBox BlackTShirtBox = VBoxFactory.createItemBox("/Black Tshirt.jpg", blk_shirt,cart);
+        VBox BlackTShirtBox = VBoxFactory.createItemBox( blk_shirt,cart);
 
 
         Item wt_shirt = ItemFileReader.retrieveItem(2);
-        VBox WhiteTShirtBox = VBoxFactory.createItemBox("/White T.jpg", wt_shirt,cart);
+        VBox WhiteTShirtBox = VBoxFactory.createItemBox( wt_shirt,cart);
 
 
         Item gray_shirt = ItemFileReader.retrieveItem(3);
-        VBox GreyTShirtBox = VBoxFactory.createItemBox("/Grey TShirt.jpg", gray_shirt,cart);
+        VBox GreyTShirtBox = VBoxFactory.createItemBox( gray_shirt,cart);
 
 
 
@@ -123,9 +123,6 @@ public class TShirtPage {
                 returnToStorefront();
             }
         });
-
-
-
 
         // Cart Button
         Image cartImage = new Image(getClass().getResourceAsStream("/CartIcon.jpg"));

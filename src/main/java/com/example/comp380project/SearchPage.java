@@ -85,7 +85,7 @@ public class SearchPage {
 
             // Testing VBoxFactory class
             for (Item item : searchResults){
-                VBox itemBox = VBoxFactory.createItemBox(item.getImagePath(),item, cart);
+                VBox itemBox = VBoxFactory.createItemBox(item, cart);
                 ItemHolder.getChildren().add(itemBox);
             }
 
