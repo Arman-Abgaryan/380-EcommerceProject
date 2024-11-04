@@ -2,6 +2,6 @@ id;Name;Price;Stock; imagePath
 1;Black T-Shirt;19.99;10;/Black TShirt.jpg
 2;White T-Shirt;19.99;10;/White T.jpg
 3;Grey T-Shirt;19.99;10;/Grey TShirt.jpg
-4; Blue Jeans; 39.99;10;/Blue Jeans.jpg
-5; Black Chinos; 49.99;10;/Black Chinos.jpg
-6; Brown Pants; 29.99;10;/Brown Pants.jpg
+4;Blue Jeans; 39.99;10;/Blue Jeans.jpg
+5;Black Chinos; 49.99;10;/Black Chinos.jpg
+6;Brown Pants; 29.99;10;/Brown Pants.jpg
