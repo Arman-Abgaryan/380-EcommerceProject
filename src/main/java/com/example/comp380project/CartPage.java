@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,6 +74,7 @@ public class CartPage{
 
             //Buttons for Increasing
             Button increaseButton = new Button("+");
+            increaseButton.setCursor(Cursor.HAND);
             increaseButton.setOnAction(event -> {
                 cart.addItem(item);
                 itemLabel.setText(item.getName()+ " x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
@@ -81,6 +83,7 @@ public class CartPage{
 
             //Button for Decreasing
             Button decreaseButton = new Button("-");
+            decreaseButton.setCursor(Cursor.HAND);
             decreaseButton.setOnAction(event -> {
                 Integer currentQuantity = cart.getItems().get(item);
 
@@ -110,6 +113,7 @@ public class CartPage{
 
         // Go Back to HomePage
         Button backButton = new Button("Back to Home");
+        backButton.setCursor(Cursor.HAND);
         backButton.setOnAction(event -> {
             storefront.createStoreFront();
             primaryStage.setScene(storefront.getScene());
