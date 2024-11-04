@@ -27,11 +27,18 @@ public class CartPage{
     private Storefront storefront;
     private Label totalLabel;
 
+    private static CartPage instance;
 
     public CartPage(Cart cart, Storefront storefront ){
         this.cart = cart;
         this.storefront = storefront;
+    }
 
+    public static CartPage getInstance(Cart cart, Storefront storefront) {
+        if (instance == null){
+            instance = new CartPage(cart,storefront);
+        }
+        return instance;
     }
 
     public Scene getCartScene(Stage primaryStage){
@@ -60,7 +67,7 @@ public class CartPage{
             imageView.setFitWidth(100);
 
 
-            Label itemLabel = new Label(item.getName() + " x " + quantity + " - $"+ (item.getPrice() * quantity));
+            Label itemLabel = new Label(item.getName() + " x " + quantity + " - $"+ String.format("%.2f", (item.getPrice() * quantity)));
             itemLabel.setFont(Font.font("calibri", FontWeight.BOLD, FontPosture.REGULAR,15));
             itemLabel.setStyle("-fx-padding:5px");
 
@@ -68,7 +75,7 @@ public class CartPage{
             Button increaseButton = new Button("+");
             increaseButton.setOnAction(event -> {
                 cart.addItem(item);
-                itemLabel.setText(item.getName()+ " x " + cart.getItems().get(item) + " - $" + (item.getPrice()* cart.getItems().get(item)));
+                itemLabel.setText(item.getName()+ " x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
                 updateTotal();
             });
 
@@ -82,7 +89,7 @@ public class CartPage{
                         cart.removeItem(item);
                         int newQuantity = cart.getItems().get(item);
 
-                        itemLabel.setText(item.getName()+ " x "+ newQuantity + " - $" + (item.getPrice()*newQuantity));
+                        itemLabel.setText(item.getName()+ " x "+ newQuantity + " - $" + String.format("%.2f", (item.getPrice()*newQuantity)));
 
 
                     } else {
@@ -90,10 +97,7 @@ public class CartPage{
                         itemList.getChildren().remove(itemLabel.getParent());
                     }
                     updateTotal();
-
                 }
-
-
             });
 
             HBox itemBox = new HBox(10);
@@ -101,9 +105,7 @@ public class CartPage{
             itemList.getChildren().add(itemBox);
             }
 
-
-
-        totalLabel = new Label ("Total: $" + cart.getTotalAmount());
+        totalLabel = new Label ("Total: $" + String.format("%.2f", cart.getTotalAmount()));
         totalLabel.setStyle("-fx-font-weight: bold;");
 
         // Go Back to HomePage
@@ -121,15 +123,10 @@ public class CartPage{
 
         Scene cartScene = new Scene(layout,400,300);
         return cartScene;
-
-
-
         }
 
     // use to update Total when incrementing and decrementing
     private void updateTotal(){
-        totalLabel.setText("Total: $" + cart.getTotalAmount());
+        totalLabel.setText("Total: $" + String.format("%.2f", cart.getTotalAmount()));
     }
-
-
 }
