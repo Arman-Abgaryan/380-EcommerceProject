@@ -71,13 +71,13 @@ public class PantsPage {
 
         // Testing VBoxFactory class
         Item blue_jeans = ItemFileReader.retrieveItem(4);
-        VBox BlueJeansBox = VBoxFactory.createItemBox("/Blue Jeans.jpg", blue_jeans,cart);
+        VBox BlueJeansBox = VBoxFactory.createItemBox(blue_jeans,cart);
 
         Item blk_chinos = ItemFileReader.retrieveItem(5);
-        VBox BlackChinosBox = VBoxFactory.createItemBox("/Black Chinos.jpg", blk_chinos,cart);
+        VBox BlackChinosBox = VBoxFactory.createItemBox(blk_chinos,cart);
 
         Item brown_pants = ItemFileReader.retrieveItem(6);
-        VBox BrownPantsBox = VBoxFactory.createItemBox("/Brown Pants.jpg", brown_pants,cart);
+        VBox BrownPantsBox = VBoxFactory.createItemBox( brown_pants,cart);
 
 
         PantsHolder.setAlignment(Pos.CENTER);
