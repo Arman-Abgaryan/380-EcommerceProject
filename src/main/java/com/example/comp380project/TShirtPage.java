@@ -146,9 +146,6 @@ public class TShirtPage {
 
 
 
-
-
-
         BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
         boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white
 
@@ -181,8 +178,5 @@ public class TShirtPage {
         CartPage cartPage = new CartPage(cart,storefront);
         primaryStage.setScene(cartPage.getCartScene(primaryStage));
     }
-
-
-
 
 }
