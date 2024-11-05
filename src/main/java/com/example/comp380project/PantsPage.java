@@ -55,6 +55,9 @@ public class PantsPage {
         searchField.setPrefWidth(500); // Sets width of search bar
         searchField.setStyle("-fx-background-radius: 30"); // Rounds the edges of the search bar
         searchField.setPromptText("Search for an item"); // Sets default text of search bar
+        searchField.setOnAction(actionEvent -> {
+            performSearch(searchField.getText());
+        });
 
 
         // Search Button
@@ -62,10 +65,7 @@ public class PantsPage {
         searchButton.setCursor(Cursor.HAND);
         searchBar.setSpacing(10); // Sets the space between the search bar and button
         searchButton.setOnAction(actionEvent -> {
-            String query = searchField.getText();
-            List<Item> queryList = SearchController.search(query);
-            SearchPage searchPage =new SearchPage(storefront, cart, queryList,primaryStage);
-            primaryStage.setScene(searchPage.getSearchPage());
+            performSearch(searchField.getText());
         });
         searchBar.getChildren().addAll(searchField, searchButton);
 
@@ -175,6 +175,15 @@ public class PantsPage {
         primaryStage.setScene(cartPage.getCartScene(primaryStage));
     }
 
-
+    public void performSearch(String query) {
+        List<Item> queryList = SearchController.search(query);
+        if(queryList.isEmpty()){
+            returnToStorefront();
+        }
+        else {
+            SearchPage searchPage = new SearchPage(storefront, cart, queryList, primaryStage);
+            primaryStage.setScene(searchPage.getSearchPage());
+        }
+    }
 }
 

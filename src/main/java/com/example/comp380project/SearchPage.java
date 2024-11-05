@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.security.Key;
 import java.util.List;
 
 public class SearchPage {
@@ -38,30 +39,31 @@ public class SearchPage {
         searchBorder.setPadding(new Insets(80, 0, 0, 0)); // Sets position of light blue border
         searchBorder.setStyle("-fx-background-color: #00324b"); // Sets background of search bar to light blue
 
-
         HBox searchBar = new HBox();
         searchBar.setAlignment(Pos.TOP_CENTER);
         searchBar.setPadding(new Insets(-52, 0, 0, 0));
-
 
         // Search bar
         TextField searchField = new TextField(); // Creates search bar
         searchField.setPrefWidth(500); // Sets width of search bar
         searchField.setStyle("-fx-background-radius: 30"); // Rounds the edges of the search bar
         searchField.setPromptText("Search for an item"); // Sets default text of search bar
+        searchField.setOnAction(actionEvent -> {
+            performSearch(searchField.getText());
+        });
 
-
-        // Search Button
+         // Search Button
         Button searchButton = new Button("Search"); // Creates search button
         searchButton.setCursor(Cursor.HAND);
         searchBar.setSpacing(10); // Sets the space between the search bar and button
+        searchButton.setOnAction(actionEvent -> {
+           performSearch(searchField.getText());
+        });
         searchBar.getChildren().addAll(searchField, searchButton);
-
 
         VBox searchHolder = new VBox();
         searchHolder.setAlignment(Pos.TOP_CENTER);
         searchHolder.getChildren().addAll(searchBorder, searchBar);
-
 
         HBox ItemHolder = new HBox(200); //Horizontal Box that holds all items found
 
@@ -70,9 +72,7 @@ public class SearchPage {
             VBox itemBox = VBoxFactory.createItemBox(item, cart);
             ItemHolder.getChildren().add(itemBox);
         }
-
         BorderPane topSection = new BorderPane();
-
 
         // Back to Home Button
         Button backButton = new Button("Back to Home");
@@ -82,7 +82,6 @@ public class SearchPage {
         backButton.setOnAction(e -> {
             returnToStorefront();
         });
-
 
         // Logo
         Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
@@ -104,8 +103,6 @@ public class SearchPage {
         ImageView cartImageView = new ImageView(cartImage);
         cartImageView.setFitWidth(30);
         cartImageView.setFitHeight(30);
-
-
         Button cartButton = new Button("Cart");
         cartButton.setStyle("-fx-background-color: white;");
         cartButton.setGraphic(cartImageView);
@@ -116,20 +113,12 @@ public class SearchPage {
         topSection.setRight(cartButton);
         BorderPane.setMargin(cartButton, new Insets(22, 30, 0, 0));
 
-
         BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
         boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white
-
-
         boxHolder.setTop(new VBox(topSection, searchHolder));
-
-
         boxHolder.setCenter(ItemHolder);
-
-
         return new Scene(boxHolder);
     }
-
 
     private void showCart() {
         StringBuilder cartContents = new StringBuilder("Items in Cart:\n");
@@ -146,6 +135,17 @@ public class SearchPage {
     private void returnToStorefront() {
         storefront.createStoreFront();
         primaryStage.setScene(storefront.getScene());
+    }
+
+    public void performSearch(String query) {
+        List<Item> queryList = SearchController.search(query);
+        if(queryList.isEmpty()){
+            returnToStorefront();
+        }
+        else {
+            SearchPage searchPage = new SearchPage(storefront, cart, queryList, primaryStage);
+            primaryStage.setScene(searchPage.getSearchPage());
+        }
     }
 }
 

@@ -34,13 +34,9 @@ public class TShirtPage {
         this.storefront = storefront;
         this.cart = cart;
         this.primaryStage = primaryStage;
-
-
     }
 
-
     public Scene getTShirtPage() {
-
 
         HBox searchBorder = new HBox();
         // Border of Search Bar
@@ -59,6 +55,9 @@ public class TShirtPage {
         searchField.setPrefWidth(500); // Sets width of search bar
         searchField.setStyle("-fx-background-radius: 30"); // Rounds the edges of the search bar
         searchField.setPromptText("Search for an item"); // Sets default text of search bar
+        searchField.setOnAction(actionEvent -> {
+            performSearch(searchField.getText());
+        });
 
 
         // Search Button
@@ -66,10 +65,7 @@ public class TShirtPage {
         searchButton.setCursor(Cursor.HAND);
         searchBar.setSpacing(10); // Sets the space between the search bar and button
         searchButton.setOnAction(actionEvent -> {
-            String query = searchField.getText();
-            List<Item> queryList = SearchController.search(query);
-            SearchPage searchPage =new SearchPage(storefront, cart, queryList,primaryStage);
-            primaryStage.setScene(searchPage.getSearchPage());
+            performSearch(searchField.getText());
         });
         searchBar.getChildren().addAll(searchField, searchButton);
 
@@ -79,8 +75,6 @@ public class TShirtPage {
         searchHolder.getChildren().addAll(searchBorder, searchBar);
 
 
-
-
         HBox TShirtHolder = new HBox(200); //Horizontal Box that holds all T-Shirts
 
 
@@ -88,20 +82,14 @@ public class TShirtPage {
         Item blk_shirt = ItemFileReader.retrieveItem(1);
         VBox BlackTShirtBox = VBoxFactory.createItemBox( blk_shirt,cart);
 
-
         Item wt_shirt = ItemFileReader.retrieveItem(2);
         VBox WhiteTShirtBox = VBoxFactory.createItemBox( wt_shirt,cart);
-
 
         Item gray_shirt = ItemFileReader.retrieveItem(3);
         VBox GreyTShirtBox = VBoxFactory.createItemBox( gray_shirt,cart);
 
-
-
-
         TShirtHolder.setAlignment(Pos.CENTER);
         TShirtHolder.getChildren().addAll(BlackTShirtBox, WhiteTShirtBox, GreyTShirtBox);
-
 
         BorderPane topSection = new BorderPane();
 
@@ -183,4 +171,14 @@ public class TShirtPage {
         primaryStage.setScene(cartPage.getCartScene(primaryStage));
     }
 
+    public void performSearch(String query) {
+        List<Item> queryList = SearchController.search(query);
+        if(queryList.isEmpty()){
+            returnToStorefront();
+        }
+        else {
+            SearchPage searchPage = new SearchPage(storefront, cart, queryList, primaryStage);
+            primaryStage.setScene(searchPage.getSearchPage());
+        }
+    }
 }
