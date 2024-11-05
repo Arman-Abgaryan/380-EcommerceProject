@@ -54,6 +54,7 @@ public class ItemFileReader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        items.remove(0);
         return items;
     }
 

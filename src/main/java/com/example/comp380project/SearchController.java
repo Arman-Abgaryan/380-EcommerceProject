@@ -20,8 +20,6 @@ public class SearchController  {
         // List that contains items matching search string
         List<Item> items_found = new ArrayList<>();
 
-        System.out.println(items.toString()); //DEBUG
-
         for (Item item : items) {
             String itemName = item.getName();
             if (itemName.toLowerCase().contains(query.toLowerCase())) {
@@ -29,14 +27,5 @@ public class SearchController  {
             }
         }
         return items_found;
-    }
-
-    public static void main(String[] args){
-        Scanner in = new Scanner(System.in);
-        System.out.print("Enter an item to search.\n");
-        String query = in.next();
-        List<Item> items_found = search(query);
-        System.out.print(items_found.toString());
-        //System.out.print(item.getName());
     }
 }

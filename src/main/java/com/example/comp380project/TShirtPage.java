@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.awt.event.ItemEvent;
 import java.io.IOException;
+import java.util.List;
 
 public class TShirtPage {
 
@@ -64,6 +65,12 @@ public class TShirtPage {
         Button searchButton = new Button("Search"); // Creates search button
         searchButton.setCursor(Cursor.HAND);
         searchBar.setSpacing(10); // Sets the space between the search bar and button
+        searchButton.setOnAction(actionEvent -> {
+            String query = searchField.getText();
+            List<Item> queryList = SearchController.search(query);
+            SearchPage searchPage =new SearchPage(storefront, cart, queryList,primaryStage);
+            primaryStage.setScene(searchPage.getSearchPage());
+        });
         searchBar.getChildren().addAll(searchField, searchButton);
 
 
