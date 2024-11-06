@@ -72,7 +72,67 @@ public class SweaterPage {
         searchHolder.getChildren().addAll(searchBorder, searchBar);
 
 
-        return null;
+
+
+
+
+
+
+        BorderPane topSection = new BorderPane();
+
+        // Back to Home Button
+        Button backButton = new Button("Back to Home");
+        backButton.setCursor(Cursor.HAND);
+        topSection.setLeft(backButton);
+        BorderPane.setMargin(backButton, new Insets(30, 0, 0, 25));
+        backButton.setOnAction(e -> {
+            returnToStorefront();
+        });
+
+
+        // Logo
+        Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
+        ImageView AJADlogo = new ImageView(logo);
+        AJADlogo.setFitHeight(100);
+        AJADlogo.setFitWidth(100);
+        topSection.setCenter(AJADlogo);
+        BorderPane.setMargin(AJADlogo, new Insets(-10, 0, 0, 0));
+        AJADlogo.setCursor(Cursor.HAND);
+        AJADlogo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                returnToStorefront();
+            }
+        });
+
+        // Cart Button
+        Image cartImage = new Image(getClass().getResourceAsStream("/CartIcon.jpg"));
+        ImageView cartImageView = new ImageView(cartImage);
+        cartImageView.setFitWidth(30);
+        cartImageView.setFitHeight(30);
+
+
+        Button cartButton = new Button("Cart");
+        cartButton.setStyle("-fx-background-color: white;");
+        cartButton.setGraphic(cartImageView);
+        cartButton.setCursor(Cursor.HAND);
+        cartButton.setOnAction(event ->{
+            goToCartPage();
+        });
+        topSection.setRight(cartButton);
+        BorderPane.setMargin(cartButton, new Insets(22, 30, 0, 0));
+
+
+
+        BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
+        boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white
+
+
+        boxHolder.setTop(new VBox(topSection, searchHolder));
+
+
+        return new Scene(boxHolder);
+
     }
 
 
