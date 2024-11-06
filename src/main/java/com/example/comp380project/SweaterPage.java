@@ -37,5 +37,16 @@ public class SweaterPage {
 
 
 
+    private void returnToStorefront() {
+        storefront.createStoreFront();
+        primaryStage.setScene(storefront.getScene());
+    }
+
+
+    private void goToCartPage() {
+        CartPage cartPage = new CartPage(cart,storefront);
+        primaryStage.setScene(cartPage.getCartScene(primaryStage));
+    }
+
 
 }
