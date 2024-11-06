@@ -35,7 +35,7 @@ public class Storefront extends Application {
 
     public void createStoreFront(){
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweater","Cart");
+        choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweaters","Cart");
         choiceBox.setValue("- Select -");
         choiceBox.setCursor(Cursor.HAND);
 
