@@ -33,7 +33,7 @@ public class Storefront extends Application {
 
     public void createStoreFront(){
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll("T-Shirts", "Pants", "Shoes","Cart");
+        choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweater","Cart");
         choiceBox.setValue("- Select -");
         choiceBox.setCursor(Cursor.HAND);
 
@@ -69,7 +69,7 @@ public class Storefront extends Application {
             Scene blankPantsPage = pantsPage.getPantsPage();
             window.setScene((blankPantsPage));
             System.out.println("Navigating to: " + choice);
-        } else if (choice.equals("Shoes")) {
+        } else if (choice.equals("Sweater")) {
             System.out.println("Navigating to: " + choice);
         } else if  (choice.equals("Cart")){
             CartPage cartPage = new CartPage(cart,this);
