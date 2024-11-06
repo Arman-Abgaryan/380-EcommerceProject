@@ -138,6 +138,9 @@ public class SearchPage {
     }
 
     public void performSearch(String query) {
+        if(query.isEmpty()){
+            return;
+        }
         List<Item> queryList = SearchController.search(query);
         if(queryList.isEmpty()){
             returnToStorefront();
