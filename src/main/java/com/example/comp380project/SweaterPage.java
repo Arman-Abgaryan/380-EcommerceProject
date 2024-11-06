@@ -110,7 +110,7 @@ public class SweaterPage {
         });
 
         // Cart Button
-        Image cartImage = new Image(getClass().getResourceAsStream("/CartIcon.jpg"));
+        Image cartImage = new Image(getClass().getResourceAsStream("/cart.png"));
         ImageView cartImageView = new ImageView(cartImage);
         cartImageView.setFitWidth(30);
         cartImageView.setFitHeight(30);
