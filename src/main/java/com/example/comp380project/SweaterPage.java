@@ -139,7 +139,12 @@ public class SweaterPage {
 
     }
 
-
+    private void showCart(){
+        StringBuilder cartContents = new StringBuilder("Items in Cart:\n");
+        cart.getItems().forEach((item, quantity)->
+                cartContents.append(item.getName()).append("( ").append(")\n"));
+        System.out.println(cartContents.toString());
+    }
 
 
     private void returnToStorefront() {
