@@ -34,6 +34,47 @@ public class SweaterPage {
         this.primaryStage = primaryStage;
     }
 
+    public Scene getSweaterPage() {
+        HBox searchBorder = new HBox();
+        // Border of Search Bar
+        searchBorder.setAlignment(Pos.TOP_CENTER);
+        searchBorder.setPadding(new Insets(80, 0, 0, 0)); // Sets position of light blue border
+        searchBorder.setStyle("-fx-background-color: #00324b"); // Sets background of search bar to light blue
+
+
+        HBox searchBar = new HBox();
+        searchBar.setAlignment(Pos.TOP_CENTER);
+        searchBar.setPadding(new Insets(-52, 0, 0, 0));
+
+
+        // Search bar
+        TextField searchField = new TextField(); // Creates search bar
+        searchField.setPrefWidth(500); // Sets width of search bar
+        searchField.setStyle("-fx-background-radius: 30"); // Rounds the edges of the search bar
+        searchField.setPromptText("Search for an item"); // Sets default text of search bar
+        searchField.setOnAction(actionEvent -> {
+            performSearch(searchField.getText());
+        });
+
+
+        // Search Button
+        Button searchButton = new Button("Search"); // Creates search button
+        searchButton.setCursor(Cursor.HAND);
+        searchBar.setSpacing(10); // Sets the space between the search bar and button
+        searchButton.setOnAction(actionEvent -> {
+            performSearch(searchField.getText());
+        });
+        searchBar.getChildren().addAll(searchField, searchButton);
+
+
+        VBox searchHolder = new VBox();
+        searchHolder.setAlignment(Pos.TOP_CENTER);
+        searchHolder.getChildren().addAll(searchBorder, searchBar);
+
+
+        return null;
+    }
+
 
 
 
@@ -48,5 +89,18 @@ public class SweaterPage {
         primaryStage.setScene(cartPage.getCartScene(primaryStage));
     }
 
-
+    public void performSearch(String query) {
+        if(query.isEmpty()){
+            return;
+        }
+        List<Item> queryList = SearchController.search(query);
+        if(queryList.isEmpty()){
+            returnToStorefront();
+        }
+        else {
+            SearchPage searchPage = new SearchPage(storefront, cart, queryList, primaryStage);
+            primaryStage.setScene(searchPage.getSearchPage());
+        }
+    }
 }
+
