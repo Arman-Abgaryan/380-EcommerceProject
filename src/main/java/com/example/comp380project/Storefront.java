@@ -71,7 +71,7 @@ public class Storefront extends Application {
             Scene blankPantsPage = pantsPage.getPantsPage();
             window.setScene((blankPantsPage));
             System.out.println("Navigating to: " + choice);
-        } else if (choice.equals("Sweater")) {
+        } else if (choice.equals("Sweaters")) {
             SweaterPage sweaterPage = new SweaterPage(this,cart,window);
             Scene newSweaterPage = sweaterPage.getSweaterPage();
             window.setScene((newSweaterPage));
