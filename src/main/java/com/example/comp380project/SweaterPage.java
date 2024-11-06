@@ -35,6 +35,7 @@ public class SweaterPage {
     }
 
     public Scene getSweaterPage() {
+
         HBox searchBorder = new HBox();
         // Border of Search Bar
         searchBorder.setAlignment(Pos.TOP_CENTER);
@@ -71,10 +72,19 @@ public class SweaterPage {
         searchHolder.setAlignment(Pos.TOP_CENTER);
         searchHolder.getChildren().addAll(searchBorder, searchBar);
 
+        HBox SweaterHolder = new HBox(200);
 
+        Item black_sweater = ItemFileReader.retrieveItem(7);
+        VBox BlackSweaterBox = VBoxFactory.createItemBox(black_sweater,cart);
 
+        Item grey_sweater = ItemFileReader.retrieveItem(8);
+        VBox GreySweaterBox = VBoxFactory.createItemBox(grey_sweater,cart);
 
+        Item green_sweater = ItemFileReader.retrieveItem(9);
+        VBox GreenSweaterBox = VBoxFactory.createItemBox(green_sweater,cart);
 
+        SweaterHolder.setAlignment(Pos.CENTER);
+        SweaterHolder.getChildren().addAll(BlackSweaterBox, GreySweaterBox, GreenSweaterBox);
 
 
 
@@ -130,6 +140,7 @@ public class SweaterPage {
 
         boxHolder.setTop(new VBox(topSection, searchHolder));
 
+        boxHolder.setCenter(SweaterHolder);
 
         return new Scene(boxHolder);
 
