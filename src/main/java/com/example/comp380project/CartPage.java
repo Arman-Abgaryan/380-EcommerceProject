@@ -120,11 +120,20 @@ public class CartPage{
             primaryStage.setScene(storefront.getScene());
         });
 
+        //Go to ReceiptPage
+        Button receiptButton = new Button("Confirm Purchase");
+        receiptButton.setCursor(Cursor.HAND);
+        receiptButton.setOnAction(event -> {
+            ReceiptPage receiptPage = new ReceiptPage(cart,storefront);
+           primaryStage.setScene(receiptPage.getReceiptScene(primaryStage)); 
+        });
+
         layout.setCenter(itemList);
         layout.setBottom(totalLabel);
         layout.setAlignment(totalLabel, Pos.CENTER);
         layout.setTop(backButton);
         layout.setAlignment(backButton,Pos.TOP_CENTER);
+        layout.setRight(receiptButton);
 
         Scene cartScene = new Scene(layout,400,300);
         return cartScene;
