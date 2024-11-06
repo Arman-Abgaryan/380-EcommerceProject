@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.sql.SQLData;
+
 public class Storefront extends Application {
     Stage window;
     Scene scene;
@@ -70,6 +72,9 @@ public class Storefront extends Application {
             window.setScene((blankPantsPage));
             System.out.println("Navigating to: " + choice);
         } else if (choice.equals("Sweater")) {
+            SweaterPage sweaterPage = new SweaterPage(this,cart,window);
+            Scene newSweaterPage = sweaterPage.getSweaterPage();
+            window.setScene((newSweaterPage));
             System.out.println("Navigating to: " + choice);
         } else if  (choice.equals("Cart")){
             CartPage cartPage = new CartPage(cart,this);
