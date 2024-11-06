@@ -89,7 +89,9 @@ public class CustomerFileReader {
     String lastName = data[2];
     String email = data[3];
     String address = data[4];
+    String username = data[5];
+    String password = data[6];
 
-    return new Customer(id, firstName, lastName, email, address);
+    return new Customer(id, firstName, lastName, email, address, username, password);
     }
 }
