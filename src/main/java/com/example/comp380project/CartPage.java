@@ -112,28 +112,47 @@ public class CartPage{
         totalLabel = new Label ("Total: $" + String.format("%.2f", cart.getTotalAmount()));
         totalLabel.setStyle("-fx-font-weight: bold;");
 
+        BorderPane topPane = new BorderPane();
+
         // Go Back to HomePage
         Button backButton = new Button("Back to Home");
         backButton.setCursor(Cursor.HAND);
+        topPane.setLeft(backButton);
         backButton.setOnAction(event -> {
             storefront.createStoreFront();
             primaryStage.setScene(storefront.getScene());
         });
 
+        // Logo
+        Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
+        ImageView AJADlogo = new ImageView(logo);
+        AJADlogo.setFitHeight(100);
+        AJADlogo.setFitWidth(100);
+        topPane.setCenter(AJADlogo);
+        BorderPane.setMargin(AJADlogo, new Insets(-32, 0, 0, 0));
+        AJADlogo.setCursor(Cursor.HAND);
+        AJADlogo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                storefront.createStoreFront();
+                primaryStage.setScene(storefront.getScene());
+            }
+        });
+
         //Go to ReceiptPage
         Button receiptButton = new Button("Confirm Purchase");
         receiptButton.setCursor(Cursor.HAND);
+        topPane.setRight(receiptButton);
         receiptButton.setOnAction(event -> {
             ReceiptPage receiptPage = new ReceiptPage(cart,storefront);
-           primaryStage.setScene(receiptPage.getReceiptScene(primaryStage)); 
+            primaryStage.setScene(receiptPage.getReceiptScene(primaryStage));
         });
 
         layout.setCenter(itemList);
         layout.setBottom(totalLabel);
         layout.setAlignment(totalLabel, Pos.CENTER);
-        layout.setTop(backButton);
-        layout.setAlignment(backButton,Pos.TOP_CENTER);
-        layout.setRight(receiptButton);
+        layout.setTop(topPane);
+
 
         Scene cartScene = new Scene(layout,400,300);
         return cartScene;
