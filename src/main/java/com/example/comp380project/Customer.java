@@ -1,6 +1,7 @@
 package com.example.comp380project;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Customer implements Serializable{
     private static int nextID = 1;
@@ -10,28 +11,25 @@ public class Customer implements Serializable{
     private String lastName;
     private String email;
     private String address;
-    private String username;
-    private String password;
+    private HashMap<String,String> loginCred;
 
-    public Customer(int id,String firstName, String lastName, String email, String address, String username, String password) {
+    public Customer(int id,String firstName, String lastName, String email, String address, HashMap<String,String> loginCred) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.address = address;
-        this.username = username;
-        this.password = password;
+        this.loginCred = loginCred;
 
     }
 
-    public Customer(String firstName, String lastName, String email, String address, String username, String password){
+    public Customer(String firstName, String lastName, String email, String address, HashMap<String,String> loginCred){
         this.id = nextID++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.address = address;
-        this.username = username;
-        this.password = password;
+        this.loginCred = loginCred;
 
     }
 
@@ -59,12 +57,8 @@ public class Customer implements Serializable{
         return address;
     }
 
-    String getUsername(){
-        return username;
-    }
-
-    String getPassword(){
-        return password;
+    HashMap<String,String> getLoginCred(){
+        return loginCred;
     }
 
     // To make it more human-readable
@@ -75,9 +69,7 @@ public class Customer implements Serializable{
                 "First name: " + firstName + "\n" +
                 "Last name: " + lastName + "\n" +
                 "Email: " + email + "\n" +
-                "Address: " + address + "\n" +
-                "Username: " + username + "\n" +
-                "Password: " + password
+                "Address: " + address
                 ;
     }
 }
