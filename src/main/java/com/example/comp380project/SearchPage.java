@@ -2,9 +2,11 @@ package com.example.comp380project;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -13,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.security.Key;
 import java.util.List;
 
 public class SearchPage {
@@ -22,90 +25,131 @@ public class SearchPage {
     private Stage primaryStage;
     List<Item> searchResults;
 
-    public SearchPage(Storefront storefront, Cart cart,List<Item> searchResults) {
+    public SearchPage(Storefront storefront, Cart cart, List<Item> searchResults, Stage primaryStage) {
         this.storefront = storefront;
         this.cart = cart;
         this.searchResults = searchResults;
+        this.primaryStage = primaryStage;
     }
 
     public Scene getSearchPage() {
-            HBox pageLabel = new HBox(); // HBox for Label
-            pageLabel.setPadding(new Insets(0, 0, 0, 0));
-            Label label = new Label("Search Results");
-            label.setFont(Font.font("verdana", FontWeight.BOLD, 20));
-            pageLabel.setAlignment(Pos.TOP_LEFT);
-            pageLabel.getChildren().addAll(label);
+        HBox searchBorder = new HBox();
+        // Border of Search Bar
+        searchBorder.setAlignment(Pos.TOP_CENTER);
+        searchBorder.setPadding(new Insets(80, 0, 0, 0)); // Sets position of light blue border
+        searchBorder.setStyle("-fx-background-color: #00324b"); // Sets background of search bar to light blue
 
-            HBox logoHolder = new HBox();
-            logoHolder.setAlignment(Pos.TOP_CENTER);
-            logoHolder.setPadding(new Insets(-40, 0, 0, 0)); //Adjusts the positioning of the logo to be centered in top center
+        HBox searchBar = new HBox();
+        searchBar.setAlignment(Pos.TOP_CENTER);
+        searchBar.setPadding(new Insets(-52, 0, 0, 0));
 
-            // Image of Logo
-            Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
-            ImageView AJADlogo = new ImageView(logo);
-            AJADlogo.setFitHeight(100);
-            AJADlogo.setFitWidth(100);
-            AJADlogo.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    System.out.println("Logo clicked ");
-                    Storefront storefront = new Storefront();
-                    storefront.start(primaryStage);
-                }
-            });
+        // Search bar
+        TextField searchField = new TextField(); // Creates search bar
+        searchField.setPrefWidth(500); // Sets width of search bar
+        searchField.setStyle("-fx-background-radius: 30"); // Rounds the edges of the search bar
+        searchField.setPromptText("Search for an item"); // Sets default text of search bar
+        searchField.setOnAction(actionEvent -> {
+            performSearch(searchField.getText());
+        });
 
-            logoHolder.getChildren().addAll(AJADlogo);
+         // Search Button
+        Button searchButton = new Button("Search"); // Creates search button
+        searchButton.setCursor(Cursor.HAND);
+        searchBar.setSpacing(10); // Sets the space between the search bar and button
+        searchButton.setOnAction(actionEvent -> {
+           performSearch(searchField.getText());
+        });
+        searchBar.getChildren().addAll(searchField, searchButton);
 
+        VBox searchHolder = new VBox();
+        searchHolder.setAlignment(Pos.TOP_CENTER);
+        searchHolder.getChildren().addAll(searchBorder, searchBar);
 
-            HBox viewCart = new HBox();
-            viewCart.setAlignment(Pos.TOP_RIGHT);
-            viewCart.setPadding(new Insets(-70, 95, 0, 0));
+        HBox ItemHolder = new HBox(200); //Horizontal Box that holds all items found
 
-            Image cartImage = new Image(getClass().getResourceAsStream("/cart.png"));
-            ImageView cartImageView = new ImageView(cartImage);
-            cartImageView.setFitWidth(30);
-            cartImageView.setFitHeight(30);
-
-
-            Button cartButton = new Button("Cart");
-            cartButton.setStyle("-fx-background-color: #12A822;");
-            cartButton.setOnAction(event ->{
-                CartPage cartPage = new CartPage(cart,storefront);
-                primaryStage.setScene(cartPage.getCartScene(primaryStage));
-            });
-            viewCart.getChildren().addAll(cartButton,cartImageView);
-
-
-
-            VBox topHolder = new VBox(); // Vertical Box holder for pageLabel and logoHolder
-            topHolder.setAlignment(Pos.TOP_CENTER);
-            topHolder.getChildren().addAll(pageLabel, logoHolder, viewCart);
-
-            HBox ItemHolder = new HBox(200); //Horizontal Box that holds all items found
-
-            // Testing VBoxFactory class
-            for (Item item : searchResults){
-                VBox itemBox = VBoxFactory.createItemBox(item, cart);
-                ItemHolder.getChildren().add(itemBox);
-            }
-
-            BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
-            boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white
-
-            boxHolder.setTop(topHolder);
-            BorderPane.setAlignment(topHolder, Pos.TOP_LEFT);
-
-            boxHolder.setCenter(ItemHolder);
-            BorderPane.setAlignment(ItemHolder, Pos.CENTER);
-
-            return new Scene(boxHolder);
+        // Testing VBoxFactory class
+        for (Item item : searchResults) {
+            VBox itemBox = VBoxFactory.createItemBox(item, cart);
+            ItemHolder.getChildren().add(itemBox);
         }
+        BorderPane topSection = new BorderPane();
 
-        private void showCart(){
-            StringBuilder cartContents = new StringBuilder("Items in Cart:\n");
-            cart.getItems().forEach((item, quantity)->
-                    cartContents.append(item.getName()).append("( ").append(")\n"));
-            System.out.println(cartContents.toString());
+        // Back to Home Button
+        Button backButton = new Button("Back to Home");
+        backButton.setCursor(Cursor.HAND);
+        topSection.setLeft(backButton);
+        BorderPane.setMargin(backButton, new Insets(30, 0, 0, 25));
+        backButton.setOnAction(e -> {
+            returnToStorefront();
+        });
+
+        // Logo
+        Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
+        ImageView AJADlogo = new ImageView(logo);
+        AJADlogo.setFitHeight(100);
+        AJADlogo.setFitWidth(100);
+        topSection.setCenter(AJADlogo);
+        BorderPane.setMargin(AJADlogo, new Insets(-10, 0, 0, 0));
+        AJADlogo.setCursor(Cursor.HAND);
+        AJADlogo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                returnToStorefront();
+            }
+        });
+
+        // Cart Button
+        Image cartImage = new Image(getClass().getResourceAsStream("/CartIcon.jpg"));
+        ImageView cartImageView = new ImageView(cartImage);
+        cartImageView.setFitWidth(30);
+        cartImageView.setFitHeight(30);
+        Button cartButton = new Button("Cart");
+        cartButton.setStyle("-fx-background-color: white;");
+        cartButton.setGraphic(cartImageView);
+        cartButton.setCursor(Cursor.HAND);
+        cartButton.setOnAction(event -> {
+            goToCartPage();
+        });
+        topSection.setRight(cartButton);
+        BorderPane.setMargin(cartButton, new Insets(22, 30, 0, 0));
+
+        BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
+        boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white
+        boxHolder.setTop(new VBox(topSection, searchHolder));
+        boxHolder.setCenter(ItemHolder);
+        return new Scene(boxHolder);
+    }
+
+    private void showCart() {
+        StringBuilder cartContents = new StringBuilder("Items in Cart:\n");
+        cart.getItems().forEach((item, quantity) ->
+                cartContents.append(item.getName()).append("( ").append(")\n"));
+        System.out.println(cartContents.toString());
+    }
+
+    private void goToCartPage() {
+        CartPage cartPage = new CartPage(cart, storefront);
+        primaryStage.setScene(cartPage.getCartScene(primaryStage));
+    }
+
+    private void returnToStorefront() {
+        storefront.createStoreFront();
+        primaryStage.setScene(storefront.getScene());
+    }
+
+    public void performSearch(String query) {
+        if(query.isEmpty()){
+            return;
+        }
+        List<Item> queryList = SearchController.search(query);
+        if(queryList.isEmpty()){
+            returnToStorefront();
+        }
+        else {
+            SearchPage searchPage = new SearchPage(storefront, cart, queryList, primaryStage);
+            primaryStage.setScene(searchPage.getSearchPage());
         }
     }
+}
+
 

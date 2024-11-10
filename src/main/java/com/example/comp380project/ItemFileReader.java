@@ -54,6 +54,7 @@ public class ItemFileReader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        items.remove(0);
         return items;
     }
 
@@ -62,6 +63,7 @@ public class ItemFileReader {
                 ";" + item.getName() +
                 ";" + item.getPrice() +
                 ";" + item.getStock() +
+                "l" + item.getSize() +
                 ";" + item.getImagePath();
     }
 
@@ -73,8 +75,9 @@ public class ItemFileReader {
         String name = data[1];
         double price = Double.parseDouble(data[2]);
         int stock = Integer.parseInt(data[3]);
+        String size = data[5];
         String imagePath = data.length > 4 ? data[4]: null;
 
-        return new Item(id, name, price, stock,imagePath);
+        return new Item(id, name, price, stock,imagePath,size);
     }
     }

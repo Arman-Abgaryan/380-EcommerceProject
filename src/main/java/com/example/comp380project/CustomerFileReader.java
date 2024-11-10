@@ -2,6 +2,7 @@ package com.example.comp380project;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -15,7 +16,7 @@ public class CustomerFileReader {
 
         for (Customer existingCustomer : existingCustomers){
             if (existingCustomer != null) {
-                if (existingCustomer.getId() == customer.getId()) {
+                if (existingCustomer.getUsername().equals(customer.getUsername())) {
                     System.out.println("Customer " + customer.getFirstName() + " already exists. Not saving.");
                     return;
                 }
@@ -23,7 +24,9 @@ public class CustomerFileReader {
         }
         try(PrintWriter writer = new PrintWriter(new FileWriter(CSV_CUSTOMERS_INFO, true))) {  // Append mode
             writer.println(customerToCSV(customer));
-        }catch (IOException e){}
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -33,7 +36,10 @@ public class CustomerFileReader {
                 ";" + customer.getFirstName() +
                 ";" + customer.getLastName() +
                 ";" + customer.getEmail() +
-                ";" + customer.getAddress();
+                ";" + customer.getAddress() +
+                ";" + customer.getUsername() +
+                ";" + customer.getPassword()
+                ;
     }
 
     // Retrieve a specific customer by ID
@@ -61,20 +67,18 @@ public class CustomerFileReader {
         try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                if (line.startsWith("id;")) continue;
                 customers.add(csvToCustomer(line));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        // Removing null value
-        customers.remove(0);
-
         /*---------------------------*/
         // Setting next available ID
         // Need to create a separate method in the future to initialize the next available ID on startup
-        maxID = customers.getLast().getId();
-        Customer.setNextID(maxID);
+        maxID = customers.stream().mapToInt(Customer::getId).max().orElse(0);
+        Customer.setNextID(maxID + 1);
         /*---------------------------*/
         return customers;
     }
@@ -89,7 +93,9 @@ public class CustomerFileReader {
     String lastName = data[2];
     String email = data[3];
     String address = data[4];
+    String username = data[5];
+    String password = data[6];
 
-    return new Customer(id, firstName, lastName, email, address);
+    return new Customer(id, firstName, lastName, email, address, username, password);
     }
 }

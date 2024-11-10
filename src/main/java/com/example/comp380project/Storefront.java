@@ -20,6 +20,8 @@ public class Storefront extends Application {
 
     @Override
     public void start(Stage StorefrontStage) {
+        CustomerFileReader.retrieveAllCustomers(); // Added to initialize next available customer ID
+
         window = StorefrontStage;
         window.setTitle("AJAD Ecommerce");
         StorefrontStage.setWidth(1200);
@@ -33,7 +35,7 @@ public class Storefront extends Application {
 
     public void createStoreFront(){
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll("T-Shirts", "Pants", "Shoes","Cart");
+        choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweaters","Cart");
         choiceBox.setValue("- Select -");
         choiceBox.setCursor(Cursor.HAND);
 
@@ -69,7 +71,10 @@ public class Storefront extends Application {
             Scene blankPantsPage = pantsPage.getPantsPage();
             window.setScene((blankPantsPage));
             System.out.println("Navigating to: " + choice);
-        } else if (choice.equals("Shoes")) {
+        } else if (choice.equals("Sweaters")) {
+            SweaterPage sweaterPage = new SweaterPage(this,cart,window);
+            Scene newSweaterPage = sweaterPage.getSweaterPage();
+            window.setScene((newSweaterPage));
             System.out.println("Navigating to: " + choice);
         } else if  (choice.equals("Cart")){
             CartPage cartPage = new CartPage(cart,this);
@@ -87,6 +92,6 @@ public class Storefront extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 }

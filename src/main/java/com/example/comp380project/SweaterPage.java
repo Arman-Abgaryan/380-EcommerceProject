@@ -1,42 +1,34 @@
 package com.example.comp380project;
+
+import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
-import java.awt.event.ItemEvent;
-import java.io.IOException;
 import java.util.List;
 
-public class TShirtPage {
-
+public class SweaterPage {
 
     private Storefront storefront;
     private Cart cart;
     private Stage primaryStage;
 
 
-
-
-    public TShirtPage(Storefront storefront, Cart cart,Stage primaryStage){
+    public SweaterPage(Storefront storefront, Cart cart,Stage primaryStage) {
         this.storefront = storefront;
         this.cart = cart;
         this.primaryStage = primaryStage;
     }
 
-    public Scene getTShirtPage() {
+    public Scene getSweaterPage() {
 
         HBox searchBorder = new HBox();
         // Border of Search Bar
@@ -74,25 +66,23 @@ public class TShirtPage {
         searchHolder.setAlignment(Pos.TOP_CENTER);
         searchHolder.getChildren().addAll(searchBorder, searchBar);
 
+        HBox SweaterHolder = new HBox(200);
 
-        HBox TShirtHolder = new HBox(200); //Horizontal Box that holds all T-Shirts
+        Item black_sweater = ItemFileReader.retrieveItem(7);
+        VBox BlackSweaterBox = VBoxFactory.createItemBox(black_sweater,cart);
+
+        Item grey_sweater = ItemFileReader.retrieveItem(8);
+        VBox GreySweaterBox = VBoxFactory.createItemBox(grey_sweater,cart);
+
+        Item green_sweater = ItemFileReader.retrieveItem(9);
+        VBox GreenSweaterBox = VBoxFactory.createItemBox(green_sweater,cart);
+
+        SweaterHolder.setAlignment(Pos.CENTER);
+        SweaterHolder.getChildren().addAll(BlackSweaterBox, GreySweaterBox, GreenSweaterBox);
 
 
-        // Testing VBoxFactory class
-        Item blk_shirt = ItemFileReader.retrieveItem(1);
-        VBox BlackTShirtBox = VBoxFactory.createItemBox( blk_shirt,cart);
-
-        Item wt_shirt = ItemFileReader.retrieveItem(2);
-        VBox WhiteTShirtBox = VBoxFactory.createItemBox( wt_shirt,cart);
-
-        Item gray_shirt = ItemFileReader.retrieveItem(3);
-        VBox GreyTShirtBox = VBoxFactory.createItemBox( gray_shirt,cart);
-
-        TShirtHolder.setAlignment(Pos.CENTER);
-        TShirtHolder.getChildren().addAll(BlackTShirtBox, WhiteTShirtBox, GreyTShirtBox);
 
         BorderPane topSection = new BorderPane();
-
 
         // Back to Home Button
         Button backButton = new Button("Back to Home");
@@ -137,20 +127,17 @@ public class TShirtPage {
         BorderPane.setMargin(cartButton, new Insets(22, 30, 0, 0));
 
 
-
         BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
         boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white
 
 
         boxHolder.setTop(new VBox(topSection, searchHolder));
 
-
-        boxHolder.setCenter(TShirtHolder);
-
+        boxHolder.setCenter(SweaterHolder);
 
         return new Scene(boxHolder);
-    }
 
+    }
 
     private void showCart(){
         StringBuilder cartContents = new StringBuilder("Items in Cart:\n");
@@ -185,3 +172,4 @@ public class TShirtPage {
         }
     }
 }
+

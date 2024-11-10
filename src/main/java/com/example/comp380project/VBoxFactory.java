@@ -4,6 +4,7 @@ import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,19 @@ public class VBoxFactory {
 
         Label itemName = new Label(item.getName());
         Label itemPrice = new Label("$" + String.valueOf(item.getPrice()));
+
+       //Select Size
+        ChoiceBox<String> sizeChoiceBox = new ChoiceBox<>();
+        sizeChoiceBox.getItems().add("Select a Size");
+
+        String[] sizes = item.getSizes();
+        sizeChoiceBox.getItems().addAll(sizes);
+
+        sizeChoiceBox.setValue("Select a Size");
+
+
+
+
         Label countLabel = new Label("Added 0");
         Button addToCartButton = new Button("Add to Cart");
         addToCartButton.setCursor(Cursor.HAND);
@@ -36,21 +50,27 @@ public class VBoxFactory {
         addToCartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                cart.addItem(item);
-                addCount[0]++;
-                countLabel.setText("Items: " + addCount[0]);
+                String selectedSize = sizeChoiceBox.getValue();
+                if (!"Select a Size".equals(selectedSize)) {
+                    Item itemwithSize = new Item(item.getId(), item.getName(), item.getPrice(), item.getStock(), item.getImagePath(), selectedSize);
+                    cart.addItem(itemwithSize);
+                    addCount[0]++;
+                    countLabel.setText("Items: " + addCount[0]);
 
-                addToCartButton.setText("Added to Cart!");
-                PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                delay.setOnFinished(e -> addToCartButton.setText("Add to cart"));
-                delay.play();
-                System.out.println(item.getName() + " added to the cart!");
+                    addToCartButton.setText("Added to Cart!");
+                    PauseTransition delay = new PauseTransition(Duration.seconds(2));
+                    delay.setOnFinished(e -> addToCartButton.setText("Add to cart"));
+                    delay.play();
+                    System.out.println(selectedSize + " " + item.getName() + " added to the cart!");
 
+                } else{
+                    System.out.println("Please select a size.");
+                }
 
             }
         });
 
-        itemBox.getChildren().addAll(imageView, itemName, itemPrice,countLabel, addToCartButton);
+        itemBox.getChildren().addAll(imageView, itemName, itemPrice, sizeChoiceBox, addToCartButton);
 
         return itemBox;
     }

@@ -68,17 +68,18 @@ public class CartPage{
             imageView.setFitHeight(100);
             imageView.setFitWidth(100);
 
-
-            Label itemLabel = new Label(item.getName() + " x " + quantity + " - $"+ String.format("%.2f", (item.getPrice() * quantity)));
+            //Sahow size
+            Label itemLabel = new Label(item.getSize()+ " " +item.getName()+" x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
             itemLabel.setFont(Font.font("calibri", FontWeight.BOLD, FontPosture.REGULAR,15));
             itemLabel.setStyle("-fx-padding:5px");
+
 
             //Buttons for Increasing
             Button increaseButton = new Button("+");
             increaseButton.setCursor(Cursor.HAND);
             increaseButton.setOnAction(event -> {
                 cart.addItem(item);
-                itemLabel.setText(item.getName()+ " x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
+                itemLabel.setText(item.getSize()+ " " +item.getName()+" x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
                 updateTotal();
             });
 
@@ -86,23 +87,19 @@ public class CartPage{
             Button decreaseButton = new Button("-");
             decreaseButton.setCursor(Cursor.HAND);
             decreaseButton.setOnAction(event -> {
-                Integer currentQuantity = cart.getItems().get(item);
+                cart.removeItem(item);// Remove item from the cart (decreases quantity)
 
-                if (currentQuantity != null){
-                    if (currentQuantity > 1){
-                        cart.removeItem(item);
-                        int newQuantity = cart.getItems().get(item);
-
-                        itemLabel.setText(item.getName()+ " x "+ newQuantity + " - $" + String.format("%.2f", (item.getPrice()*newQuantity)));
-
-
-                    } else {
-                        cart.removeItem(item);
-                        itemList.getChildren().remove(itemLabel.getParent());
-                    }
-                    updateTotal();
+                int newQuantity = cart.getItems().getOrDefault(item, 0);
+                if (newQuantity > 0) {
+                    itemLabel.setText(item.getSize()+ " " +item.getName() + " x " + newQuantity + " - $" + String.format("%.2f", (item.getPrice() * newQuantity)));
+                } else {
+                    itemList.getChildren().remove(itemLabel.getParent());  // Remove item from UI if quantity reaches 0
                 }
+                updateTotal();  // Update total amount in the cart
             });
+
+
+
 
             HBox itemBox = new HBox(10);
             itemBox.getChildren().addAll(imageView,itemLabel,increaseButton,decreaseButton);
@@ -112,19 +109,47 @@ public class CartPage{
         totalLabel = new Label ("Total: $" + String.format("%.2f", cart.getTotalAmount()));
         totalLabel.setStyle("-fx-font-weight: bold;");
 
+        BorderPane topPane = new BorderPane();
+
         // Go Back to HomePage
         Button backButton = new Button("Back to Home");
         backButton.setCursor(Cursor.HAND);
+        topPane.setLeft(backButton);
         backButton.setOnAction(event -> {
             storefront.createStoreFront();
             primaryStage.setScene(storefront.getScene());
         });
 
+        // Logo
+        Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
+        ImageView AJADlogo = new ImageView(logo);
+        AJADlogo.setFitHeight(100);
+        AJADlogo.setFitWidth(100);
+        topPane.setCenter(AJADlogo);
+        BorderPane.setMargin(AJADlogo, new Insets(-32, 0, 0, 0));
+        AJADlogo.setCursor(Cursor.HAND);
+        AJADlogo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                storefront.createStoreFront();
+                primaryStage.setScene(storefront.getScene());
+            }
+        });
+
+        //Go to ReceiptPage
+        Button receiptButton = new Button("Confirm Purchase");
+        receiptButton.setCursor(Cursor.HAND);
+        topPane.setRight(receiptButton);
+        receiptButton.setOnAction(event -> {
+            ReceiptPage receiptPage = new ReceiptPage(cart,storefront);
+            primaryStage.setScene(receiptPage.getReceiptScene(primaryStage));
+        });
+
         layout.setCenter(itemList);
         layout.setBottom(totalLabel);
         layout.setAlignment(totalLabel, Pos.CENTER);
-        layout.setTop(backButton);
-        layout.setAlignment(backButton,Pos.TOP_CENTER);
+        layout.setTop(topPane);
+
 
         Scene cartScene = new Scene(layout,400,300);
         return cartScene;
