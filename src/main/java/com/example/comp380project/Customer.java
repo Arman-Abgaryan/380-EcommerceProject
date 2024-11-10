@@ -1,7 +1,6 @@
 package com.example.comp380project;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 public class Customer implements Serializable{
     private static int nextID = 1;
@@ -11,26 +10,28 @@ public class Customer implements Serializable{
     private String lastName;
     private String email;
     private String address;
-    private HashMap<String,String> loginCred;
+    private String username;
+    private String password;
 
-    public Customer(int id,String firstName, String lastName, String email, String address, HashMap<String,String> loginCred) {
+
+    public Customer(int id,String firstName, String lastName, String email, String address, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.address = address;
-        this.loginCred = loginCred;
-
+        this.username = username;
+        this.password = password;
     }
 
-    public Customer(String firstName, String lastName, String email, String address, HashMap<String,String> loginCred){
+    public Customer(String firstName, String lastName, String email, String address, String username, String password){
         this.id = nextID++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.address = address;
-        this.loginCred = loginCred;
-
+        this.username = username;
+        this.password = password;
     }
 
     int getId(){
@@ -57,8 +58,12 @@ public class Customer implements Serializable{
         return address;
     }
 
-    HashMap<String,String> getLoginCred(){
-        return loginCred;
+    String getUsername(){
+        return username;
+    }
+
+    String getPassword(){
+        return password;
     }
 
     // To make it more human-readable

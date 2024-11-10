@@ -12,8 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.sql.SQLData;
-
 public class Storefront extends Application {
     Stage window;
     Scene scene;
@@ -22,6 +20,8 @@ public class Storefront extends Application {
 
     @Override
     public void start(Stage StorefrontStage) {
+        CustomerFileReader.retrieveAllCustomers(); // Added to initialize next available customer ID
+
         window = StorefrontStage;
         window.setTitle("AJAD Ecommerce");
         StorefrontStage.setWidth(1200);
