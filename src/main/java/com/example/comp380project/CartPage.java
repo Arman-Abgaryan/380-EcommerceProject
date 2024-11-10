@@ -68,17 +68,18 @@ public class CartPage{
             imageView.setFitHeight(100);
             imageView.setFitWidth(100);
 
-
-            Label itemLabel = new Label(item.getName() + " x " + quantity + " - $"+ String.format("%.2f", (item.getPrice() * quantity)));
+            //Sahow size
+            Label itemLabel = new Label(item.getSize()+ " " +item.getName()+" x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
             itemLabel.setFont(Font.font("calibri", FontWeight.BOLD, FontPosture.REGULAR,15));
             itemLabel.setStyle("-fx-padding:5px");
+
 
             //Buttons for Increasing
             Button increaseButton = new Button("+");
             increaseButton.setCursor(Cursor.HAND);
             increaseButton.setOnAction(event -> {
                 cart.addItem(item);
-                itemLabel.setText(item.getName()+ " x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
+                itemLabel.setText(item.getSize()+ " " +item.getName()+" x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
                 updateTotal();
             });
 
@@ -86,23 +87,19 @@ public class CartPage{
             Button decreaseButton = new Button("-");
             decreaseButton.setCursor(Cursor.HAND);
             decreaseButton.setOnAction(event -> {
-                Integer currentQuantity = cart.getItems().get(item);
+                cart.removeItem(item);// Remove item from the cart (decreases quantity)
 
-                if (currentQuantity != null){
-                    if (currentQuantity > 1){
-                        cart.removeItem(item);
-                        int newQuantity = cart.getItems().get(item);
-
-                        itemLabel.setText(item.getName()+ " x "+ newQuantity + " - $" + String.format("%.2f", (item.getPrice()*newQuantity)));
-
-
-                    } else {
-                        cart.removeItem(item);
-                        itemList.getChildren().remove(itemLabel.getParent());
-                    }
-                    updateTotal();
+                int newQuantity = cart.getItems().getOrDefault(item, 0);
+                if (newQuantity > 0) {
+                    itemLabel.setText(item.getSize()+ " " +item.getName() + " x " + newQuantity + " - $" + String.format("%.2f", (item.getPrice() * newQuantity)));
+                } else {
+                    itemList.getChildren().remove(itemLabel.getParent());  // Remove item from UI if quantity reaches 0
                 }
+                updateTotal();  // Update total amount in the cart
             });
+
+
+
 
             HBox itemBox = new HBox(10);
             itemBox.getChildren().addAll(imageView,itemLabel,increaseButton,decreaseButton);

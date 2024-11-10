@@ -9,12 +9,12 @@ public class Cart implements Serializable {
 
     private int idCart;
     private Customer customer;
-    private Map<Item, Integer> items;
+    private Map<Item, Integer> items = new HashMap<>();
 
     public Cart() {
         this.idCart = nextID++;
         this.customer  = getCustomer();
-        items = new HashMap<>();
+        this.items = new HashMap<>();
     }
 
     public Cart(int idCart, Customer customer, Map<Item, Integer> items) {
@@ -49,28 +49,36 @@ public class Cart implements Serializable {
 
     // Add an item to cart
     public void addItem(Item item) {
-        items.put(item,items.getOrDefault(item,0)+1);
+        if (items.containsKey(item)){
+
+            items.put(item,items.get(item) + 1);
+        }else {
+            items.put(item,1);
+        }
 
     }
 
     // Remove an item from cart
     public void removeItem(Item item) {
-        Integer currentQuantity = items.get(item);
-
-        if (currentQuantity != null){
-            if(currentQuantity > 1){
-                items.put(item,currentQuantity - 1);
+        if (items.containsKey(item)) {
+            int newQuantity = items.get(item)-1;
+            if (newQuantity > 0) {
+                items.put(item,newQuantity);
             } else {
                 items.remove(item);
             }
         }
     }
 
+
+
     // Calculate total amount
     public double getTotalAmount() {
         double total = 0;
+
         for (Map.Entry<Item, Integer> entry : items.entrySet()) {
             total += entry.getKey().getPrice() * entry.getValue();
+
         }
         return total;
     }
