@@ -1,15 +1,17 @@
 package com.example.comp380project;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Class that handles login procedures
  */
 public class LoginSystem {
-    private HashMap<String,String> loginCred;
+    private List<Customer> customers;
 
-    public LoginSystem(HashMap<String,String> loginCred){
-        this.loginCred = loginCred;
+    public LoginSystem(){
+        this.customers = CustomerFileReader.retrieveAllCustomers();
     }
 
     /**
@@ -18,12 +20,14 @@ public class LoginSystem {
      * @param password
      * @return true if username is valid, false if username already exists.
      */
-    public boolean existingUser(String username, String password){
-        if (loginCred.containsKey(username)){
-            return false;
-        }
-        loginCred.put(username,password);
-        return true;
+    public boolean newUser(String username, String password){
+       for (Customer customer : customers){
+           if (customer.getUsername().equals(username)){
+               System.out.println("Username already exists.");
+               return false;
+           }
+       }
+       return true;
     }
 
     /**
@@ -33,6 +37,13 @@ public class LoginSystem {
      * @return
      */
     public boolean authenticateUser(String username, String password){
-        return loginCred.containsKey(username) && loginCred.get(username).equals(password);
+        for (Customer customer : customers){
+            if (customer.getUsername().equals(username) && customer.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
     }
 }
+
+
