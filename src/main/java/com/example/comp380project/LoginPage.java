@@ -78,8 +78,6 @@ public class LoginPage extends Application {
         // Method to handle going to RegisterPage
     }
 
-    private
-
     public static void main(String[] args) {
         launch(args);
     }
