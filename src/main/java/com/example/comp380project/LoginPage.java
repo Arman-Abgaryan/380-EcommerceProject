@@ -26,12 +26,14 @@ public class LoginPage extends Application {
     public void start(Stage loginStage) {
         loginStage.setTitle("Login");
 
+        Label loginMessage = new Label();
+
         TextField usernameField = new TextField();
         usernameField.setPromptText("Username");
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Password");
+        passwordField.setOnAction(e -> handleLogin(usernameField.getText().trim(), passwordField.getText(), loginStage, loginMessage)); // Enables use of enter key to proceed
 
-        Label loginMessage = new Label();
 
         Button loginButton = new Button("Login");
         loginButton.setCursor(Cursor.HAND);
