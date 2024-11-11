@@ -5,10 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -28,6 +25,10 @@ public class LoginPage extends Application {
 
         Label loginMessage = new Label();
 
+        Hyperlink registerUser = new Hyperlink("Not a user? Register here.");
+        registerUser.setFocusTraversable(false);
+        registerUser.setOnAction(e -> goToRegisterPage());
+
         TextField usernameField = new TextField();
         usernameField.setPromptText("Username");
         PasswordField passwordField = new PasswordField();
@@ -42,7 +43,7 @@ public class LoginPage extends Application {
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(usernameField, passwordField, loginButton, loginMessage);
+        layout.getChildren().addAll(usernameField, passwordField, loginButton, loginMessage, registerUser);
 
         Scene loginScene = new Scene(layout, 300, 200);
         loginStage.setScene(loginScene);
@@ -51,8 +52,18 @@ public class LoginPage extends Application {
 
     private void handleLogin(String username, String password, Stage loginStage, Label loginMessage) {
         LoginSystem loginSystem = new LoginSystem();
+        if (loginSystem.login(username, password)){
+            loginMessage.setText("Login succesful!");
+            loginMessage.setStyle("-fx-text-fill: green;");
+            storefront.start(new Stage());
+            loginStage.close();
+        }
+        else {
+            loginMessage.setText("Login failed!");
+            loginMessage.setStyle("-fx-text-fill: red;");
+        }
 
-        if (loginSystem.authenticateUser(username, password)){
+       /* if (loginSystem.authenticateUser(username, password)){
             loginMessage.setText("Login Successful!");
             loginMessage.setStyle("-fx-text-fill: green;");
             storefront.start(new Stage());
@@ -60,8 +71,14 @@ public class LoginPage extends Application {
         } else {
             loginMessage.setText("Login failed!");
             loginMessage.setStyle("-fx-text-fill: red;");
-        }
+        }*/
     }
+
+    private void goToRegisterPage(){
+        // Method to handle going to RegisterPage
+    }
+
+    private
 
     public static void main(String[] args) {
         launch(args);
