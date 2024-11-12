@@ -25,13 +25,20 @@ public class Storefront extends Application {
     Cart cart;
 
     public Storefront(){
-        this.window = new Stage();
+        this(null, new Cart());
     }
 
     public Storefront(Customer customer, Cart cart){
         this.customer = customer;
-        this.cart = cart;
+        this.cart = (cart != null) ? cart : new Cart();
     }
+
+    private void intializeCart(){
+        if (cart == null){
+            cart = new Cart();
+        }
+    }
+
     public void start(Stage StorefrontStage) {
         CustomerFileReader.retrieveAllCustomers(); // Added to initialize next available customer ID
 
@@ -42,10 +49,10 @@ public class Storefront extends Application {
 
         createStoreFront();
         window.show();
-
     }
 
     public void createStoreFront(){
+        intializeCart();
 
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
         choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweaters","Cart");
@@ -69,11 +76,10 @@ public class Storefront extends Application {
         if (customer != null) {
             Label welcomeUser = new Label("Welcome " + customer.getFirstName() + "!");
             welcomeUser.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-            selection.getChildren().addAll(welcomeUser, AJADlogo, choiceBox, button);
+            welcomeUser.setAlignment(Pos.TOP_CENTER);
+            selection.getChildren().add(welcomeUser);
         }
-        else {
-            selection.getChildren().addAll(AJADlogo, choiceBox, button);
-        }
+        selection.getChildren().addAll(AJADlogo, choiceBox, button);
 
         scene = new Scene(selection);
         window.setScene(scene);
@@ -83,30 +89,23 @@ public class Storefront extends Application {
         String choice = choiceBox.getValue();
 
         if (choice.equals("T-Shirts")) {
-            TShirtPage tShirtPage = new TShirtPage(this,cart,window);
+            TShirtPage tShirtPage = new TShirtPage(this, cart != null ? cart : new Cart(), window);
             Scene blankShirtScene = tShirtPage.getTShirtPage();
             window.setScene(blankShirtScene);
         } else if (choice.equals("Pants")) {
-            PantsPage pantsPage = new PantsPage(this,cart,window);
+            PantsPage pantsPage = new PantsPage(this, cart != null ? cart : new Cart(), window);
             Scene blankPantsPage = pantsPage.getPantsPage();
             window.setScene((blankPantsPage));
             System.out.println("Navigating to: " + choice);
         } else if (choice.equals("Sweaters")) {
-            SweaterPage sweaterPage = new SweaterPage(this,cart,window);
+            SweaterPage sweaterPage = new SweaterPage(this, cart != null ? cart : new Cart(), window);
             Scene newSweaterPage = sweaterPage.getSweaterPage();
             window.setScene((newSweaterPage));
             System.out.println("Navigating to: " + choice);
         } else if  (choice.equals("Cart")){
-            if (customer == null) {
-                CartPage cartPage = new CartPage(new Cart(),this);
-                Scene cartScene = cartPage.getCartScene(window);
-                window.setScene(cartScene);
-            }
-            else{
-                CartPage cartPage = new CartPage(cart, this);
-                Scene cartScene = cartPage.getCartScene(window);
-                window.setScene(cartScene);
-            }
+            CartPage cartPage = new CartPage(cart != null ? cart : new Cart(), this);
+            Scene cartScene = cartPage.getCartScene(window);
+            window.setScene(cartScene);
         }
     }
 
