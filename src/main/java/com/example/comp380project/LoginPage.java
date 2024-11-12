@@ -43,7 +43,10 @@ public class LoginPage extends Application {
 
         Hyperlink registerUser = new Hyperlink("Not a user? Register here.");
         registerUser.setFocusTraversable(false);
-        registerUser.setOnAction(e -> goToRegisterPage());
+        registerUser.setOnAction(e ->{
+            loginStage.close();
+            goToRegisterPage();
+        });
 
         TextField usernameField = new TextField();
         usernameField.setPromptText("Username");

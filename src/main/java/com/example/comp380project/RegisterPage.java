@@ -17,6 +17,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.Cursor;
 
+
 public class RegisterPage extends Application {
     private LoginSystem loginSystem;
 
@@ -36,14 +37,16 @@ public class RegisterPage extends Application {
         Label header = new Label("Enter Information");
         header.setFont(Font.font("Arial", FontWeight.BOLD, 18));
 
+        Label loginMessage = new Label();
+
         TextField firstNameField = new TextField();
         firstNameField.setPromptText("First Name");
         TextField lastNameField = new TextField();
         lastNameField.setPromptText("Last Name");
-        TextField addressField = new TextField();
-        addressField.setPromptText("Address");
         TextField emailField = new TextField();
         emailField.setPromptText("Email");
+        TextField addressField = new TextField();
+        addressField.setPromptText("Address");
 
         TextField usernameField = new TextField();
         usernameField.setPromptText("Username");
@@ -51,12 +54,23 @@ public class RegisterPage extends Application {
         passwordField.setPromptText("Password");
         PasswordField confirmPasswordField = new PasswordField();
         confirmPasswordField.setPromptText("Confirm Password");
+        confirmPasswordField.setOnAction(e -> registerNewUser(firstNameField, lastNameField, emailField, addressField, usernameField, passwordField, confirmPasswordField, loginMessage));
 
-        Label message = new Label();
 
         Button createUserButton = new Button("Confirm");
         createUserButton.setCursor(Cursor.HAND);
-        createUserButton.setOnAction(e -> registerNewUser(firstNameField, lastNameField, emailField, addressField, usernameField, passwordField, confirmPasswordField, message));
+        createUserButton.setOnAction(e -> registerNewUser(firstNameField, lastNameField, emailField, addressField, usernameField, passwordField, confirmPasswordField, loginMessage));
+
+        Button returnToLogin = new Button("Return to Login");
+        returnToLogin.setCursor(Cursor.HAND);
+        returnToLogin.setOnAction(e ->{
+            registerStage.close();
+
+            Stage loginStage = new Stage();
+            LoginPage loginPage = new LoginPage();
+            loginPage.start(loginStage);
+
+        });
 
         Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
         ImageView AJADlogo = new ImageView(logo);
@@ -68,7 +82,7 @@ public class RegisterPage extends Application {
         layout.setPadding(new Insets(40));
         layout.setAlignment(Pos.CENTER);
         layout.setStyle("-fx-background-color: white");
-        layout.getChildren().addAll(AJADlogo, header, firstNameField, lastNameField, addressField, emailField, usernameField, passwordField, confirmPasswordField, createUserButton, message);
+        layout.getChildren().addAll(AJADlogo, header, firstNameField, lastNameField, emailField, addressField, usernameField, passwordField, confirmPasswordField, createUserButton, returnToLogin, loginMessage);
 
         Scene registerScene = new Scene(layout, 300,450);
         registerStage.setScene(registerScene);
