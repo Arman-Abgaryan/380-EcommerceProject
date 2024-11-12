@@ -6,6 +6,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -65,7 +66,9 @@ public class SearchPage {
         searchHolder.setAlignment(Pos.TOP_CENTER);
         searchHolder.getChildren().addAll(searchBorder, searchBar);
 
-        HBox ItemHolder = new HBox(200); //Horizontal Box that holds all items found
+        FlowPane ItemHolder = new FlowPane(100,100); //Horizontal Box that holds all items found
+        ItemHolder.setAlignment(Pos.CENTER);
+        ItemHolder.setStyle("-fx-background-color: white");
 
         // Testing VBoxFactory class
         for (Item item : searchResults) {
@@ -99,7 +102,7 @@ public class SearchPage {
         });
 
         // Cart Button
-        Image cartImage = new Image(getClass().getResourceAsStream("/CartIcon.jpg"));
+        Image cartImage = new Image(getClass().getResourceAsStream("/cart.png"));
         ImageView cartImageView = new ImageView(cartImage);
         cartImageView.setFitWidth(30);
         cartImageView.setFitHeight(30);
@@ -113,11 +116,20 @@ public class SearchPage {
         topSection.setRight(cartButton);
         BorderPane.setMargin(cartButton, new Insets(22, 30, 0, 0));
 
+        ScrollPane scrollPane = new ScrollPane(ItemHolder);
+        scrollPane.setPadding(new Insets(10));
+        scrollPane.setStyle("-fx-background-color: white");
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+
+
         BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
         boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white
         boxHolder.setTop(new VBox(topSection, searchHolder));
-        boxHolder.setCenter(ItemHolder);
-        return new Scene(boxHolder);
+        boxHolder.setCenter(scrollPane);
+
+        Scene scene = new Scene(boxHolder);
+        return scene;
     }
 
     private void showCart() {

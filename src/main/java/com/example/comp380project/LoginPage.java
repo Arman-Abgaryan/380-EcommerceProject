@@ -69,7 +69,6 @@ public class LoginPage extends Application {
             loginMessage.setStyle("-fx-text-fill: green;");
 
             Customer customer = CustomerFileReader.retrieveCustomer(username);
-            System.out.println(customer);
             Cart cart = CartFileReader.retrieveCart(customer.getId());
 
             Storefront storefront = new Storefront(customer, cart);
