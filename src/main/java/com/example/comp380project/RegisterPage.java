@@ -8,7 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+
 import javafx.stage.Stage;
 import javafx.scene.Cursor;
 
@@ -27,6 +32,9 @@ public class RegisterPage extends Application {
         CustomerFileReader.retrieveAllCustomers(); // Added to initialize next available customer ID
 
         registerStage.setTitle("Register");
+
+        Label header = new Label("Enter Information");
+        header.setFont(Font.font("Arial", FontWeight.BOLD, 18));
 
         TextField firstNameField = new TextField();
         firstNameField.setPromptText("First Name");
@@ -50,13 +58,19 @@ public class RegisterPage extends Application {
         createUserButton.setCursor(Cursor.HAND);
         createUserButton.setOnAction(e -> registerNewUser(firstNameField, lastNameField, emailField, addressField, usernameField, passwordField, confirmPasswordField, message));
 
+        Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
+        ImageView AJADlogo = new ImageView(logo);
+        AJADlogo.setFitHeight(100);
+        AJADlogo.setFitWidth(100);
+
 
         VBox layout = new VBox(10);
-        layout.setPadding(new Insets(20));
+        layout.setPadding(new Insets(40));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(firstNameField, lastNameField, addressField, emailField, usernameField, passwordField, confirmPasswordField, createUserButton, message);
+        layout.setStyle("-fx-background-color: white");
+        layout.getChildren().addAll(AJADlogo, header, firstNameField, lastNameField, addressField, emailField, usernameField, passwordField, confirmPasswordField, createUserButton, message);
 
-        Scene registerScene = new Scene(layout, 300,200);
+        Scene registerScene = new Scene(layout, 300,450);
         registerStage.setScene(registerScene);
         registerStage.show();
     }
@@ -91,31 +105,31 @@ public class RegisterPage extends Application {
 
     private boolean validateFields(TextField firstNameField, TextField lastNameField, TextField emailField, TextField addressField, TextField usernameField, TextField passwordField, TextField confirmPasswordField, Label message) {
         if (firstNameField.getText().trim().isEmpty()) {
-            message.setText("First name cannot be empty.");
+            message.setText("First name cannot be empty!");
             return false;
         }
         if (lastNameField.getText().trim().isEmpty()) {
-            message.setText("Last name cannot be empty.");
+            message.setText("Last name cannot be empty!");
             return false;
         }
         if (emailField.getText().trim().isEmpty()) {
-            message.setText("Email cannot be empty.");
+            message.setText("Email cannot be empty!");
             return false;
         }
         if (addressField.getText().trim().isEmpty()) {
-            message.setText("Address cannot be empty.");
+            message.setText("Address cannot be empty!");
             return false;
         }
         if (usernameField.getText().trim().isEmpty()) {
-            message.setText("Username cannot be empty.");
+            message.setText("Username cannot be empty!");
             return false;
         }
         if (passwordField.getText().isEmpty()) {
-            message.setText("Password cannot be empty.");
+            message.setText("Password cannot be empty!");
             return false;
         }
         if (confirmPasswordField.getText().isEmpty()) {
-            message.setText("Confirm password cannot be empty.");
+            message.setText("Confirm password cannot be empty!");
             return false;
         }
         return true;

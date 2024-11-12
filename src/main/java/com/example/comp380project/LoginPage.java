@@ -6,7 +6,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class LoginPage extends Application {
@@ -25,7 +29,13 @@ public class LoginPage extends Application {
         loginStage.setTitle("Login");
         loginStage.setResizable(false);
 
+        Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
+        ImageView AJADlogo = new ImageView(logo);
+        AJADlogo.setFitHeight(150);
+        AJADlogo.setFitWidth(150);
+
         Label header = new Label("Welcome!");
+        header.setFont(Font.font("Arial", FontWeight.BOLD, 16));
         header.setAlignment(Pos.CENTER);
         header.setPrefSize(200,200);
 
@@ -49,9 +59,10 @@ public class LoginPage extends Application {
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(50));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(header, usernameField, passwordField, loginButton, loginMessage, registerUser);
+        layout.setStyle("-fx-background-color: white");
+        layout.getChildren().addAll(AJADlogo, header, usernameField, passwordField, loginButton, loginMessage, registerUser);
 
-        Scene loginScene = new Scene(layout, 300, 200);
+        Scene loginScene = new Scene(layout, 325, 350);
         loginStage.setScene(loginScene);
         loginStage.show();
     }
