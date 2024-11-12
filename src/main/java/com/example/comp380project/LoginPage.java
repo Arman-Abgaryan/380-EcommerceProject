@@ -22,6 +22,11 @@ public class LoginPage extends Application {
 
     public void start(Stage loginStage) {
         loginStage.setTitle("Login");
+        loginStage.setResizable(false);
+
+        Label header = new Label("Welcome!");
+        header.setAlignment(Pos.CENTER);
+        header.setPrefSize(200,200);
 
         Label loginMessage = new Label();
 
@@ -41,9 +46,9 @@ public class LoginPage extends Application {
         loginButton.setOnAction(e -> handleLogin(usernameField.getText().trim(), passwordField.getText(), loginStage, loginMessage));
 
         VBox layout = new VBox(10);
-        layout.setPadding(new Insets(20));
+        layout.setPadding(new Insets(50));
         layout.setAlignment(Pos.CENTER);
-        layout.getChildren().addAll(usernameField, passwordField, loginButton, loginMessage, registerUser);
+        layout.getChildren().addAll(header, usernameField, passwordField, loginButton, loginMessage, registerUser);
 
         Scene loginScene = new Scene(layout, 300, 200);
         loginStage.setScene(loginScene);
