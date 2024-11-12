@@ -75,7 +75,10 @@ public class LoginPage extends Application {
     }
 
     private void goToRegisterPage(){
-        // Method to handle going to RegisterPage
+        RegisterPage registerPage = new RegisterPage();
+        Stage registerStage = new Stage();
+        registerStage.setMinHeight(400);
+        registerPage.start(registerStage);
     }
 
     public static void main(String[] args) {
