@@ -90,6 +90,9 @@ public class Storefront extends Application {
 
 
         Button loginButton = new Button("login");
+        if (customer != null){
+            loginButton.setText(customer.getFirstName());
+        }
         loginButton.setStyle("-fx-background-color: white;");
         loginButton.setGraphic(loginImageView);
         loginButton.setCursor(Cursor.HAND);
