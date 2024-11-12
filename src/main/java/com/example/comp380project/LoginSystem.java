@@ -46,13 +46,23 @@ public class LoginSystem {
         }
     }
 
+    public void createNewUser(String firstName, String lastName, String email, String address, String username, String password){
+        if (isUsernameAvailable(username)){
+            Customer customer = new Customer(firstName,lastName,email,address,username,password);
+            CustomerFileReader.saveCustomer(customer);
+            System.out.println("New customer " + customer.getFirstName() + " saved succesfully.");
+
+        }
+        else System.out.println("Error");
+    }
+
     /**
      * Checks if username doesn't already exist in the system.
      * @param username
      * @param password
      * @return true if username is valid, false if username already exists.
      */
-    private boolean newUser(String username){
+    public boolean isUsernameAvailable(String username){
        for (Customer customer : customers){
            if (customer.getUsername().equals(username)){
                System.out.println("Username already exists.");
