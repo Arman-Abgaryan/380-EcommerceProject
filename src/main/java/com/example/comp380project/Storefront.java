@@ -7,18 +7,31 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Storefront extends Application {
     Stage window;
     Scene scene;
     Button button;
-    Cart cart = new Cart();
+    Customer customer;
+    Cart cart;
 
-    @Override
+    public Storefront(){
+        this.window = new Stage();
+    }
+
+    public Storefront(Customer customer, Cart cart){
+        this.customer = customer;
+        this.cart = cart;
+    }
     public void start(Stage StorefrontStage) {
         CustomerFileReader.retrieveAllCustomers(); // Added to initialize next available customer ID
 
@@ -28,12 +41,15 @@ public class Storefront extends Application {
         StorefrontStage.setHeight(800);
 
         createStoreFront();
-
         window.show();
 
     }
 
     public void createStoreFront(){
+        Label welcomeUser = new Label("Welcome " + customer.getFirstName() + "!");
+        welcomeUser.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+
+
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
         choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweaters","Cart");
         choiceBox.setValue("- Select -");
@@ -53,7 +69,7 @@ public class Storefront extends Application {
         selection.setPadding(new Insets(0, 0, 0, 0));
         selection.setSpacing(20); //Sets space between drop-down menu and button
         selection.setAlignment(Pos.CENTER);
-        selection.getChildren().addAll(AJADlogo, choiceBox, button);
+        selection.getChildren().addAll(welcomeUser, AJADlogo, choiceBox, button);
 
         scene = new Scene(selection);
         window.setScene(scene);
@@ -83,9 +99,9 @@ public class Storefront extends Application {
         }
     }
 
-    public static Storefront createStorefront(){
+    /*public static Storefront createStorefront(){
         return new Storefront();
-    }
+    }*/
 
     public Scene getScene(){
         return scene;

@@ -2,7 +2,6 @@ package com.example.comp380project;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -42,12 +41,23 @@ public class CustomerFileReader {
                 ;
     }
 
-    // Retrieve a specific customer by ID
     public static Customer retrieveCustomer(int id)  {
         List<Customer> customers = retrieveAllCustomers();
         for (Customer customer : customers) {
             if(customer == null) continue;
             if (customer.getId() == id) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    // Retrieve a specific customer by username
+    public static Customer retrieveCustomer(String username)  {
+        List<Customer> customers = retrieveAllCustomers();
+        for (Customer customer : customers) {
+            if(customer == null) continue;
+            if (customer.getUsername().equals(username)) {
                 return customer;
             }
         }

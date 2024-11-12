@@ -20,6 +20,7 @@ public class LoginPage extends Application {
         this.storefront = storefront;
     }
 
+    @Override
     public void start(Stage loginStage) {
         loginStage.setTitle("Login");
         loginStage.setResizable(false);
@@ -56,10 +57,22 @@ public class LoginPage extends Application {
     }
 
     private void handleLogin(String username, String password, Stage loginStage, Label loginMessage) {
+        if (username.isEmpty() || password.isEmpty()){
+            loginMessage.setText("Please enter username and password.");
+            loginMessage.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
         LoginSystem loginSystem = new LoginSystem();
         if (loginSystem.login(username, password)){
             loginMessage.setText("Login succesful!");
             loginMessage.setStyle("-fx-text-fill: green;");
+
+            Customer customer = CustomerFileReader.retrieveCustomer(username);
+            System.out.println(customer);
+            Cart cart = CartFileReader.retrieveCart(customer.getId());
+
+            Storefront storefront = new Storefront(customer, cart);
             storefront.start(new Stage());
             loginStage.close();
         }

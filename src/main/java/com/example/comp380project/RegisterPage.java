@@ -23,6 +23,8 @@ public class RegisterPage extends Application {
     }
 
     public void start(Stage registerStage){
+        CustomerFileReader.retrieveAllCustomers(); // Added to initialize next available customer ID
+
         registerStage.setTitle("Register");
 
         TextField firstNameField = new TextField();
@@ -34,7 +36,8 @@ public class RegisterPage extends Application {
         TextField emailField = new TextField();
         emailField.setPromptText("Email");
 
-        TextField usernameField = new TextField("Username");
+        TextField usernameField = new TextField();
+        usernameField.setPromptText("Username");
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Password");
         PasswordField confirmPasswordField = new PasswordField();
