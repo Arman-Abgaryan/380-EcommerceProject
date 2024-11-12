@@ -97,9 +97,16 @@ public class Storefront extends Application {
             window.setScene((newSweaterPage));
             System.out.println("Navigating to: " + choice);
         } else if  (choice.equals("Cart")){
-            CartPage cartPage = new CartPage(cart,this);
-            Scene cartScene = cartPage.getCartScene(window);
-            window.setScene(cartScene);
+            if (customer == null) {
+                CartPage cartPage = new CartPage(new Cart(),this);
+                Scene cartScene = cartPage.getCartScene(window);
+                window.setScene(cartScene);
+            }
+            else{
+                CartPage cartPage = new CartPage(cart, this);
+                Scene cartScene = cartPage.getCartScene(window);
+                window.setScene(cartScene);
+            }
         }
     }
 
