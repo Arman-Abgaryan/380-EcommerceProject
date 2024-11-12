@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -64,7 +65,6 @@ public class Storefront extends Application {
         button.setOnAction(e -> getChoice(choiceBox));
 
         VBox selection = new VBox();
-        selection.setStyle("-fx-background-color: white");
         Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
         ImageView AJADlogo = new ImageView(logo);
         AJADlogo.setFitHeight(300);
@@ -81,7 +81,36 @@ public class Storefront extends Application {
         }
         selection.getChildren().addAll(AJADlogo, choiceBox, button);
 
-        scene = new Scene(selection);
+        VBox login = new VBox();
+
+        Image loginIcon = new Image(getClass().getResourceAsStream("/LoginIcon.jpg"));
+        ImageView loginImageView = new ImageView(loginIcon);
+        loginImageView.setFitWidth(30);
+        loginImageView.setFitHeight(30);
+
+
+        Button loginButton = new Button("login");
+        loginButton.setStyle("-fx-background-color: white;");
+        loginButton.setGraphic(loginImageView);
+        loginButton.setCursor(Cursor.HAND);
+        loginButton.setOnAction(event ->{
+            window.close();
+
+            Stage loginStage = new Stage();
+            LoginPage loginPage = new LoginPage();
+            loginPage.start(loginStage);
+
+        });
+
+        login.setAlignment(Pos.TOP_RIGHT);
+        login.getChildren().addAll(loginButton);
+
+        BorderPane storefront = new BorderPane();
+        storefront.setStyle("-fx-background-color: white");
+        storefront.setCenter(selection);
+        storefront.setTop(login);
+
+        scene = new Scene(storefront);
         window.setScene(scene);
     }
 
