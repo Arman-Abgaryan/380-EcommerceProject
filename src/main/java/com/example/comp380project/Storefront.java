@@ -46,9 +46,6 @@ public class Storefront extends Application {
     }
 
     public void createStoreFront(){
-        Label welcomeUser = new Label("Welcome " + customer.getFirstName() + "!");
-        welcomeUser.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-
 
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
         choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweaters","Cart");
@@ -69,7 +66,14 @@ public class Storefront extends Application {
         selection.setPadding(new Insets(0, 0, 0, 0));
         selection.setSpacing(20); //Sets space between drop-down menu and button
         selection.setAlignment(Pos.CENTER);
-        selection.getChildren().addAll(welcomeUser, AJADlogo, choiceBox, button);
+        if (customer != null) {
+            Label welcomeUser = new Label("Welcome " + customer.getFirstName() + "!");
+            welcomeUser.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+            selection.getChildren().addAll(welcomeUser, AJADlogo, choiceBox, button);
+        }
+        else {
+            selection.getChildren().addAll(AJADlogo, choiceBox, button);
+        }
 
         scene = new Scene(selection);
         window.setScene(scene);

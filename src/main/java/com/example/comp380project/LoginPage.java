@@ -20,7 +20,7 @@ public class LoginPage extends Application {
         this.storefront = storefront;
     }
 
-    @Override
+
     public void start(Stage loginStage) {
         loginStage.setTitle("Login");
         loginStage.setResizable(false);
