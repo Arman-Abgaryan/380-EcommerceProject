@@ -87,32 +87,14 @@ public class TopBoxFactory {
         return topSection;
     }
 
-
-
-
     private void returnToStorefront() {
         storefront.createStoreFront();
         primaryStage.setScene(storefront.getScene());
     }
 
-
-
-
     private void goToCartPage() {
         CartPage cartPage = new CartPage(cart,storefront);
         primaryStage.setScene(cartPage.getCartScene(primaryStage));
     }
-    public void performSearch(String query) {
-        if(query.isEmpty()){
-            return;
-        }
-        List<Item> queryList = SearchController.search(query);
-        if(queryList.isEmpty()){
-            returnToStorefront();
-        }
-        else {
-            SearchPage searchPage = new SearchPage(storefront, cart, queryList, primaryStage);
-            primaryStage.setScene(searchPage.getSearchPage());
-        }
-    }
+
 }
