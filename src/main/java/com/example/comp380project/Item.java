@@ -10,6 +10,7 @@ public class Item implements Serializable {
     private int stock;
     private String imagePath;
     private String size;
+    private String category;
 
 
     public Item(int id, String name, double price, int stock, String imagePath,String size){
@@ -19,7 +20,16 @@ public class Item implements Serializable {
         this.stock = stock;
         this.imagePath = imagePath;
         this.size = size;
+    }
 
+    public Item(int id, String name, double price, int stock, String imagePath, String size, String category){
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.imagePath = imagePath;
+        this.size = size;
+        this.category = category;
     }
 
     public String getSize() {
@@ -45,6 +55,10 @@ public class Item implements Serializable {
 
     public int getStock() {
         return stock;
+    }
+
+    public String getCategory(){
+        return category;
     }
 
     public void setStock(int stock) {

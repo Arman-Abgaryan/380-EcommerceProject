@@ -64,7 +64,8 @@ public class ItemFileReader {
                 ";" + item.getPrice() +
                 ";" + item.getStock() +
                 "l" + item.getSize() +
-                ";" + item.getImagePath();
+                ";" + item.getImagePath() +
+                ";" + item.getCategory();
     }
 
     public static Item csvToItem(String line){
@@ -75,9 +76,10 @@ public class ItemFileReader {
         String name = data[1];
         double price = Double.parseDouble(data[2]);
         int stock = Integer.parseInt(data[3]);
-        String size = data[5];
         String imagePath = data.length > 4 ? data[4]: null;
+        String size = data[5];
+        String category = data[6].trim();
 
-        return new Item(id, name, price, stock,imagePath,size);
+        return new Item(id, name, price, stock,imagePath,size, category);
     }
     }
