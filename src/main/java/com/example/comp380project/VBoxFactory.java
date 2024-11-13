@@ -33,6 +33,7 @@ public class VBoxFactory {
        //Select Size
         ChoiceBox<String> sizeChoiceBox = new ChoiceBox<>();
         sizeChoiceBox.getItems().add("Select a Size");
+        sizeChoiceBox.setCursor(Cursor.HAND);
 
         String[] sizes = item.getSizes();
         sizeChoiceBox.getItems().addAll(sizes);
