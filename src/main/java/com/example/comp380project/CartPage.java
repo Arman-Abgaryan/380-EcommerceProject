@@ -9,10 +9,12 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -48,6 +50,7 @@ public class CartPage{
         layout.setPadding(new Insets(20));
 
         VBox itemList = new VBox();
+        itemList.setStyle("-fx-background-color: white"); // Adds White Background
         itemList.setAlignment(Pos.TOP_LEFT);
         itemList.setSpacing(10);
 
@@ -68,7 +71,7 @@ public class CartPage{
             imageView.setFitHeight(100);
             imageView.setFitWidth(100);
 
-            //Sahow size
+            //Show size
             Label itemLabel = new Label(item.getSize()+ " " +item.getName()+" x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
             itemLabel.setFont(Font.font("calibri", FontWeight.BOLD, FontPosture.REGULAR,15));
             itemLabel.setStyle("-fx-padding:5px");
@@ -145,7 +148,15 @@ public class CartPage{
             primaryStage.setScene(receiptPage.getReceiptScene(primaryStage));
         });
 
-        layout.setCenter(itemList);
+        ScrollPane scroll = new ScrollPane();
+        scroll.setStyle("-fx-background-color: white"); // Adds White Background
+        scroll.setFitToHeight(true);
+        scroll.setFitToWidth(true);
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scroll.setContent(itemList);
+
+
+        layout.setCenter(scroll);
         layout.setBottom(totalLabel);
         layout.setAlignment(totalLabel, Pos.CENTER);
         layout.setTop(topPane);
