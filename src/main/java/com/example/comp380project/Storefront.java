@@ -123,9 +123,18 @@ public class Storefront extends Application {
     }
 
     private void getChoice(ChoiceBox<String> choiceBox) {
-        String choice = choiceBox.getValue();
+        String choice = choiceBox.getValue().toLowerCase();
+        if (choice.equals("cart")){
+            CartPage cartPage = new CartPage(cart != null ? cart : new Cart(), this);
+            Scene cartScene = cartPage.getCartScene(window);
+            window.setScene(cartScene);
+        }
+        else {
+            ItemPage itemPage = new ItemPage(this, cart != null ? cart : new Cart(), window);
+            window.setScene(itemPage.getItemPage(choice));
+        }
 
-        if (choice.equals("T-Shirts")) {
+        /*if (choice.equals("T-Shirts")) {
             TShirtPage tShirtPage = new TShirtPage(this, cart != null ? cart : new Cart(), window);
             Scene blankShirtScene = tShirtPage.getTShirtPage();
             window.setScene(blankShirtScene);
@@ -143,7 +152,7 @@ public class Storefront extends Application {
             CartPage cartPage = new CartPage(cart != null ? cart : new Cart(), this);
             Scene cartScene = cartPage.getCartScene(window);
             window.setScene(cartScene);
-        }
+        }*/
     }
 
     public Scene getScene(){
