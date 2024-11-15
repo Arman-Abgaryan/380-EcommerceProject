@@ -17,7 +17,7 @@ public class LoginPage extends Application {
     private Storefront storefront;
 
     public LoginPage(){
-        this.storefront = new Storefront();
+        this.storefront = null;
     }
 
     public LoginPage(Storefront storefront) {
@@ -85,24 +85,19 @@ public class LoginPage extends Application {
             Customer customer = CustomerFileReader.retrieveCustomer(username);
             Cart cart = CartFileReader.retrieveCart(customer.getId());
 
-            Storefront storefront = new Storefront(customer, cart);
-            storefront.start(new Stage());
+            if(storefront != null){
+                storefront.refreshUI(customer,cart);
+            }
+            else{
+                storefront = new Storefront(customer,cart);
+                storefront.start(new Stage());
+            }
             loginStage.close();
         }
         else {
             loginMessage.setText("Login failed!");
             loginMessage.setStyle("-fx-text-fill: red;");
         }
-
-       /* if (loginSystem.authenticateUser(username, password)){
-            loginMessage.setText("Login Successful!");
-            loginMessage.setStyle("-fx-text-fill: green;");
-            storefront.start(new Stage());
-            loginStage.close();
-        } else {
-            loginMessage.setText("Login failed!");
-            loginMessage.setStyle("-fx-text-fill: red;");
-        }*/
     }
 
     private void goToRegisterPage(){
