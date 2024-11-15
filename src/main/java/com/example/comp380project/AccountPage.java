@@ -46,7 +46,7 @@ public class AccountPage {
 
         BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
         boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white
-        boxHolder.setTop(new VBox(topBoxFactory.getTopSection()));
+        //boxHolder.setTop(new VBox(topBoxFactory.getTopSection()));
         boxHolder.setLeft(accountName);
 
         return new Scene(boxHolder);
