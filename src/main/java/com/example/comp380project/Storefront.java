@@ -133,26 +133,6 @@ public class Storefront extends Application {
             ItemPage itemPage = new ItemPage(this, cart != null ? cart : new Cart(), window);
             window.setScene(itemPage.getItemPage(choice));
         }
-
-        /*if (choice.equals("T-Shirts")) {
-            TShirtPage tShirtPage = new TShirtPage(this, cart != null ? cart : new Cart(), window);
-            Scene blankShirtScene = tShirtPage.getTShirtPage();
-            window.setScene(blankShirtScene);
-        } else if (choice.equals("Pants")) {
-            PantsPage pantsPage = new PantsPage(this, cart != null ? cart : new Cart(), window);
-            Scene blankPantsPage = pantsPage.getPantsPage();
-            window.setScene((blankPantsPage));
-            System.out.println("Navigating to: " + choice);
-        } else if (choice.equals("Sweaters")) {
-            SweaterPage sweaterPage = new SweaterPage(this, cart != null ? cart : new Cart(), window);
-            Scene newSweaterPage = sweaterPage.getSweaterPage();
-            window.setScene((newSweaterPage));
-            System.out.println("Navigating to: " + choice);
-        } else if  (choice.equals("Cart")){
-            CartPage cartPage = new CartPage(cart != null ? cart : new Cart(), this);
-            Scene cartScene = cartPage.getCartScene(window);
-            window.setScene(cartScene);
-        }*/
     }
 
     public Scene getScene(){
