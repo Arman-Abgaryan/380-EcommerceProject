@@ -95,12 +95,9 @@ public class Storefront extends Application {
         loginButton.setGraphic(loginImageView);
         loginButton.setCursor(Cursor.HAND);
         loginButton.setOnAction(event ->{
-            window.close();
-
             Stage loginStage = new Stage();
-            LoginPage loginPage = new LoginPage();
+            LoginPage loginPage = new LoginPage(this);
             loginPage.start(loginStage);
-
         });
 
         login.setAlignment(Pos.TOP_RIGHT);
@@ -113,6 +110,16 @@ public class Storefront extends Application {
 
         scene = new Scene(storefront);
         window.setScene(scene);
+    }
+
+    public void refreshUI(Customer customer, Cart cart) {
+        this.customer = customer;
+        if (cart != null){
+            this.cart = cart;
+        } else {
+            this.cart = new Cart();
+        }
+        createStoreFront();
     }
 
     private void getChoice(ChoiceBox<String> choiceBox) {
@@ -138,10 +145,6 @@ public class Storefront extends Application {
             window.setScene(cartScene);
         }
     }
-
-    /*public static Storefront createStorefront(){
-        return new Storefront();
-    }*/
 
     public Scene getScene(){
         return scene;
