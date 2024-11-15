@@ -95,9 +95,14 @@ public class Storefront extends Application {
         loginButton.setGraphic(loginImageView);
         loginButton.setCursor(Cursor.HAND);
         loginButton.setOnAction(event ->{
-            Stage loginStage = new Stage();
-            LoginPage loginPage = new LoginPage(this);
-            loginPage.start(loginStage);
+            if (customer == null) {
+                Stage loginStage = new Stage();
+                LoginPage loginPage = new LoginPage(this);
+                loginPage.start(loginStage);
+            } else {
+                AccountPage accountPage = new AccountPage(customer, this, window);
+                window.setScene(accountPage.getAccountPage());
+            }
         });
 
         login.setAlignment(Pos.TOP_RIGHT);
