@@ -28,12 +28,24 @@ public class AccountPage {
     private Cart cart;
 
 
+    /**
+     *
+     * @param customer
+     * @param storefront
+     * @param primaryStage
+     */
+
     public AccountPage(Customer customer, Storefront storefront, Stage primaryStage) {
         this.storefront = storefront;
         this.customer = customer;
         this.primaryStage = primaryStage;
-        this.cart = cart;
+        this.cart = CartFileReader.retrieveCart(customer.getId());
     }
+
+    /**
+     *
+     * @return
+     */
 
     public Scene getAccountPage(){
         CustomerFileReader.retrieveAllCustomers();
