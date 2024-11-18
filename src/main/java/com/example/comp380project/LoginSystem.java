@@ -3,7 +3,6 @@ package com.example.comp380project;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Class that handles login procedures
@@ -15,6 +14,9 @@ public class LoginSystem {
     private Map<String,Long> lockoutTime = new HashMap<>();
     private List<Customer> customers;
 
+    /**
+     * Default constructor for running the loginSystem
+     */
     public LoginSystem(){
         this.customers = CustomerFileReader.retrieveAllCustomers();
     }
@@ -46,6 +48,15 @@ public class LoginSystem {
         }
     }
 
+    /**
+     * Register a new customer into the system
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param address
+     * @param username
+     * @param password
+     */
     public void createNewUser(String firstName, String lastName, String email, String address, String username, String password){
         if (isUsernameAvailable(username)){
             Customer customer = new Customer(firstName,lastName,email,address,username,password);
@@ -73,10 +84,10 @@ public class LoginSystem {
     }
 
     /**
-     * Method that verifies credentials
+     * Method that verifies credentials of a user
      * @param username
      * @param password
-     * @return
+     * @return true if credentials exist and match in database
      */
     private boolean authenticateUser(String username, String password){
         for (Customer customer : customers){
@@ -88,7 +99,7 @@ public class LoginSystem {
     }
 
     /**
-     * Mehod that checks if a user is locked out
+     * Method that checks if a user is locked out due to failed login attempts
      * @param username
      * @return true if user is locked out, false otherwise
      */
