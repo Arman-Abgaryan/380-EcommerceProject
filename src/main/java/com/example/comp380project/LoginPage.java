@@ -129,5 +129,4 @@ public class LoginPage extends Application {
         registerStage.setMinHeight(400);
         registerPage.start(registerStage);
     }
-    
 }
