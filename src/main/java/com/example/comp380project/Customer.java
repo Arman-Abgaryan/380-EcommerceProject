@@ -17,6 +17,16 @@ public class Customer implements Serializable{
     private String password;
 
 
+    /**
+     * Constructor for existing CUstomer
+     * @param id
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param address
+     * @param username
+     * @param password
+     */
     public Customer(int id,String firstName, String lastName, String email, String address, String username, String password) {
         this.id = id;
         this.firstName = firstName;
@@ -27,6 +37,15 @@ public class Customer implements Serializable{
         this.password = password;
     }
 
+    /**
+     * Constructor for new Customer
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param address
+     * @param username
+     * @param password
+     */
     public Customer(String firstName, String lastName, String email, String address, String username, String password){
         this.id = nextID++;
         this.firstName = firstName;

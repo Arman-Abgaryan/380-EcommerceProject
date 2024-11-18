@@ -35,17 +35,23 @@ public class CartPage{
 
     private static CartPage instance;
 
+    /**
+     * Constructor for CartPage contents
+     * @param cart
+     * @param storefront
+     */
     public CartPage(Cart cart, Storefront storefront ){
         this.cart = cart;
         this.storefront = storefront;
     }
 
-    public static CartPage getInstance(Cart cart, Storefront storefront) {
-        if (instance == null){
-            instance = new CartPage(cart,storefront);
-        }
-        return instance;
-    }
+//    public static CartPage getInstance(Cart cart, Storefront storefront) {
+//        if (instance == null){
+//            instance = new CartPage(cart,storefront);
+//        }
+//        return instance;
+//    }
+
 
     /**
      * Method that creates GUI interface that displays Cart Contents

@@ -15,7 +15,15 @@ public class Item implements Serializable {
     private String size;
     private String category;
 
-
+    /**
+     * Constructor for Item
+     * @param id
+     * @param name
+     * @param price
+     * @param stock
+     * @param imagePath
+     * @param size
+     */
     public Item(int id, String name, double price, int stock, String imagePath,String size){
         this.id = id;
         this.name = name;
@@ -25,6 +33,16 @@ public class Item implements Serializable {
         this.size = size;
     }
 
+    /**
+     * Constructor for Item
+     * @param id
+     * @param name
+     * @param price
+     * @param stock
+     * @param imagePath
+     * @param size
+     * @param category
+     */
     public Item(int id, String name, double price, int stock, String imagePath, String size, String category){
         this.id = id;
         this.name = name;

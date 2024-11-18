@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that reads Item informaton from CSV file
+ */
 public class ItemFileReader {
     private static final String CSV_ITEM_INFO = "data/Items.csv";
 
@@ -26,7 +29,11 @@ public class ItemFileReader {
         }
     }
 
-
+    /**
+     * Method that returns item based on ID
+     * @param id
+     * @return
+     */
     public static Item retrieveItem (int id){
         List<Item> existingItems = retrieveAllItems();
         for (Item item : existingItems){
@@ -38,7 +45,11 @@ public class ItemFileReader {
         return null;
     }
 
-    // Return list of customers
+    /**
+     * Method that places Items into a ArrayList
+     * @return
+     */
+
     public static List<Item> retrieveAllItems() {
         List<Item> items = new ArrayList<>();
         File file = new File(CSV_ITEM_INFO);
@@ -58,6 +69,11 @@ public class ItemFileReader {
         return items;
     }
 
+    /**
+     * How CSV is read
+     * @param item
+     * @return
+     */
     public static String itemToCSV(Item item){
         return item.getId() +
                 ";" + item.getName() +
@@ -68,6 +84,11 @@ public class ItemFileReader {
                 ";" + item.getCategory();
     }
 
+    /**
+     * Method to place item Information into Item object
+     * @param line
+     * @return
+     */
     public static Item csvToItem(String line){
         String[] data = line.split(";");
         if(data[0].equalsIgnoreCase("id")) return null;
