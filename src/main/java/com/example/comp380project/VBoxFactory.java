@@ -13,9 +13,17 @@ import javafx.scene.control.Button;
 import javafx.geometry.Pos;
 import javafx.util.Duration;
 
+/**
+ * Factory class used to create multiple vboxes for Item objects
+ */
 public class VBoxFactory {
 
-    // Method to create a VBox for an item
+    /**
+     * Method that creates a vbox for an item
+     * @param item
+     * @param cart
+     * @return vbox with corresponding item attributes
+     */
     public static VBox createItemBox(Item item, Cart cart) {
 
         VBox itemBox = new VBox();
@@ -34,14 +42,9 @@ public class VBoxFactory {
         ChoiceBox<String> sizeChoiceBox = new ChoiceBox<>();
         sizeChoiceBox.getItems().add("Select a Size");
         sizeChoiceBox.setCursor(Cursor.HAND);
-
         String[] sizes = item.getSizes();
         sizeChoiceBox.getItems().addAll(sizes);
-
         sizeChoiceBox.setValue("Select a Size");
-
-
-
 
         Label countLabel = new Label("Added 0");
         Button addToCartButton = new Button("Add to Cart");
