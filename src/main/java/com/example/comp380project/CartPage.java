@@ -24,6 +24,9 @@ import javafx.stage.Stage;
 
 import java.util.Map;
 
+/**
+ * Class that holds and displays items in Cart along with their price
+ */
 public class CartPage{
 
     private Cart cart;
@@ -44,6 +47,11 @@ public class CartPage{
         return instance;
     }
 
+    /**
+     * Method that creates GUI interface that displays Cart Contents
+     * @param primaryStage
+     * @return Scene
+     */
     public Scene getCartScene(Stage primaryStage){
         BorderPane layout = new BorderPane();
         layout.setStyle("-fx-background-color: white"); // Adds White Background
@@ -166,6 +174,9 @@ public class CartPage{
         return cartScene;
         }
 
+    /**
+     * Update Total Price when Incrementing quantity of items
+     */
     // use to update Total when incrementing and decrementing
     private void updateTotal(){
         totalLabel.setText("Total: $" + String.format("%.2f", cart.getTotalAmount()));

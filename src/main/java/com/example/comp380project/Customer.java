@@ -2,6 +2,9 @@ package com.example.comp380project;
 
 import java.io.Serializable;
 
+/**
+ * Class that holds Customer Information
+ */
 public class Customer implements Serializable{
     private static int nextID = 1;
 
@@ -34,48 +37,69 @@ public class Customer implements Serializable{
         this.password = password;
     }
 
+    /**
+     * Getter Method to get ID
+     * @return id
+     */
     int getId(){
         return id;
     }
 
+    /**
+     * Sets ID for next customer
+     * @param nextID
+     */
     public static void setNextID(int nextID) {
         Customer.nextID = nextID;
     }
 
+    /**
+     * Getter Method to get customer's first name
+     * @return FirstName
+     */
     String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Getter Method to get customer's last name
+     * @return LastName
+     */
     String getLastName() {
         return lastName;
     }
 
+    /**
+     * Getter Method to get customer's email
+     * @return Email
+     */
     String getEmail() {
         return email;
     }
 
+    /**
+     * Getter Method to get customer's Username
+     * @return Address
+     */
     String getAddress() {
         return address;
     }
 
+    /**
+     * Getter Method to get customer's Username
+     * @return Username
+     */
     String getUsername(){
         return username;
     }
 
+    /**
+     * Getter Method to get customer's password
+     * @return Password
+     */
     String getPassword(){
         return password;
     }
 
-    // To make it more human-readable
-    @Override
-    public String toString() {
-        return
-                "Id: " + id + "\n" +
-                "First name: " + firstName + "\n" +
-                "Last name: " + lastName + "\n" +
-                "Email: " + email + "\n" +
-                "Address: " + address
-                ;
-    }
 }
 
