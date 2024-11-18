@@ -4,11 +4,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Class to read existing Customer Information from CSV file
+ */
 // Make methods static to not have to crate the object
 public class CustomerFileReader {
     private static final String CSV_CUSTOMERS_INFO = "data/Customers.csv";
 
+    /**
+     * Method that saves Customers info
+     * @param customer
+     */
     // Save customer info
     public static void saveCustomer(Customer customer)  {
         List<Customer> existingCustomers = retrieveAllCustomers();
@@ -29,6 +35,11 @@ public class CustomerFileReader {
 
     }
 
+    /**
+     * Method to format customer CSV for it to be read
+     * @param customer
+     * @return
+     */
     // Converts Customer object to an entry in Customers.csv
     private static String customerToCSV(Customer customer){
         return customer.getId() +
@@ -41,6 +52,11 @@ public class CustomerFileReader {
                 ;
     }
 
+    /**
+     * Method to retrieve Customer from List
+     * @param id
+     * @return
+     */
     public static Customer retrieveCustomer(int id)  {
         List<Customer> customers = retrieveAllCustomers();
         for (Customer customer : customers) {
@@ -52,6 +68,11 @@ public class CustomerFileReader {
         return null;
     }
 
+    /**
+     * Method to retrieve a Customer by their username
+     * @param username
+     * @return
+     */
     // Retrieve a specific customer by username
     public static Customer retrieveCustomer(String username)  {
         List<Customer> customers = retrieveAllCustomers();
@@ -64,7 +85,10 @@ public class CustomerFileReader {
         return null;
     }
 
-
+    /**
+     * Method to place all customers into ArrayList
+     * @return
+     */
     // Return list of customers
     public static List<Customer> retrieveAllCustomers() {
         List<Customer> customers = new ArrayList<>();
@@ -93,6 +117,11 @@ public class CustomerFileReader {
         return customers;
     }
 
+    /**
+     * Method to place customer information from CSV into new Customer Object
+     * @param line
+     * @return
+     */
     // Convert an entry in Customers.csv to a Customer object
     public static Customer csvToCustomer(String line){
     String[] data = line.split(";");
