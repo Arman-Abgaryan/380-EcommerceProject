@@ -1,41 +1,45 @@
 package com.example.comp380project;
 
-
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
-
-import java.awt.event.ItemEvent;
-import java.io.IOException;
 import java.util.List;
 
-
+/**
+ * Class that creates the search bar near the top of the GUI
+ */
 public class SearchBoxFactory {
 
     private Storefront storefront;
     private Cart cart;
     private Stage primaryStage;
 
+    /**
+     * Default constructor for SearchBoxFactory that creates the search bar
+     * @param storefront
+     * @param cart
+     * @param primaryStage
+     */
     public SearchBoxFactory(Storefront storefront, Cart cart, Stage primaryStage) {
         this.storefront = storefront;
         this.cart = cart;
         this.primaryStage = primaryStage;
     }
 
+    /**
+     * Creates a VBox called SearchBox that holds all elements of the search bar
+     *
+     * SearchBox includes:
+     * - "searchBorder" Hbox that creates a dark blue border around the search bar
+     * - "searchBar" HBox that creates the search bar and button
+     * - "searchHolder" VBox that holds "searchBorder" and "searchBar"
+     *
+     * @return searchHolder
+     */
     public VBox getSearchBox() {
         HBox searchBorder = new HBox();
         // Border of Search Bar
@@ -48,7 +52,6 @@ public class SearchBoxFactory {
         searchBar.setAlignment(Pos.TOP_CENTER);
         searchBar.setPadding(new Insets(-52, 0, 0, 0));
 
-
         // Search bar
         TextField searchField = new TextField(); // Creates search bar
         searchField.setPrefWidth(500); // Sets width of search bar
@@ -57,7 +60,6 @@ public class SearchBoxFactory {
         searchField.setOnAction(actionEvent -> {
             performSearch(searchField.getText());
         });
-
 
         // Search Button
         Button searchButton = new Button("Search"); // Creates search button
@@ -78,6 +80,10 @@ public class SearchBoxFactory {
     }
 
 
+    /**
+     * Executes and handles the search functionlity for an item based on a query
+     * @param query
+     */
     public void performSearch(String query) {
         if(query.isEmpty()){
             return;
@@ -91,6 +97,5 @@ public class SearchBoxFactory {
             primaryStage.setScene(searchPage.getSearchPage());
         }
     }
-
 
 }
