@@ -3,6 +3,9 @@ package com.example.comp380project;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Class that hold Item(Clothing) information
+ */
 public class Item implements Serializable {
     private int id;
     private String name;
@@ -32,43 +35,80 @@ public class Item implements Serializable {
         this.category = category;
     }
 
+    /**
+     * Getter Method that returns item Size
+     * @return size
+     */
     public String getSize() {
         return size;
     }
 
+    /**
+     * Method to split different sizes in CSV by a ","
+     * @return
+     */
     public String[] getSizes() {
         // Split the sizesCSV into an array of sizes
         return size.split(",");
     }
 
+    /**
+     * Getter Method that returns item ID
+     * @return ID
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Getter Method that returns item Name
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Getter Method that returns item Price
+     * @return price
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Getter Method that returns item STock
+     * @return stock
+     */
     public int getStock() {
         return stock;
     }
 
+    /**
+     * Getter Method that returns item Category
+     * @return Category
+     */
     public String getCategory(){
         return category;
     }
 
+
     public void setStock(int stock) {
         this.stock = stock;
     }
-
+    /**
+     * Getter Method that returns item Image location
+     * @return
+     */
     public String getImagePath(){
         return imagePath;
     }
 
+    /**
+     * Method to check if two objects are true
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
@@ -81,6 +121,10 @@ public class Item implements Serializable {
                 Objects.equals(size,item.size);
     }
 
+    /**
+     * Method to place item id, name, price, and size into Hashcode
+     * @return
+     */
     @Override
     public int hashCode(){
         return Objects.hash(id,name,price,size);
