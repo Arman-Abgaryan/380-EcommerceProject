@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class that handles search functions
+ */
 public class SearchController  {
 
-    String query;
-
-    public String getQuery() {
-        return query;
-    }
-
+    /**
+     * Search function to retrieve items
+     * @param query
+     * @return list of items that match query
+     */
     public static List<Item> search(String query) {
-
+        if (query.equalsIgnoreCase("tshirt")){
+            query = "t-shirt";
+        }
         query = query.toLowerCase();
 
         // Retrieve all items in stock
