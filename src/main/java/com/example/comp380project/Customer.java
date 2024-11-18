@@ -18,7 +18,7 @@ public class Customer implements Serializable{
 
 
     /**
-     * Constructor for existing CUstomer
+     * Constructor for existing Customer
      * @param id
      * @param firstName
      * @param lastName
