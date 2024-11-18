@@ -7,6 +7,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.util.List;
 
+/**
+ * Class that handles the GUI for a search page.
+ */
 public class SearchPage {
 
     private Storefront storefront;
@@ -14,6 +17,13 @@ public class SearchPage {
     private Stage primaryStage;
     List<Item> searchResults;
 
+    /**
+     * Constructor for creating the search page based on search results.
+     * @param storefront
+     * @param cart
+     * @param searchResults
+     * @param primaryStage
+     */
     public SearchPage(Storefront storefront, Cart cart, List<Item> searchResults, Stage primaryStage) {
         this.storefront = storefront;
         this.cart = cart;
@@ -21,6 +31,10 @@ public class SearchPage {
         this.primaryStage = primaryStage;
     }
 
+    /**
+     * Getter method to retrieve SearchPage
+     * @return searchPage with appropriate search results.
+     */
     public Scene getSearchPage() {
 
         TopBoxFactory topBoxFactory = new TopBoxFactory(storefront, cart, primaryStage);
