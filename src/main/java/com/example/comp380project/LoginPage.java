@@ -13,18 +13,31 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * Class that handles creation of the loginPage.
+ */
 public class LoginPage extends Application {
     private Storefront storefront;
 
+    /**
+     * Default constructor that creates a loginPage without storefront being initialized.
+     */
     public LoginPage(){
         this.storefront = null;
     }
 
+    /**
+     * Constructor used when storefront is initialized.
+     * @param storefront
+     */
     public LoginPage(Storefront storefront) {
         this.storefront = storefront;
     }
 
-
+    /**
+     * Handles the layout creation of the loginPage.
+     * @param loginStage
+     */
     public void start(Stage loginStage) {
         loginStage.setTitle("Login");
         loginStage.setResizable(false);
@@ -70,6 +83,13 @@ public class LoginPage extends Application {
         loginStage.show();
     }
 
+    /**
+     * Method that handles login procedures
+     * @param username
+     * @param password
+     * @param loginStage
+     * @param loginMessage
+     */
     private void handleLogin(String username, String password, Stage loginStage, Label loginMessage) {
         if (username.isEmpty() || password.isEmpty()){
             loginMessage.setText("Please enter username and password.");
@@ -100,14 +120,14 @@ public class LoginPage extends Application {
         }
     }
 
+    /**
+     * Method that brings up the registerPage for new users
+     */
     private void goToRegisterPage(){
         RegisterPage registerPage = new RegisterPage();
         Stage registerStage = new Stage();
         registerStage.setMinHeight(400);
         registerPage.start(registerStage);
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
 }
