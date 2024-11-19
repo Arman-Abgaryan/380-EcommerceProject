@@ -2,7 +2,6 @@ package com.example.comp380project;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Class that handles search functions
@@ -11,7 +10,7 @@ public class SearchController  {
 
     /**
      * Search function to retrieve items
-     * @param query
+     * @param query string used for item search
      * @return list of items that match query
      */
     public static List<Item> search(String query) {
