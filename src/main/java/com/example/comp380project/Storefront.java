@@ -16,6 +16,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * Represents the storefront page of the e-commerce application.
+ * Provides navigation to various sections like items, cart, and account management.
+ */
 public class Storefront extends Application {
     Stage window;
     Scene scene;
@@ -27,6 +31,12 @@ public class Storefront extends Application {
         this(null, new Cart());
     }
 
+    /**
+     * Constructs a Storefront with the specified customer and cart.
+     *
+     * @param customer the customer accessing the storefront
+     * @param cart     the cart associated with the customer
+     */
     public Storefront(Customer customer, Cart cart){
         this.customer = customer;
         this.cart = (cart != null) ? cart : new Cart();
@@ -38,6 +48,12 @@ public class Storefront extends Application {
         }
     }
 
+    /**
+     * Entry point for the JavaFX application.
+     * Sets up the main storefront window and initializes the scene.
+     *
+     * @param StorefrontStage the primary stage for the storefront
+     */
     public void start(Stage StorefrontStage) {
         CustomerFileReader.retrieveAllCustomers(); // Added to initialize next available customer ID
 
@@ -50,6 +66,9 @@ public class Storefront extends Application {
         window.show();
     }
 
+    /**
+     * Creates the storefront UI with options for product categories and navigation to the cart.
+     */
     public void createStoreFront(){
         intializeCart();
 
@@ -117,6 +136,12 @@ public class Storefront extends Application {
         window.setScene(scene);
     }
 
+    /**
+     * Refreshes the storefront UI with updated customer and cart data.
+     *
+     * @param customer the updated customer
+     * @param cart     the updated cart
+     */
     public void refreshUI(Customer customer, Cart cart) {
         this.customer = customer;
         if (cart != null){
@@ -127,6 +152,11 @@ public class Storefront extends Application {
         createStoreFront();
     }
 
+    /**
+     * Handles navigation based on the selected choice in the dropdown menu.
+     *
+     * @param choiceBox the dropdown menu for selecting options
+     */
     private void getChoice(ChoiceBox<String> choiceBox) {
         String choice = choiceBox.getValue().toLowerCase();
         if (choice.equals("cart")){
@@ -140,10 +170,20 @@ public class Storefront extends Application {
         }
     }
 
+    /**
+     * Returns the current scene of the storefront.
+     *
+     * @return the current scene
+     */
     public Scene getScene(){
         return scene;
     }
 
+    /**
+     * Launches the application.
+     *
+     * @param args the command-line arguments
+     */
     public static void main(String[] args) {
         launch();
     }
