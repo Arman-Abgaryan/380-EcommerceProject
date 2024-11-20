@@ -4,19 +4,44 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents a shopping cart for a customer.
+ * Stores items with their quantities and provides methods to manage the cart's content.
+ */
 public class Cart implements Serializable {
+    
+    /**
+     * A static counter to assign unique IDs to carts.
+     */
     private static int nextID = 1;
 
+    /**
+     * Unique ID for this cart.
+     */
     private int idCart;
     private Customer customer;
+
+    /**
+     * Items in the cart and their quantities.
+     */
     private Map<Item, Integer> items = new HashMap<>();
 
+    /**
+     * Creates a new cart with a unique ID and no items.
+     */
     public Cart() {
         this.idCart = nextID++;
         this.customer  = getCustomer();
         this.items = new HashMap<>();
     }
 
+    /**
+     * Creates a cart with the given ID, customer, and items.
+     *
+     * @param idCart   the cart ID
+     * @param customer the customer
+     * @param items    the items in the cart
+     */
     public Cart(int idCart, Customer customer, Map<Item, Integer> items) {
         this.idCart = idCart;
         this.customer = customer;
@@ -47,7 +72,11 @@ public class Cart implements Serializable {
         return items;
     }
 
-    // Add an item to cart
+    /**
+     * Adds an item to the cart, increasing the quantity if it already exists.
+     *
+     * @param item the item to add
+     */
     public void addItem(Item item) {
         if (items.containsKey(item)){
 
@@ -58,7 +87,11 @@ public class Cart implements Serializable {
 
     }
 
-    // Remove an item from cart
+    /**
+     * Removes an item from the cart, decreasing its quantity or removing it entirely.
+     *
+     * @param item the item to remove
+     */
     public void removeItem(Item item) {
         if (items.containsKey(item)) {
             int newQuantity = items.get(item)-1;
@@ -70,9 +103,11 @@ public class Cart implements Serializable {
         }
     }
 
-
-
-    // Calculate total amount
+    /**
+     * Calculates the total price of all items in the cart.
+     *
+     * @return the total amount
+     */
     public double getTotalAmount() {
         double total = 0;
 
@@ -83,6 +118,11 @@ public class Cart implements Serializable {
         return total;
     }
 
+    /**
+     * Returns a CSV representation of the cart.
+     *
+     * @return a CSV string with cart details
+     */
     @Override
     public String toString() {
         // Convert the customer object to a CSV-friendly format
