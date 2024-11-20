@@ -13,16 +13,31 @@ import javafx.stage.Stage;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Represents the receipt page for displaying cart totals and applying promo codes.
+ */
 public class ReceiptPage {
 
     private Cart cart;
     private Storefront storefront;
 
+    /**
+     * Constructs a ReceiptPage with the specified cart and storefront.
+     *
+     * @param cart       the cart to display the receipt for
+     * @param storefront the storefront for navigation
+     */
     public ReceiptPage(Cart cart, Storefront storefront){
         this.cart = cart;
         this.storefront = storefront;
     }
 
+    /**
+     * Creates and returns the receipt scene.
+     *
+     * @param primaryStage the primary stage for navigation
+     * @return the receipt scene
+     */
     public Scene getReceiptScene(Stage primaryStage){
         BorderPane layout = new BorderPane();
         layout.setStyle("-fx-background-color: white; -fx-padding: 20px;");
