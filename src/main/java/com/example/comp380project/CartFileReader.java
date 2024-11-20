@@ -6,10 +6,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Provides methods to read, write, and manage cart data from a CSV file.
+ */
 public class CartFileReader {
     private static final String CSV_CART_INFO = "data/Cart.csv";
 
-    // Write Cart object to file
+	/**
+     * Saves a cart to the CSV file. If the cart already exists, it will not be saved.
+     *
+     * @param cart the cart to save
+     */
     public static void saveCart(Cart cart) {
         // Retrieve list of carts already saved in file
         List<Cart> existingCarts = retrieveAllCarts();
@@ -27,6 +34,13 @@ public class CartFileReader {
     }
 
     // Retrieve Cart by ID
+
+	/**
+     * Retrieves a cart by its ID from the CSV file.
+     *
+     * @param id the ID of the cart to retrieve
+     * @return the cart with the given ID, or {@code null} if not found
+     */
     public static Cart retrieveCart(int id) {
         List<Cart> existingCarts = retrieveAllCarts();
 
@@ -40,6 +54,12 @@ public class CartFileReader {
     }
 
     // Helper method for saveCart
+
+	/**
+     * Retrieves all carts from the CSV file.
+     *
+     * @return a list of all carts
+     */
     public static List<Cart> retrieveAllCarts() {
         List<Cart> carts = new ArrayList<>();
         File file = new File(CSV_CART_INFO);
@@ -67,6 +87,13 @@ public class CartFileReader {
     }
 
     // Create Cart object from data in Cart.csv
+
+	/**
+     * Converts a CSV string to a Cart object.
+     *
+     * @param line the CSV string
+     * @return the Cart object, or {@code null} if the input is invalid
+     */
     public static Cart csvToCart(String line) {
         String[] data = line.split(",");
 
@@ -82,6 +109,12 @@ public class CartFileReader {
         return new Cart(id, customer, items);
     }
 
+	/**
+     * Converts a map of items to a CSV string.
+     *
+     * @param items the map of items and their quantities
+     * @return a CSV representation of the items
+     */
     private static String itemsToCSV(Map<Item, Integer> items) {
         StringBuilder itemsCSV = new StringBuilder();
         for (Map.Entry<Item, Integer> entry : items.entrySet()) {
@@ -95,12 +128,24 @@ public class CartFileReader {
         return itemsCSV.toString();
     }
 
+	/**
+     * Converts a Cart object to a CSV string.
+     *
+     * @param cart the Cart object
+     * @return a CSV representation of the cart
+     */
     private static String cartToCSV(Cart cart){
         return cart.getIdCart() +
                 "," + cart.getCustomer().getId() +
                 "," + itemsToCSV(cart.getItems());
     }
 
+	/**
+     * Parses a CSV string of items into a map.
+     *
+     * @param line the CSV string
+     * @return a map of items and their quantities
+     */
     private static Map<Item, Integer> parseItems (String line) {
 		Map<Item,Integer> items = new HashMap<>();
 
