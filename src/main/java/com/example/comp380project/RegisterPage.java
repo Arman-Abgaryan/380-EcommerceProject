@@ -13,22 +13,26 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
 import javafx.stage.Stage;
 import javafx.scene.Cursor;
 
-
+/**
+ * Class that creates the RegisterPage
+ */
 public class RegisterPage extends Application {
     private LoginSystem loginSystem;
 
+    /**
+     * Default constructor for instantiating RegisterPage
+     */
     public RegisterPage(){
         this.loginSystem = new LoginSystem();
     }
 
-    public RegisterPage(LoginSystem loginSystem){
-        this.loginSystem = loginSystem;
-    }
-
+    /**
+     * Method that initializes and creates layout of RegisterPage
+     * @param registerStage
+     */
     public void start(Stage registerStage){
         CustomerFileReader.retrieveAllCustomers(); // Added to initialize next available customer ID
 
@@ -47,7 +51,6 @@ public class RegisterPage extends Application {
         emailField.setPromptText("Email");
         TextField addressField = new TextField();
         addressField.setPromptText("Address");
-
         TextField usernameField = new TextField();
         usernameField.setPromptText("Username");
         PasswordField passwordField = new PasswordField();
@@ -55,7 +58,6 @@ public class RegisterPage extends Application {
         PasswordField confirmPasswordField = new PasswordField();
         confirmPasswordField.setPromptText("Confirm Password");
         confirmPasswordField.setOnAction(e -> registerNewUser(firstNameField, lastNameField, emailField, addressField, usernameField, passwordField, confirmPasswordField, loginMessage));
-
 
         Button createUserButton = new Button("Confirm");
         createUserButton.setCursor(Cursor.HAND);
@@ -65,18 +67,15 @@ public class RegisterPage extends Application {
         returnToLogin.setCursor(Cursor.HAND);
         returnToLogin.setOnAction(e ->{
             registerStage.close();
-
             Stage loginStage = new Stage();
             LoginPage loginPage = new LoginPage();
             loginPage.start(loginStage);
-
         });
 
         Image logo = new Image(getClass().getResourceAsStream("/AJAD Edited Logo.png"));
         ImageView AJADlogo = new ImageView(logo);
         AJADlogo.setFitHeight(100);
         AJADlogo.setFitWidth(100);
-
 
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(40));
@@ -89,6 +88,17 @@ public class RegisterPage extends Application {
         registerStage.show();
     }
 
+    /**
+     * Method to register a new user to the system
+     * @param firstNameField
+     * @param lastNameField
+     * @param emailField
+     * @param addressField
+     * @param usernameField
+     * @param passwordField
+     * @param confirmPasswordField
+     * @param message message that lets the user know if there's any issues(username already exists, empty fields, etc), or lets user know account was created successfully
+     */
     private void registerNewUser(TextField firstNameField, TextField lastNameField, TextField emailField, TextField addressField, TextField usernameField, TextField passwordField, TextField confirmPasswordField, Label message){
         if(!validateFields(firstNameField,lastNameField,emailField,addressField,usernameField, passwordField,confirmPasswordField, message)){
             return;
@@ -111,12 +121,24 @@ public class RegisterPage extends Application {
             message.setText("New user registered!");
         }
        else{
-           message.setText("Passwords do not match. PLease verify and try again.");
+           message.setText("Passwords do not match. Please verify and try again.");
            passwordField.clear();
            confirmPasswordField.clear();
         }
     }
 
+    /**
+     * Helper method for registering new user, checks which fields are empty and let's user aware via message
+     * @param firstNameField
+     * @param lastNameField
+     * @param emailField
+     * @param addressField
+     * @param usernameField
+     * @param passwordField
+     * @param confirmPasswordField
+     * @param message
+     * @return false if any field is empty, true otherwise
+     */
     private boolean validateFields(TextField firstNameField, TextField lastNameField, TextField emailField, TextField addressField, TextField usernameField, TextField passwordField, TextField confirmPasswordField, Label message) {
         if (firstNameField.getText().trim().isEmpty()) {
             message.setText("First name cannot be empty!");
@@ -148,5 +170,4 @@ public class RegisterPage extends Application {
         }
         return true;
     }
-
 }
