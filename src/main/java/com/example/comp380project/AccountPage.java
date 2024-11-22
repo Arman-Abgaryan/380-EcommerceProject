@@ -30,6 +30,7 @@ public class AccountPage {
      */
     public AccountPage(Customer customer, Storefront storefront, Stage primaryStage) {
         this.customer = customer;
+        this.storefront = storefront;
         this.primaryStage = primaryStage;
         this.cart = CartFileReader.retrieveCart(customer.getId());
     }
