@@ -22,9 +22,9 @@ public class TopBoxFactory {
 
     /**
      * Default constructor for creating the top section of the GUI
-     * @param storefront
-     * @param cart
-     * @param primaryStage
+     * @param storefront the storefront that is associated with the GUI
+     * @param cart the cart that is associated with the cart button in the GUI
+     * @param primaryStage the window where the GUI is displayed
      */
     public TopBoxFactory(Storefront storefront, Cart cart, Stage primaryStage) {
         this.storefront = storefront;
