@@ -37,8 +37,8 @@ public class CartPage{
 
     /**
      * Constructor for CartPage contents
-     * @param cart
-     * @param storefront
+     * @param cart the cart that contains the items to be displayed on the page
+     * @param storefront the storefront that is associated with the cart
      */
     public CartPage(Cart cart, Storefront storefront ){
         this.cart = cart;
@@ -55,8 +55,16 @@ public class CartPage{
 
     /**
      * Method that creates GUI interface that displays Cart Contents
-     * @param primaryStage
-     * @return Scene
+     *
+     * The GUI includes:
+     * - A list of all items in the cart
+     * - Buttons to increase or decrease the quantity of each item in the cart
+     * - A label at the bottom of the page that displays the total cost of the items in the cart
+     * - A "back to home button" that navigates the user back to the Storefront page
+     * - A "confirm purchase" button that navigates the user to the receipt page to purchase the items in the cart
+     *
+     * @param primaryStage the main window that displays the Cart Page
+     * @return a Scene that displays the Cart Page
      */
     public Scene getCartScene(Stage primaryStage){
         BorderPane layout = new BorderPane();
