@@ -13,7 +13,7 @@ public class CustomerFileReader {
 
     /**
      * Method that saves Customers info
-     * @param customer
+     * @param customer the customer whose information is saved to the CSV file
      */
     // Save customer info
     public static void saveCustomer(Customer customer)  {
@@ -37,8 +37,8 @@ public class CustomerFileReader {
 
     /**
      * Method to format customer CSV for it to be read
-     * @param customer
-     * @return
+     * @param customer customer whose information is being formatted for the CSV file
+     * @return the customers information
      */
     // Converts Customer object to an entry in Customers.csv
     private static String customerToCSV(Customer customer){
@@ -54,8 +54,8 @@ public class CustomerFileReader {
 
     /**
      * Method to retrieve Customer from List
-     * @param id
-     * @return
+     * @param id the customers specific ID
+     * @return the customers ID
      */
     public static Customer retrieveCustomer(int id)  {
         List<Customer> customers = retrieveAllCustomers();
@@ -71,7 +71,7 @@ public class CustomerFileReader {
     /**
      * Method to retrieve a Customer by their username
      * @param username
-     * @return
+     * @return the customer and their specific username
      */
     // Retrieve a specific customer by username
     public static Customer retrieveCustomer(String username)  {
@@ -87,7 +87,7 @@ public class CustomerFileReader {
 
     /**
      * Method to place all customers into ArrayList
-     * @return
+     * @return the list of all customers in the CSV file
      */
     // Return list of customers
     public static List<Customer> retrieveAllCustomers() {
@@ -119,8 +119,8 @@ public class CustomerFileReader {
 
     /**
      * Method to place customer information from CSV into new Customer Object
-     * @param line
-     * @return
+     * @param line a string separated by semicolons that contains the customers details from the CSV file
+     * @return the customers details including their id, first name, last name, email, address, username, and password
      */
     // Convert an entry in Customers.csv to a Customer object
     public static Customer csvToCustomer(String line){
