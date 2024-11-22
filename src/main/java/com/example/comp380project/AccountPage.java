@@ -36,7 +36,7 @@ public class AccountPage {
     }
 
     /**
-     * Creates the Account Page and it's specific elements in the GUI
+     * Creates the Account Page, and it's specific elements in the GUI
      *
      * The Account Page includes:
      * - a top section that holds a "back to home" button, the AJAD logo, a "cart" button, and an "Account Information" label
