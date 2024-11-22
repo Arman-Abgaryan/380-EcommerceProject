@@ -49,10 +49,15 @@ public class AccountPage {
         TopBoxFactory topBoxFactory = new TopBoxFactory(storefront, cart, primaryStage);
 
 
-        Label accountName = new Label("Account Information:");
-        accountName.setAlignment(Pos.TOP_LEFT);
-        accountName.setFont(Font.font("Verdana", 20));
-        accountName.setPadding(new Insets(0, 0, 0, 15));
+        Label accountInfo = new Label("Account Information:");
+        accountInfo.setAlignment(Pos.TOP_LEFT);
+        accountInfo.setFont(Font.font("Verdana", 20));
+        accountInfo.setPadding(new Insets(15, 0, 0, 15));
+
+        Label username = new Label(customer.getUsername());
+        username.setAlignment(Pos.TOP_LEFT);
+        username.setFont(Font.font("Verdana", 20));
+        username.setPadding(new Insets(0, 0, 0, 15));
 
         VBox customerNameBox = createInfoBoxes("Name:",customer.getFirstName() + " " + customer.getLastName());
         VBox customerEmailBox = createInfoBoxes("Email:", customer.getEmail());
@@ -73,7 +78,7 @@ public class AccountPage {
         BorderPane accountPageLayout = new BorderPane();
         accountPageLayout.setStyle("-fx-background-color: white"); //Sets the background of the page to white
 
-        accountPageLayout.setTop(new VBox(topBoxFactory.getTopSection(), accountName));
+        accountPageLayout.setTop(new VBox(topBoxFactory.getTopSection(), username, accountInfo));
         accountPageLayout.setCenter(InfoBoxesLayout);
 
         return new Scene(accountPageLayout);
