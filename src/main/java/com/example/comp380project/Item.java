@@ -63,7 +63,7 @@ public class Item implements Serializable {
 
     /**
      * Method to split different sizes in CSV by a ","
-     * @return
+     * @return the different sizes from the CSV file split by a comma
      */
     public String[] getSizes() {
         // Split the sizesCSV into an array of sizes
@@ -116,7 +116,7 @@ public class Item implements Serializable {
     }
     /**
      * Getter Method that returns item Image location
-     * @return
+     * @return image location of the item
      */
     public String getImagePath(){
         return imagePath;
@@ -124,8 +124,8 @@ public class Item implements Serializable {
 
     /**
      * Method to check if two objects are true
-     * @param o
-     * @return
+     * @param o the object that is being compared to the item
+     * @return true if the object is equal to the item, false if the object is not equal to the item
      */
     @Override
     public boolean equals(Object o){
@@ -141,15 +141,18 @@ public class Item implements Serializable {
 
     /**
      * Method to place item id, name, price, and size into Hashcode
-     * @return
+     * @return the hashcode of the object, including the items id, name, price, and size
      */
     @Override
     public int hashCode(){
         return Objects.hash(id,name,price,size);
     }
-    
 
 
+    /**
+     * Converts the item to a human-readable string
+     * @return a string separated by semicolons containing the items details
+     */
     // To make it more human-readable
     @Override
     public String toString() {
