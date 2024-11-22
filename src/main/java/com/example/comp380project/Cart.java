@@ -48,26 +48,50 @@ public class Cart implements Serializable {
         this.items = items;
     }
 
+    /**
+     * Retrieves the ID of the cart
+     * @return idCart as an int
+     */
     public int getIdCart() {
         return idCart;
     }
 
+    /**
+     * Sets the static ID for the next cart
+     * @param nextID the new ID to assign to the next cart, as an integer
+     */
     public static void setNextID(int nextID){
         Cart.nextID = nextID;
     }
 
+    /**
+     * Sets the ID of the current cart
+     * @param idCart the ID that is assigned to the cart, as an integer
+     */
     public void setIdCart(int idCart) {
         this.idCart = idCart;
     }
 
+    /**
+     * Retrieves the customer that is associated with the current cart
+     * @return customer
+     */
     public Customer getCustomer() {
         return customer;
     }
 
+    /**
+     * Assigns a customer to a cart
+     * @param customer the customer that is assigned to the cart
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
+    /**
+     * Retrieves a map of the items in the customers cart
+     * @return items in the customers cart
+     */
     public Map<Item, Integer> getItems() {
         return items;
     }
