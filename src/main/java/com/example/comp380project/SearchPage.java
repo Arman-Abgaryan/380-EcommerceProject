@@ -45,7 +45,7 @@ public class SearchPage {
         ItemHolder.setStyle("-fx-background-color: white");
 
         for (Item item : searchResults) {
-            VBox itemBox = VBoxFactory.createItemBox(item, cart);
+            VBox itemBox = ItemBoxFactory.createItemBox(item, cart);
             ItemHolder.getChildren().add(itemBox);
         }
 

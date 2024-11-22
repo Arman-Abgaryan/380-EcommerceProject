@@ -42,7 +42,7 @@ public class ItemPage {
         List<Item> items = ItemFileReader.retrieveAllItems();
         for (Item item: items){
             if (item.getCategory().equalsIgnoreCase(type)){
-                VBox itemBox = VBoxFactory.createItemBox(item,cart);
+                VBox itemBox = ItemBoxFactory.createItemBox(item,cart);
                 ItemHolder.getChildren().add(itemBox);
             }
         }

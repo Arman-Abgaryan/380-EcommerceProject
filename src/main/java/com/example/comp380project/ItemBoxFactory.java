@@ -16,7 +16,7 @@ import javafx.util.Duration;
 /**
  * Factory class used to create multiple vboxes for Item objects
  */
-public class VBoxFactory {
+public class ItemBoxFactory {
 
     /**
      * Method that creates a vbox for an item
@@ -30,7 +30,7 @@ public class VBoxFactory {
         itemBox.setAlignment(Pos.CENTER);
         itemBox.setSpacing(10);
 
-        Image itemImage = new Image(VBoxFactory.class.getResourceAsStream(item.getImagePath()));
+        Image itemImage = new Image(ItemBoxFactory.class.getResourceAsStream(item.getImagePath()));
         ImageView imageView = new ImageView(itemImage);
         imageView.setFitHeight(250);
         imageView.setFitWidth(250);
