@@ -35,7 +35,7 @@ public class Storefront extends Application {
      * Constructs a Storefront with the specified customer and cart.
      *
      * @param customer the customer accessing the storefront
-     * @param cart     the cart associated with the customer
+     * @param cart the cart associated with the customer
      */
     public Storefront(Customer customer, Cart cart){
         this.customer = customer;
@@ -68,6 +68,15 @@ public class Storefront extends Application {
 
     /**
      * Creates the storefront UI with options for product categories and navigation to the cart.
+     *
+     * The Storefront UI includes:
+     * - The AJAD logo in the center of the page
+     * - A choiceBox (dropdown menu) containing the pages the user can navigate to
+     * - A "Go" button to navigate the user to the selected page
+     * - A VBox called "selection" to hold these elements
+     * - A "login" button on the top right of the page that navigates the user to the Login Page
+     * - A VBox called "login" to hold the login button
+     * - A BorderPane called "storefront" that organizes the layout of the VBoxes.
      */
     public void createStoreFront(){
         intializeCart();
@@ -140,7 +149,7 @@ public class Storefront extends Application {
      * Refreshes the storefront UI with updated customer and cart data.
      *
      * @param customer the updated customer
-     * @param cart     the updated cart
+     * @param cart the updated cart
      */
     public void refreshUI(Customer customer, Cart cart) {
         this.customer = customer;

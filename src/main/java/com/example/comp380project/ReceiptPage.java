@@ -24,8 +24,8 @@ public class ReceiptPage {
     /**
      * Constructs a ReceiptPage with the specified cart and storefront.
      *
-     * @param cart       the cart to display the receipt for
-     * @param storefront the storefront for navigation
+     * @param cart the cart that contains the items to display the receipt for
+     * @param storefront the storefrontn used for navigation from the Receipt Page
      */
     public ReceiptPage(Cart cart, Storefront storefront){
         this.cart = cart;
@@ -35,8 +35,18 @@ public class ReceiptPage {
     /**
      * Creates and returns the receipt scene.
      *
+     * The Scene includes:
+     * - A label to display the subtotal of the cart
+     * - A label to display the tax price
+     * - A label to display the total price
+     * - A Vbox to hold the subtotal, tax price, and total price
+     * - A text field for entering a valid promo code for a discount
+     * - An "applyPromo" button that when pressed, verifies the entered promo code and either applies the promo or rejects it
+     * - A HBox to hold the promo text field and applyPromo button
+     * - A "back to home" button at the bottom of the page to navigate the user back to the Storefront page
+     *
      * @param primaryStage the primary stage for navigation
-     * @return the receipt scene
+     * @return a Scene that displays the Receipt Page
      */
     public Scene getReceiptScene(Stage primaryStage){
         BorderPane layout = new BorderPane();

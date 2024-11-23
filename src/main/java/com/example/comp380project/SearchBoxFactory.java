@@ -20,9 +20,9 @@ public class SearchBoxFactory {
 
     /**
      * Default constructor for SearchBoxFactory that creates the search bar
-     * @param storefront
-     * @param cart
-     * @param primaryStage
+     * @param storefront the storefront where the search bar is used
+     * @param cart the cart associated with the storefront
+     * @param primaryStage the primary stage that displays ths search bar and its results when searching for an item
      */
     public SearchBoxFactory(Storefront storefront, Cart cart, Stage primaryStage) {
         this.storefront = storefront;
@@ -31,14 +31,14 @@ public class SearchBoxFactory {
     }
 
     /**
-     * Creates a VBox called SearchBox that holds all elements of the search bar
+     * Creates a VBox called "searchHolder" that holds all elements of the search bar
      *
-     * SearchBox includes:
+     * searchHolder includes:
      * - "searchBorder" Hbox that creates a dark blue border around the search bar
      * - "searchBar" HBox that creates the search bar and button
      * - "searchHolder" VBox that holds "searchBorder" and "searchBar"
      *
-     * @return searchHolder
+     * @return searchHolder and its contents
      */
     public VBox getSearchBox() {
         HBox searchBorder = new HBox();
@@ -82,7 +82,7 @@ public class SearchBoxFactory {
 
     /**
      * Executes and handles the search functionlity for an item based on a query
-     * @param query
+     * @param query the query the user enters into the search bar
      */
     public void performSearch(String query) {
         if(query.isEmpty()){

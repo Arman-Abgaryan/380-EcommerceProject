@@ -31,7 +31,17 @@ public class RegisterPage extends Application {
 
     /**
      * Method that initializes and creates layout of RegisterPage
-     * @param registerStage
+     *
+     * The RegisterPage includes:
+     * - A "Register" title displayed in the window's title bar
+     * - A label that displays "Enter Information" that instructs the user to the enter their information in the specific text fields
+     * - The AJAD logo
+     * - Text fields for a user to enter their first and last name, email, address, username, password, and confirm their password
+     * - A "Confirm" button that registers the users account
+     * - A "Return to Login" button to return the user to the Login Page
+     * - A VBox to hold all these elements in a vertical box
+     *
+     * @param registerStage the primary stage that displays the Register Page
      */
     public void start(Stage registerStage){
         CustomerFileReader.retrieveAllCustomers(); // Added to initialize next available customer ID
@@ -136,7 +146,7 @@ public class RegisterPage extends Application {
      * @param usernameField
      * @param passwordField
      * @param confirmPasswordField
-     * @param message
+     * @param message a label that displays error messages for invalid inputs in the text fields.
      * @return false if any field is empty, true otherwise
      */
     private boolean validateFields(TextField firstNameField, TextField lastNameField, TextField emailField, TextField addressField, TextField usernameField, TextField passwordField, TextField confirmPasswordField, Label message) {

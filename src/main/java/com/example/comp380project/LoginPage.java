@@ -14,13 +14,13 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
- * Class that handles creation of the loginPage.
+ * Class that handles creation of the LoginPage.
  */
 public class LoginPage extends Application {
     private Storefront storefront;
 
     /**
-     * Default constructor that creates a loginPage without storefront being initialized.
+     * Default constructor that creates a Login Page without storefront being initialized.
      */
     public LoginPage(){
         this.storefront = null;
@@ -28,15 +28,25 @@ public class LoginPage extends Application {
 
     /**
      * Constructor used when storefront is initialized.
-     * @param storefront
+     * @param storefront the storefront is associated with the Login Page
      */
     public LoginPage(Storefront storefront) {
         this.storefront = storefront;
     }
 
     /**
-     * Handles the layout creation of the loginPage.
-     * @param loginStage
+     * Handles the layout creation of LoginPage.
+     *
+     * The Login Page includes:
+     * - The AJAD logo
+     * - A label to welcome the user to the Login Page
+     * - A link that navigates the user to the Register Page to register an account
+     * - A text field for the user to enter their username
+     * - A text field for the user to enter their password
+     * - A "login" button for the user to press to log into their account
+     * - A VBox to arrange all of these elements into a vertical box
+     *
+     * @param loginStage the primary stage that displays the Login Page
      */
     public void start(Stage loginStage) {
         loginStage.setTitle("Login");
@@ -85,10 +95,17 @@ public class LoginPage extends Application {
 
     /**
      * Method that handles login procedures
+     *
+     * This method performs these tasks:
+     * - Displays specific messages for a successful or unsuccessful login
+     * - Logs the customer into their account by retrieving and authenticating their information from the Customers.CSV file
+     * - Link the customer to their particular cart
+     * - Navigate the user back to the Storefront page after a successful login, closing the Login Page
+     *
      * @param username
      * @param password
-     * @param loginStage
-     * @param loginMessage
+     * @param loginStage the primary stage that displays the Login Page
+     * @param loginMessage the messages that are displayed for a successful or unsuccessful login
      */
     private void handleLogin(String username, String password, Stage loginStage, Label loginMessage) {
         if (username.isEmpty() || password.isEmpty()){

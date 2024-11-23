@@ -19,10 +19,10 @@ public class SearchPage {
 
     /**
      * Constructor for creating the search page based on search results.
-     * @param storefront
-     * @param cart
-     * @param searchResults
-     * @param primaryStage
+     * @param storefront the storefront associated with the Search Page
+     * @param cart the cart associated with the Search Page for managing items from the search results
+     * @param searchResults list of items returned from a search
+     * @param primaryStage the primary stage that displays the Search Page
      */
     public SearchPage(Storefront storefront, Cart cart, List<Item> searchResults, Stage primaryStage) {
         this.storefront = storefront;
@@ -32,7 +32,12 @@ public class SearchPage {
     }
 
     /**
-     * Getter method to retrieve SearchPage
+     * Creates and returns the SearchPage
+     *
+     * The SearchPage includes:
+     - A top section with a search functionality from SearchBoxFactory and navigation functionality from TopBoxFactory
+     - A scrollable display of results from the search query
+     *
      * @return searchPage with appropriate search results.
      */
     public Scene getSearchPage() {

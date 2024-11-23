@@ -70,7 +70,6 @@ public class LoginSystem {
     /**
      * Checks if username doesn't already exist in the system.
      * @param username
-     * @param password
      * @return true if username is valid, false if username already exists.
      */
     public boolean isUsernameAvailable(String username){

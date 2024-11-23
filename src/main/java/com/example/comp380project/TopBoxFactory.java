@@ -41,7 +41,7 @@ public class TopBoxFactory {
      * - The AJAD Logo that also acts as a "Back to Home" button
      * - "Cart" button that navigates the user to their respective cart when clicked
      *
-     * @return topSection
+     * @return topSection BorderPane and its elements
      */
     public BorderPane getTopSection() {
         BorderPane topSection = new BorderPane();

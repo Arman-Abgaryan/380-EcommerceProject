@@ -17,7 +17,7 @@ public class ItemPage {
 
     /**
      * Constructor that holds contents included in ItemPage
-     * @param storefront
+     * @param storefront the storefront that is associated with the item page
      * @param cart
      * @param primaryStage
      */
@@ -28,9 +28,14 @@ public class ItemPage {
     }
 
     /**
-     * Method that creates interactable GUI interface that displays Items
-     * @param type
-     * @return Scene
+     * Creates interactable GUI interface that displays Items
+     *
+     * The page includes:
+     * - A top section with a search functionality from SearchBoxFactory and navigation functionality from TopBoxFactory
+     * - A center section that displays the particular items on the page
+     *
+     * @param type the specific category of items to be displayed on the page
+     * @return Scene a Scene that displays the Item Page
      */
     public Scene getItemPage(String type){
         TopBoxFactory topBoxFactory = new TopBoxFactory(storefront, cart, primaryStage);

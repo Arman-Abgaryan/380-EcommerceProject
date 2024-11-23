@@ -19,9 +19,19 @@ import javafx.util.Duration;
 public class ItemBoxFactory {
 
     /**
-     * Method that creates a vbox for an item
-     * @param item
-     * @param cart
+     * Method that creates a vbox called "itemBox" for an item
+     *
+     * itemBox includes:
+     * - The image of the item called pulled 'imagePath' in the Items.CSV file
+     * - A label that displays the name of the item
+     * - A label that displays the price of the item
+     * - A choiceBox (dropdown menu) containing the sizes for the item that a user can choose from
+     * - A label that displays the quantity of a specific item added to the cart
+     * - An "add to cart" button adds the particular item to the cart
+     *
+     * @param item the specific item being displayed on the page
+     * @param cart the cart to that item can be added to
+     *
      * @return vbox with corresponding item attributes
      */
     public static VBox createItemBox(Item item, Cart cart) {
