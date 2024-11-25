@@ -1,10 +1,10 @@
 id;Name;Price;Stock; imagePath; Sizes; Category
-1;Black T-Shirt;19.99;10;/Black TShirt.jpg;Small,Medium,Large;T-shirts
-2;White T-Shirt;19.99;10;/White T.jpg;Small,Medium,Large;T-shirts
-3;Grey T-Shirt;19.99;10;/Grey TShirt.jpg;Small,Medium,Large;T-shirts
-4;Blue Jeans;39.99;10;/Blue Jeans.jpg;28",30",32";Pants
-5;Black Chinos;49.99;10;/Black Chinos.jpg;28",30",32";Pants
-6;Brown Pants;29.99;10;/Brown Pants.jpg;28",30",32";Pants
-7;Black Sweater;29.99;10;/Black Sweater.jpg;Small,Medium,Large;Sweaters
-8;Grey Sweater;29.99;10;/Grey Sweater.jpg;Small,Medium,Large;Sweaters
-9;Green Sweater;29.99;10;/GreenSweaterNew.png;Small,Medium,Large;Sweaters
+1;Black T-Shirt;19.99;100;/Black TShirt.jpg;Small,Medium,Large;T-shirts
+2;White T-Shirt;19.99;100;/White T.jpg;Small,Medium,Large;T-shirts
+3;Grey T-Shirt;19.99;100;/Grey TShirt.jpg;Small,Medium,Large;T-shirts
+4;Blue Jeans;39.99;100;/Blue Jeans.jpg;28",30",32";Pants
+5;Black Chinos;49.99;100;/Black Chinos.jpg;28",30",32";Pants
+6;Brown Pants;29.99;100;/Brown Pants.jpg;28",30",32";Pants
+7;Black Sweater;29.99;100;/Black Sweater.jpg;Small,Medium,Large;Sweaters
+8;Grey Sweater;29.99;100;/Grey Sweater.jpg;Small,Medium,Large;Sweaters
+9;Green Sweater;29.99;100;/GreenSweaterNew.png;Small,Medium,Large;Sweaters
