@@ -113,13 +113,19 @@ public class LoginPage extends Application {
             loginMessage.setStyle("-fx-text-fill: red;");
             return;
         }
-
+        Customer customer = CustomerFileReader.retrieveCustomer(username);
         LoginSystem loginSystem = new LoginSystem();
+
+        if (customer == null){
+            loginMessage.setText("Username not found.");
+            loginMessage.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
         if (loginSystem.login(username, password)){
             loginMessage.setText("Login succesful!");
             loginMessage.setStyle("-fx-text-fill: green;");
 
-            Customer customer = CustomerFileReader.retrieveCustomer(username);
             Cart cart = CartFileReader.retrieveCart(customer.getId());
 
             if(storefront != null){
@@ -132,7 +138,7 @@ public class LoginPage extends Application {
             loginStage.close();
         }
         else {
-            loginMessage.setText("Login failed!");
+            loginMessage.setText("Invalid password.");
             loginMessage.setStyle("-fx-text-fill: red;");
         }
     }
