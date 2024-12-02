@@ -1,5 +1,6 @@
 package com.example.comp380project;
 
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,17 +9,22 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+
 import javafx.scene.control.Label;
+
 
 /**
  * Class that creates the Account Page
  */
 public class AccountPage {
 
+
     Customer customer;
     private Storefront storefront;
     private Stage primaryStage;
     private Cart cart;
+
+
 
 
     /**
@@ -35,6 +41,7 @@ public class AccountPage {
         this.cart = CartFileReader.retrieveCart(customer.getId());
     }
 
+
     /**
      * Creates the Account Page, and it's specific elements in the GUI
      *
@@ -49,19 +56,25 @@ public class AccountPage {
         TopBoxFactory topBoxFactory = new TopBoxFactory(storefront, cart, primaryStage);
 
 
+
+
         Label accountInfo = new Label("Account Information:");
         accountInfo.setAlignment(Pos.TOP_LEFT);
         accountInfo.setFont(Font.font("Verdana", 20));
         accountInfo.setPadding(new Insets(15, 0, 0, 15));
+
 
         Label username = new Label(customer.getUsername());
         username.setAlignment(Pos.TOP_LEFT);
         username.setFont(Font.font("Verdana", 20));
         username.setPadding(new Insets(0, 0, 0, 15));
 
+
         VBox customerNameBox = createInfoBoxes("Name:",customer.getFirstName() + " " + customer.getLastName());
         VBox customerEmailBox = createInfoBoxes("Email:", customer.getEmail());
         VBox customerAddressBox = createInfoBoxes("Address:", customer.getAddress());
+
+
 
 
         GridPane InfoBoxesLayout = new GridPane();
@@ -70,19 +83,26 @@ public class AccountPage {
         InfoBoxesLayout.setHgap(60);
         InfoBoxesLayout.setVgap(40);
 
+
         InfoBoxesLayout.add(customerNameBox, 0, 0);
         InfoBoxesLayout.add(customerEmailBox, 0, 1);
         InfoBoxesLayout.add(customerAddressBox, 1, 0);
 
 
+
+
         BorderPane accountPageLayout = new BorderPane();
         accountPageLayout.setStyle("-fx-background-color: white"); //Sets the background of the page to white
+
 
         accountPageLayout.setTop(new VBox(topBoxFactory.getTopSection(), username, accountInfo));
         accountPageLayout.setCenter(InfoBoxesLayout);
 
+
         return new Scene(accountPageLayout);
     }
+
+
 
 
     /**
@@ -100,62 +120,20 @@ public class AccountPage {
         infoBox.setPrefSize(320, 200);
         infoBox.setStyle("-fx-background-color: #e8e8e8; -fx-background-radius: 30;");
 
+
         Label boxTitleLabel = new Label(boxTitle);
         boxTitleLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+
 
         Label boxContentLabel = new Label(boxContent);
         boxContentLabel.setFont(Font.font("Verdana", 16));
 
+
         infoBox.getChildren().addAll(boxTitleLabel, boxContentLabel);
+
 
         return infoBox;
     }
 
+
 }
-
-
-/*VBox accountInfo = new VBox();
-        accountInfo.setAlignment(Pos.CENTER);
-        accountInfo.setPadding(new Insets(20));
-        accountInfo.setMaxHeight(200);
-        accountInfo.setMaxWidth(300);
-        accountInfo.setSpacing(20);
-        accountInfo.setStyle("-fx-background-color: #e8e8e8; -fx-background-radius: 30;");
-
-
-        HBox nameRow = new HBox();
-        nameRow.setAlignment(Pos.CENTER_LEFT);
-        nameRow.setSpacing(10);
-        Label nameLabel = new Label("Name:");
-            nameLabel.setFont(Font.font("Verdana", 16));
-            nameLabel.setStyle("-fx-font-weight: bold;");
-        Label customerName = new Label(customer.getFirstName() + " " + customer.getLastName());
-        customerName.setFont(Font.font("Verdana", 12));
-        nameRow.getChildren().addAll(nameLabel, customerName);
-
-
-        HBox emailRow = new HBox();
-        emailRow.setAlignment(Pos.CENTER_LEFT);
-        emailRow.setSpacing(10);
-        Label emailLabel = new Label("Email:");
-            emailLabel.setFont(Font.font("Verdana", 16));
-            emailLabel.setStyle("-fx-font-weight: bold;");
-        Label customerEmail = new Label(customer.getEmail());
-        customerEmail.setFont(Font.font("Verdana", 12));
-        emailRow.getChildren().addAll(emailLabel, customerEmail);
-
-
-        HBox addressRow = new HBox();
-        addressRow.setAlignment(Pos.CENTER_LEFT);
-        addressRow.setSpacing(10);
-        Label addressLabel = new Label("Address:");
-            addressLabel.setFont(Font.font("Verdana", 18));
-            addressLabel.setStyle("-fx-font-weight: bold;");
-        Label customerAddress = new Label(customer.getAddress());
-        customerAddress.setFont(Font.font("Verdana", 16));
-        addressRow.getChildren().addAll(addressLabel, customerAddress);
-
-
-        accountInfo.getChildren().addAll(nameRow, emailRow, addressRow);
-
-         */
