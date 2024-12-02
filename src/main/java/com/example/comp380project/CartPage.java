@@ -162,7 +162,7 @@ public class CartPage{
         });
 
         //Go to ReceiptPage
-        Button receiptButton = new Button("Confirm Purchase");
+        Button receiptButton = new Button("Proceed to Checkout");
         receiptButton.setCursor(Cursor.HAND);
         topPane.setRight(receiptButton);
         receiptButton.setOnAction(event -> {
