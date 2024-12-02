@@ -96,7 +96,7 @@ public class Storefront extends Application {
         AJADlogo.setFitHeight(300);
         AJADlogo.setFitWidth(300);
 
-        selection.setPadding(new Insets(0, 0, 0, 0));
+        selection.setPadding(new Insets(-55, 0, 0, 0));
         selection.setSpacing(20); //Sets space between drop-down menu and button
         selection.setAlignment(Pos.CENTER);
         if (customer != null) {
