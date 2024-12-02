@@ -136,10 +136,15 @@ public class Storefront extends Application {
         login.setAlignment(Pos.TOP_RIGHT);
         login.getChildren().addAll(loginButton);
 
+        SearchBoxFactory searchBoxFactory = new SearchBoxFactory(this, cart, window);
+
+        VBox searchBar = new VBox(searchBoxFactory.getSearchBox());
+        searchBar.setPadding(new Insets(20, 0, 0, 0));
+
         BorderPane storefront = new BorderPane();
         storefront.setStyle("-fx-background-color: white");
         storefront.setCenter(selection);
-        storefront.setTop(login);
+        storefront.setTop(new VBox(login, searchBar));
 
         scene = new Scene(storefront);
         window.setScene(scene);
