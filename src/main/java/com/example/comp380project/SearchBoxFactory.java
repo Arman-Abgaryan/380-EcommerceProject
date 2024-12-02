@@ -1,5 +1,6 @@
 package com.example.comp380project;
 
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -9,14 +10,17 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.util.List;
 
+
 /**
  * Class that creates the search bar near the top of the GUI
  */
 public class SearchBoxFactory {
 
+
     private Storefront storefront;
     private Cart cart;
     private Stage primaryStage;
+
 
     /**
      * Default constructor for SearchBoxFactory that creates the search bar
@@ -29,6 +33,7 @@ public class SearchBoxFactory {
         this.cart = cart;
         this.primaryStage = primaryStage;
     }
+
 
     /**
      * Creates a VBox called "searchHolder" that holds all elements of the search bar
@@ -48,9 +53,12 @@ public class SearchBoxFactory {
         searchBorder.setStyle("-fx-background-color: #00324b"); // Sets background of search bar to light blue
 
 
+
+
         HBox searchBar = new HBox();
         searchBar.setAlignment(Pos.TOP_CENTER);
         searchBar.setPadding(new Insets(-52, 0, 0, 0));
+
 
         // Search bar
         TextField searchField = new TextField(); // Creates search bar
@@ -60,6 +68,7 @@ public class SearchBoxFactory {
         searchField.setOnAction(actionEvent -> {
             performSearch(searchField.getText());
         });
+
 
         // Search Button
         Button searchButton = new Button("Search"); // Creates search button
@@ -71,13 +80,19 @@ public class SearchBoxFactory {
         searchBar.getChildren().addAll(searchField, searchButton);
 
 
+
+
         VBox searchHolder = new VBox();
         searchHolder.setAlignment(Pos.TOP_CENTER);
         searchHolder.getChildren().addAll(searchBorder, searchBar);
 
 
+
+
         return searchHolder;
     }
+
+
 
 
     /**
@@ -89,13 +104,15 @@ public class SearchBoxFactory {
             return;
         }
         List<Item> queryList = SearchController.search(query);
-        if(queryList.isEmpty()){
-            storefront.createStoreFront();
-            primaryStage.setScene(storefront.getScene());        }
+        if(queryList.isEmpty()) {
+            InvalidSearchPage invalidSearchPage = new InvalidSearchPage(storefront, cart, primaryStage);
+            primaryStage.setScene(invalidSearchPage.getInvalidSearchPage());
+        }
         else {
             SearchPage searchPage = new SearchPage(storefront, cart, queryList, primaryStage);
             primaryStage.setScene(searchPage.getSearchPage());
         }
     }
+
 
 }
