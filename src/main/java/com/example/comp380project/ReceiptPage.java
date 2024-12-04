@@ -37,7 +37,14 @@ public class ReceiptPage {
 
         // Items Section (Left)
         VBox itemsList = new VBox(15);
-        refreshItemsList(itemsList, tax);
+
+        // Price Summary Labels
+        Label subtotalLabel = new Label();
+        Label taxLabel = new Label();
+        Label totalLabel = new Label();
+
+        // Initialize the item list and price summary
+        refreshItemsList(itemsList, subtotalLabel, taxLabel, totalLabel, tax);
 
         ScrollPane itemsScrollPane = new ScrollPane(itemsList);
         itemsScrollPane.setFitToWidth(true);
@@ -57,10 +64,6 @@ public class ReceiptPage {
         rightSectionContent.setAlignment(Pos.TOP_CENTER);
 
         // Price Summary
-        Label subtotalLabel = new Label("Subtotal: $" + String.format("%.2f", cart.getTotalAmount()));
-        Label taxLabel = new Label("Tax: $" + String.format("%.2f", cart.getTotalAmount() * tax));
-        Label totalLabel = new Label("Total: $" + String.format("%.2f", cart.getTotalAmount() * (1 + tax)));
-
         subtotalLabel.setStyle("-fx-font-size: 16px;");
         taxLabel.setStyle("-fx-font-size: 14px;");
         totalLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: green;");
@@ -122,7 +125,6 @@ public class ReceiptPage {
 
         return new Scene(layout, 1100, 700);
     }
-
     private VBox createFormSection(String sectionTitle, String[] fieldPrompts) {
         Label sectionLabel = new Label(sectionTitle);
         sectionLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-padding: 5px 0;");
@@ -135,6 +137,7 @@ public class ReceiptPage {
             formFields.getChildren().add(field);
         }
 
+
         VBox section = new VBox(10, sectionLabel, formFields);
         section.setStyle("-fx-background-color: #ffffff; -fx-border-radius: 10; -fx-padding: 10px;");
         section.setAlignment(Pos.CENTER_LEFT);
@@ -142,7 +145,7 @@ public class ReceiptPage {
         return section;
     }
 
-    private void refreshItemsList(VBox itemsList, double tax) {
+    private void refreshItemsList(VBox itemsList, Label subtotalLabel, Label taxLabel, Label totalLabel, double tax) {
         itemsList.getChildren().clear();
         for (Map.Entry<Item, Integer> entry : cart.getItems().entrySet()) {
             Item item = entry.getKey();
@@ -165,7 +168,7 @@ public class ReceiptPage {
             increaseButton.setStyle("-fx-background-color: lightgreen; -fx-font-size: 12px;");
             increaseButton.setOnAction(event -> {
                 cart.addItem(item);
-                refreshItemsList(itemsList, tax);
+                refreshItemsList(itemsList, subtotalLabel, taxLabel, totalLabel, tax);
             });
 
             // Decrease Button
@@ -174,12 +177,25 @@ public class ReceiptPage {
             decreaseButton.setStyle("-fx-background-color: salmon; -fx-font-size: 12px;");
             decreaseButton.setOnAction(event -> {
                 cart.removeItem(item);
-                refreshItemsList(itemsList, tax);
+                refreshItemsList(itemsList, subtotalLabel, taxLabel, totalLabel, tax);
             });
 
             itemBox.getChildren().addAll(imageView, itemLabel, increaseButton, decreaseButton);
             itemsList.getChildren().add(itemBox);
         }
+
+        // Update the price summary
+        refreshPriceSummary(subtotalLabel, taxLabel, totalLabel, tax);
+    }
+
+    private void refreshPriceSummary(Label subtotalLabel, Label taxLabel, Label totalLabel, double tax) {
+        double subtotal = cart.getTotalAmount();
+        double taxAmount = subtotal * tax;
+        double total = subtotal + taxAmount;
+
+        subtotalLabel.setText("Subtotal: $" + String.format("%.2f", subtotal));
+        taxLabel.setText("Tax: $" + String.format("%.2f", taxAmount));
+        totalLabel.setText("Total: $" + String.format("%.2f", total));
     }
 
     private boolean validateInputFields(VBox shippingSection, VBox emailSection, VBox paymentSection) {
@@ -202,5 +218,7 @@ public class ReceiptPage {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+
     }
+
 }
