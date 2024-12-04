@@ -151,7 +151,7 @@ public class CartPage{
         AJADlogo.setFitHeight(100);
         AJADlogo.setFitWidth(100);
         topPane.setCenter(AJADlogo);
-        BorderPane.setMargin(AJADlogo, new Insets(-32, 0, 0, 0));
+        BorderPane.setMargin(AJADlogo, new Insets(-32, -50, 0, 0));
         AJADlogo.setCursor(Cursor.HAND);
         AJADlogo.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
