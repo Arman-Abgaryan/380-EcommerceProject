@@ -1,7 +1,9 @@
 package com.example.comp380project;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.util.List;
@@ -41,8 +43,9 @@ public class ItemPage {
         TopBoxFactory topBoxFactory = new TopBoxFactory(storefront, cart, primaryStage);
         SearchBoxFactory searchBoxFactory = new SearchBoxFactory(storefront, cart, primaryStage);
 
-        HBox ItemHolder = new HBox(200); //Horizontal Box that holds all T-Shirts
+        FlowPane ItemHolder = new FlowPane(100, 100);
         ItemHolder.setAlignment(Pos.CENTER);
+        ItemHolder.setStyle("-fx-background-color: white");
 
         List<Item> items = ItemFileReader.retrieveAllItems();
         for (Item item: items){
@@ -52,10 +55,16 @@ public class ItemPage {
             }
         }
 
+        ScrollPane scrollPane = new ScrollPane(ItemHolder);
+        scrollPane.setPadding(new Insets(10));
+        scrollPane.setStyle("-fx-background-color: white");
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+
         BorderPane boxHolder = new BorderPane(); // holder for all VBoxes and HBoxes
         boxHolder.setStyle("-fx-background-color: white"); //Sets the background of the page to white
         boxHolder.setTop(new VBox(topBoxFactory.getTopSection(), searchBoxFactory.getSearchBox()));
-        boxHolder.setCenter(ItemHolder);
+        boxHolder.setCenter(scrollPane);
 
         return new Scene(boxHolder);
     }
