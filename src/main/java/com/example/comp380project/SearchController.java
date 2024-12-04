@@ -14,7 +14,7 @@ public class SearchController  {
      * @return list of items that match query
      */
     public static List<Item> search(String query) {
-        if (query.equalsIgnoreCase("tshirt")){
+        if (query.equalsIgnoreCase("tshirt") || (query.equalsIgnoreCase("t shirt"))){
             query = "t-shirt";
         }
         query = query.toLowerCase();
