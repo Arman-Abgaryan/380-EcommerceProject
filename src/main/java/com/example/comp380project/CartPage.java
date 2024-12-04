@@ -166,8 +166,8 @@ public class CartPage{
         receiptButton.setCursor(Cursor.HAND);
         topPane.setRight(receiptButton);
         receiptButton.setOnAction(event -> {
-            ReceiptPage receiptPage = new ReceiptPage(cart,storefront);
-            primaryStage.setScene(receiptPage.getReceiptScene(primaryStage));
+            CheckoutPage checkoutPage = new CheckoutPage(cart,storefront);
+            primaryStage.setScene(checkoutPage.getCheckoutScene(primaryStage));
         });
 
         ScrollPane scroll = new ScrollPane();
