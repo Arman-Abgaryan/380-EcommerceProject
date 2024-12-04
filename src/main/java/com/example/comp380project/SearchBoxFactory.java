@@ -77,7 +77,11 @@ public class SearchBoxFactory {
         searchButton.setOnAction(actionEvent -> {
             performSearch(searchField.getText());
         });
-        searchBar.getChildren().addAll(searchField, searchButton);
+
+        Button showAllButton = new Button("Show All Items");
+        showAllButton.setCursor(Cursor.HAND);
+        showAllButton.setOnAction(actionEvent -> {performSearch("a");});
+        searchBar.getChildren().addAll(searchField, searchButton, showAllButton);
 
 
 
