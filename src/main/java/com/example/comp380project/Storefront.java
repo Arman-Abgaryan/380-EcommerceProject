@@ -3,17 +3,17 @@ package com.example.comp380project;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 /**
@@ -80,6 +80,7 @@ public class Storefront extends Application {
      */
     public void createStoreFront(){
         intializeCart();
+        String fontStyle = "-fx-font-family: 'Arial'; -fx-font-size: 14px;";
 
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
         choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweaters","Cart");
@@ -116,9 +117,39 @@ public class Storefront extends Application {
 
 
         Button loginButton = new Button("login");
-        if (customer != null){
+        if (customer != null) {
             loginButton.setText(customer.getFirstName());
+
+            // Create a custom popup menu
+            Popup popup = new Popup();
+            VBox popupContent = new VBox();
+            popupContent.setStyle("-fx-background-color: #f1eeee; -fx-padding: 10; -fx-border-color: rgb(28,78,201); -fx-border-width: thin;");
+            popupContent.setSpacing(10);
+
+            MenuItem accountItem = new MenuItem("Account");
+            MenuItem logoutItem = new MenuItem("Logout");
+            accountItem.setStyle(fontStyle);
+            logoutItem.setStyle(fontStyle);
+            ContextMenu contextMenu = new ContextMenu(accountItem, logoutItem);
+
+            accountItem.setOnAction(event -> {
+                AccountPage accountPage = new AccountPage(customer, this, window);
+                window.setScene(accountPage.getAccountPage());
+            });
+            logoutItem.setOnAction(event -> {
+                customer = null;
+                createStoreFront();
+            });
+
+            loginButton.setOnMouseEntered(event -> contextMenu.show(loginButton, Side.BOTTOM, 0, 0));
+
+            contextMenu.setOnShowing(event -> {
+                contextMenu.setOnHidden(hiddenEvent -> {
+                    contextMenu.hide();
+                });
+            });
         }
+
         loginButton.setStyle("-fx-background-color: white;");
         loginButton.setGraphic(loginImageView);
         loginButton.setCursor(Cursor.HAND);
@@ -127,9 +158,6 @@ public class Storefront extends Application {
                 Stage loginStage = new Stage();
                 LoginPage loginPage = new LoginPage(this);
                 loginPage.start(loginStage);
-            } else {
-                AccountPage accountPage = new AccountPage(customer, this, window);
-                window.setScene(accountPage.getAccountPage());
             }
         });
 
