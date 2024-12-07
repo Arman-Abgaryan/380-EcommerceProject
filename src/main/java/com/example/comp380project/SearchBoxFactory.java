@@ -89,7 +89,7 @@ public class SearchBoxFactory {
 
         Button showAllButton = new Button("Show All Items");
 
-        showAllButton.setStyle("-fx-background-color: transparent;-fx-text-fill: white;-fx-font-weight: bold;");
+        showAllButton.setStyle("-fx-background-color: transparent;-fx-text-fill: white;-fx-font-weight: bold; -fx-border-color:white;-fx-border-width: 2px;-fx-border-radius: 5px;-fx-padding:5px 15px;");
 
         showAllButton.setCursor(Cursor.HAND);
         showAllButton.setOnAction(actionEvent -> {performSearch("a");});
