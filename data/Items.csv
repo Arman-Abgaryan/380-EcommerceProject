@@ -8,3 +8,14 @@ id;Name;Price;Stock; imagePath; Sizes; Category
 7;Black Sweater;29.99;100;/Black Sweater.jpg;Small,Medium,Large;Sweaters
 8;Grey Sweater;29.99;100;/Grey Sweater.jpg;Small,Medium,Large;Sweaters
 9;Green Sweater;29.99;100;/GreenSweaterNew.png;Small,Medium,Large;Sweaters
+10;Blue Sweater;29.99;100;/Blue Sweater.jpg;Small,Medium,Large;Sweaters
+11;Red Sweater;29.99;100;/Red Sweater.jpg;Small,Medium,Large;Sweaters
+12;Dark Green Sweater;29.99;100;/Green Sweater.jpg;Small,Medium,Large;Sweaters
+13;Red Shirt;19.99;100;/Red Shirt.jpg;Small,Medium,Large;T-shirts
+14;Navy Shirt;19.99;100;/Navy Shirt.jpg;Small,Medium,Large;T-shirts
+15;Tan Shirt;19.99;100;/Tan Shirt.jpg;Small,Medium,Large;T-shirts
+16;Maroon Shirt;19.99;100;/Maroon Shirt.jpg;Small,Medium,Large;T-shirts
+17;Blue Polo;23.99;100;/Blue Polo.jpg;Small,Medium,Large;Polo
+18;Black Polo;23.99;100;/Black Polo.jpg;Small,Medium,Large;Polo
+19;Grey Polo;23.99;100;/Grey Polo.jpg;Small,Medium,Large;Polo
+20;Dark Blue Pants;49.99;100;/Dark Blue.jpg;28",30",32";Pants
