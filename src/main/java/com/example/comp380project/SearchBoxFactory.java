@@ -6,6 +6,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.util.List;
@@ -71,14 +73,24 @@ public class SearchBoxFactory {
 
 
         // Search Button
-        Button searchButton = new Button("Search"); // Creates search button
+        Button searchButton = new Button();// Creates search button
+        Image searchIcon = new Image(getClass().getResourceAsStream("/Search.png"));
+        ImageView searchImageView = new ImageView(searchIcon);
+        searchImageView.setFitHeight(18);
+        searchImageView.setFitWidth(18);
+        searchButton.setGraphic(searchImageView);
+        searchButton.setStyle("-fx-background-color: transparent;");
+
         searchButton.setCursor(Cursor.HAND);
-        searchBar.setSpacing(10); // Sets the space between the search bar and button
+        searchBar.setSpacing(0); // Sets the space between the search bar and button
         searchButton.setOnAction(actionEvent -> {
             performSearch(searchField.getText());
         });
 
         Button showAllButton = new Button("Show All Items");
+
+        showAllButton.setStyle("-fx-background-color: transparent;-fx-text-fill: white;-fx-font-weight: bold;");
+
         showAllButton.setCursor(Cursor.HAND);
         showAllButton.setOnAction(actionEvent -> {performSearch("a");});
         searchBar.getChildren().addAll(searchField, searchButton, showAllButton);

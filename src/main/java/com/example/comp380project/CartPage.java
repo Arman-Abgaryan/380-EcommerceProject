@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -102,6 +103,7 @@ public class CartPage{
             //Buttons for Increasing
             Button increaseButton = new Button("+");
             increaseButton.setCursor(Cursor.HAND);
+            increaseButton.setStyle("-fx-background-color: lightgreen; -fx-font-size: 12px;");
             increaseButton.setOnAction(event -> {
                 cart.addItem(item);
                 itemLabel.setText(item.getSize()+ " " +item.getName()+" x " + cart.getItems().get(item) + " - $" + String.format("%.2f", (item.getPrice() * cart.getItems().get(item))));
@@ -111,6 +113,7 @@ public class CartPage{
             //Button for Decreasing
             Button decreaseButton = new Button("-");
             decreaseButton.setCursor(Cursor.HAND);
+            decreaseButton.setStyle("-fx-background-color: salmon; -fx-font-size: 12px;");
             decreaseButton.setOnAction(event -> {
                 cart.removeItem(item);// Remove item from the cart (decreases quantity)
 
@@ -137,10 +140,20 @@ public class CartPage{
         BorderPane topPane = new BorderPane();
 
         // Go Back to HomePage
-        Button backButton = new Button("Back to Home");
+
+        Button backButton = new Button();
+        Image homeIcon = new Image(getClass().getResourceAsStream("/Home.png"));
+        ImageView homeImageView = new ImageView(homeIcon);
+        homeImageView.setFitWidth(30);
+        homeImageView.setFitHeight(30);
+
+        backButton.setGraphic(homeImageView);
+        backButton.setStyle("-fx-background-color: transparent;");
         backButton.setCursor(Cursor.HAND);
+
         topPane.setLeft(backButton);
-        backButton.setOnAction(event -> {
+        BorderPane.setMargin(backButton, new Insets(3, 0, 0, -5));
+        backButton.setOnAction(e -> {
             storefront.createStoreFront();
             primaryStage.setScene(storefront.getScene());
         });
@@ -170,6 +183,9 @@ public class CartPage{
             primaryStage.setScene(checkoutPage.getCheckoutScene(primaryStage));
         });
 
+        Separator separator = new Separator();
+        separator.setStyle("-fx-background-color: #cccccc; -fx-pref-height: 1;");
+
         ScrollPane scroll = new ScrollPane();
         scroll.setStyle("-fx-background-color: white"); // Adds White Background
         scroll.setFitToHeight(true);
@@ -181,7 +197,7 @@ public class CartPage{
         layout.setCenter(scroll);
         layout.setBottom(totalLabel);
         layout.setAlignment(totalLabel, Pos.CENTER);
-        layout.setTop(topPane);
+        layout.setTop(new VBox(topPane, separator));
 
 
         Scene cartScene = new Scene(layout,400,300);

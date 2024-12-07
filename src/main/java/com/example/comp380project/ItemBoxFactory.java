@@ -59,6 +59,8 @@ public class ItemBoxFactory {
         Label countLabel = new Label("Added 0");
         Button addToCartButton = new Button("Add to Cart");
         addToCartButton.setCursor(Cursor.HAND);
+        addToCartButton.setStyle("-fx-background-color: #00324b; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5px 10px; -fx-border-radius: 5px;");
+
         int [] addCount = {0};
 
         addToCartButton.setOnAction(new EventHandler<ActionEvent>() {

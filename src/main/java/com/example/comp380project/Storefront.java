@@ -83,7 +83,7 @@ public class Storefront extends Application {
         String fontStyle = "-fx-font-family: 'Arial'; -fx-font-size: 14px;";
 
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweaters","Cart");
+        choiceBox.getItems().addAll("T-Shirts", "Pants", "Sweaters","Polo","Cart");
         choiceBox.setValue("- Select -");
         choiceBox.setCursor(Cursor.HAND);
 
@@ -116,7 +116,7 @@ public class Storefront extends Application {
         loginImageView.setFitHeight(30);
 
 
-        Button loginButton = new Button("login");
+        Button loginButton = new Button("Login");
         if (customer != null) {
             loginButton.setText(customer.getFirstName());
 

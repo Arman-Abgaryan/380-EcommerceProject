@@ -47,10 +47,17 @@ public class TopBoxFactory {
         BorderPane topSection = new BorderPane();
 
         // Back to Home Button
-        Button backButton = new Button("Back to Home");
+        Button backButton = new Button();
+        Image homeIcon = new Image(getClass().getResourceAsStream("/Home.png"));
+        ImageView homeImageView = new ImageView(homeIcon);
+        homeImageView.setFitWidth(30);
+        homeImageView.setFitHeight(30);
+
+        backButton.setGraphic(homeImageView);
+        backButton.setStyle("-fx-background-color: transparent;");
         backButton.setCursor(Cursor.HAND);
         topSection.setLeft(backButton);
-        BorderPane.setMargin(backButton, new Insets(30, 0, 0, 25));
+        BorderPane.setMargin(backButton, new Insets(25, 0, 0, 15));
         backButton.setOnAction(e -> {
             returnToStorefront();
         });
